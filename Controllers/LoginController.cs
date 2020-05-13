@@ -14,7 +14,7 @@ namespace RepairHouse.Controllers
             return View();
         }
 
-        // GET: /login
+        // GET: /Login/Entrar
         [HttpPost]
         public ActionResult Entrar(string usuario, string contrasena)
         {

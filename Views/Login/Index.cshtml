@@ -24,12 +24,10 @@
         $(document).ready(function () {
             $("#FrmLogin").submit(function (e) {
                 e.preventDefault();
-                console.log("Hola mundo");
                 var url = '@Url.Content("~/Login/Entrar")';
                 var parametros = $(this).serialize();
 
                 $.post(url, parametros, function (data) {
-                    console.log(data);
                     if (data == "true") {
                         document.location.href = '@Url.Content("~/")';
                     } else {
