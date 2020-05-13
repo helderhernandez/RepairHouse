@@ -13,5 +13,21 @@ namespace RepairHouse.Controllers
         {
             return View();
         }
+        public ActionResult Empleado()
+        {
+            return View();
+        }
+        public ActionResult Departamentos()
+        {
+            return View();
+        }
+        public ActionResult Municipios()
+        {
+            return View();
+        }
+        public ActionResult Cargos()
+        {
+            return View();
+        }
     }
 }

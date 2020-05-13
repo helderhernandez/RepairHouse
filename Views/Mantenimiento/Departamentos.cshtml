@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Departamentos";
+}
+    <section class="container " >
+        <form id="form1" class="col-sm-12 col-md-8 col-lg-6 m-auto">
+            <h1><span class="label label-default">Departamento</span></h1>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Numero Departamento</label>
+                <input type="text" class="form-control" placeholder="Departamento" id="Departamento">
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="Select1">Nombre Departamento</label>
+                    <select id="Select1" lass="form-control" class="form-control">
+                        <option>El Salvador</option>
+                        <option>Honduras</option>
+                        <option>Nicaragua</option>
+                        <option>Costarica</option>
+                        <option>Guatemala</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Nuevo</button>
+            <br />
+            <h4><span class="label label-default">Modificar Departamanto</span></h4><br />
+            <div class="form-group">
+                <label for="formGroupExampleInput">Departamento</label>
+                <input type="text" class="form-control" placeholder="Departamento" id="MDepartamento">
+            </div>
+            <div class="form-group">
+
+                <label for="Alterdepartamento">Departamento</label>
+                <input type="text" class="form-control" placeholder="Modificar Departamento" id="Alterdepartamento">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    </section>
