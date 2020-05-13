@@ -3,7 +3,7 @@
     ViewBag.Title = "Login";
 }
 
-<section class="container mt-4">
+<section class="container">
     <form id="FrmLogin" class="col-sm-12 col-md-8 col-lg-6 m-auto">
         <h1>Iniciar sesión</h1>
 
@@ -22,9 +22,14 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+            // al hacer submit (enviar) el formulario
             $("#FrmLogin").submit(function (e) {
-                e.preventDefault();
+                e.preventDefault(); // detenemos el envio
+
+                // nombre de la url/metodo que tiene
                 var url = '@Url.Content("~/Login/Entrar")';
+
+                // los datos del formulario
                 var parametros = $(this).serialize();
 
                 $.post(url, parametros, function (data) {
