@@ -141,7 +141,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Css\app.css" />
+    <Content Include="Content\Styles\app.css" />
     <Content Include="Content\datatables\INFO.txt" />
     <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\Images\background-1.png" />
@@ -152,6 +152,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.js" />
+    <Content Include="Scripts\datatables\translation-spanish.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
