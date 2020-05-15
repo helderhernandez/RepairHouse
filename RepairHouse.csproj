@@ -120,8 +120,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -277,6 +279,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Reporte\ReporteDiagnostico.cshtml" />
+    <Content Include="Views\Inventario\ListaInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
