@@ -8,13 +8,22 @@
 
     <div class="form-group">
         <label>Usuario</label>
-        <input id="usuario" name="usuario" type="text" class="form-control" />
+        <input value="admin" id="usuario" name="usuario" type="text" maxlength="35" required class="form-control" />
     </div>
     <div class="form-group">
         <label>Contraseña</label>
-        <input id="contrasena" name="contrasena" type="password" class="form-control" />
+        <input value="admin" id="contrasena" name="contrasena" type="password" maxlength="16" required class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
+    <button type="submit" class="btn btn-primary mb-4">Entrar</button>
+
+    <div id="alertaCredenciales" class="collapse">
+        <div class="alert alert-danger collapse show fade" role="alert">
+            <strong>Credenciales incorrectas!</strong><br />Intente nuevamente o contacte al equipo de IT
+            <button type="button" class="close" data-toggle="collapse" data-target="#alertaCredenciales">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
 </form>
 
 @section scripts{
@@ -34,8 +43,10 @@
                     if (data == "true") {
                         document.location.href = '@Url.Content("~/")';
                     } else {
-                        alert("Credenciales incorrectas");
+                        $('#alertaCredenciales').addClass('show');
                     }
+                }).fail(function (error) {
+                    alert("Ocurrio un error en el servidor. Detalle del error: " + error);
                 });
             });
         });
