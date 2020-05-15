@@ -5,12 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Casa Reparadora</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <link href="~/Content/Css/app.css" rel="stylesheet" />
-    @RenderSection("styles", false)
+    <link href="~/Content/Styles/app.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,7 +44,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                         <a class="dropdown-item disabled" href="#">Lista Inventario</a>
-                     </div>
+                    </div>
                 </li>
 
                 <li class="nav-item dropdown">
