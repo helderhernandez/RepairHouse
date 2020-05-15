@@ -34,6 +34,5 @@ namespace RepairHouse.Daos
                 connection.closeConnection();
             }
         }
-
     }
 }

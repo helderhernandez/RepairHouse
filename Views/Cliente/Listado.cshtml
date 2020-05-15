@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Listado";
+}
+
+@section styles{
+    <style>
+        @@media (min-width: 768px) {
+            .c-mt {
+                margin-top: 32px;
+            }
+        }
+    </style>
+}
+
+<h1>Clientes</h1>
+<div class="table-responsive mt-2">
+    <table id="example" class="table table-bordered table-striped">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">DUI</th>
+                <th scope="col">Télefono</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var listado = function () {
+                var url = '@Url.Content("~/Cliente/ListadoJson")';
+
+                $.get(url, function (data) {
+                    $('#example').DataTable({
+                        language: spanishTranslationConfig,
+                        data: data,
+                        columns: [
+                            { data: 'id' },
+                            { data: 'nombreCompleto' },
+                            { data: 'dui' },
+                            { data: 'telefono' }
+                        ]
+                    });
+                }).fail(function (error) {
+                    alert("Ocurrio un error en el servidor. Detalle del error: " + error);
+                });
+            };
+
+            listado();
+        });
+    </script>
+}
