@@ -1,0 +1,1 @@
+﻿El css no se utiliza porque hay un error con las imagenes de sort, en su lugar usamos el CDN directamente
