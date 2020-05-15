@@ -7,10 +7,7 @@
     <title>@ViewBag.Title - Casa Reparadora</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">*@
-    <link href="~/Content/Css/app.css" rel="stylesheet" />
-    @RenderSection("styles", false)
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
