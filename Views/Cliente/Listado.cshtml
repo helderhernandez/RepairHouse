@@ -21,34 +21,35 @@
 </div>
 
 @section scripts{
+
     <script>
-        $(document).ready(function () {
-            var traerClientes = function () {
-                var url = '@Url.Content("~/Cliente/ListadoJson")';
+        var traerClientes = function () {
+            var url = '@Url.Content("~/Cliente/ListadoJson")';
 
-                $.get(url, function (data) {
-                    $('#tablaClientes').DataTable({
-                        language: spanishTranslationConfig,
-                        data: data,
-                        columns: [
-                            { data: "id" },
-                            { data: "nombreCompleto" },
-                            { data: "dui" },
-                            { data: "telefono" },
-                            {
-                                defaultContent:
-                                    "<div class='text-center'>" +
-                                    "<a class='btn btn-primary mx-1' title='Actualizar' href='#'><i class='fa fa-pencil'></i></a>" +
-                                    "<a class='btn btn-danger mx-1' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>" +
-                                    "</div>"
-                            }
-                        ]
-                    });
-                }).fail(function (error) {
-                    alert("Ocurrio un error en el servidor. Detalle del error: " + error);
+            $.get(url, function (data) {
+                $('#tablaClientes').DataTable({
+                    language: spanishTranslationConfig,
+                    data: data,
+                    columns: [
+                        { data: "id" },
+                        { data: "nombreCompleto" },
+                        { data: "dui" },
+                        { data: "telefono" },
+                        {
+                            defaultContent:
+                                "<div class='text-center'>" +
+                                "<a class='btn btn-primary mx-1' title='Actualizar' href='#'><i class='fa fa-pencil'></i></a>" +
+                                "<a class='btn btn-danger mx-1' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>" +
+                                "</div>"
+                        }
+                    ]
                 });
-            };
+            }).fail(function (error) {
+                alert("Ocurrio un error en el servidor. Detalle del error: " + error);
+            });
+        };
 
+        $(document).ready(function () {
             //var algo = function (tbody, table) {
             //    $(tbody).on("click", "button.editar", function () {
             //        var data = table.row($(this).)
