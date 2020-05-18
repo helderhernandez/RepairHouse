@@ -120,6 +120,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\HelderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -288,6 +289,7 @@
     <Content Include="Views\Reporte\ReporteDiagnostico.cshtml" />
     <Content Include="Views\Inventario\ListaInventario.cshtml" />
     <Content Include="Views\Cliente\Listado.cshtml" />
+    <Content Include="Views\Helder\Formulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
