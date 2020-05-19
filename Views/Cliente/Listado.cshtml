@@ -23,41 +23,57 @@
 @section scripts{
 
     <script>
-        var traerClientes = function () {
+        var tablaClientes = function (datos) {
+            var tabla = $('#tablaClientes').DataTable({
+                language: spanishTranslationConfig,
+                data: datos,
+                columns: [
+                    { data: "id" },
+                    { data: "nombreCompleto" },
+                    { data: "dui" },
+                    { data: "telefono" },
+                    {
+                        defaultContent:
+                            "<div class='text-center'>" +
+                            "<a class='editar btn btn-primary mx-1' title='Actualizar' href='#'><i class='fa fa-pencil'></i></a>" +
+                            "<a class='borrar btn btn-danger mx-1' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>" +
+                            "</div>"
+                    }
+                ]
+            });
+        };
+
+        var llenarTabla = function () {
             var url = '@Url.Content("~/Cliente/ListadoJson")';
 
             $.get(url, function (data) {
-                $('#tablaClientes').DataTable({
-                    language: spanishTranslationConfig,
-                    data: data,
-                    columns: [
-                        { data: "id" },
-                        { data: "nombreCompleto" },
-                        { data: "dui" },
-                        { data: "telefono" },
-                        {
-                            defaultContent:
-                                "<div class='text-center'>" +
-                                "<a class='btn btn-primary mx-1' title='Actualizar' href='#'><i class='fa fa-pencil'></i></a>" +
-                                "<a class='btn btn-danger mx-1' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>" +
-                                "</div>"
-                        }
-                    ]
-                });
+                tablaClientes(data);
             }).fail(function (error) {
                 alert("Ocurrio un error en el servidor. Detalle del error: " + error);
             });
         };
 
         $(document).ready(function () {
-            //var algo = function (tbody, table) {
-            //    $(tbody).on("click", "button.editar", function () {
-            //        var data = table.row($(this).)
-            //    });
-            //};
+            // llamamos la funcion para recuperar listado de clientes y llenar la tabla
+            llenarTabla();
 
-            // llamamos la funcion para traer el listado de clientes
-            traerClientes();
+            // evento para boton editar
+            $("#tablaClientes tbody").on("click", "a.editar", function () {
+                var data = $('#tablaClientes').DataTable().row($(this).parents("tr")).data();
+                var idCliente = data.id;
+                console.log(idCliente);
+            });
+
+            // evento para boton editar
+            $("#tablaClientes tbody").on("click", "a.borrar", function () {
+                var data = $('#tablaClientes').DataTable().row($(this).parents("tr")).data();
+                var idCliente = data.id;
+                var nombreCliente = data.nombreCompleto;
+                if (confirm("Seguro que desea eliminar al cliente " + nombreCliente)) {
+                    console.log(idCliente);
+                    alert("Eliminado");
+                }
+            });
         });
     </script>
 }
