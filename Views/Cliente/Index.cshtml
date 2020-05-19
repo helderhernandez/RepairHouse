@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Listado";
+    ViewBag.Title = "Clientes";
 }
 
 <h1>Clientes</h1>
@@ -23,8 +23,8 @@
 @section scripts{
 
     <script>
-        var tablaClientes = function (datos) {
-            var tabla = $('#tablaClientes').DataTable({
+        var tabla = function (datos) {
+            $('#tablaClientes').DataTable({
                 language: spanishTranslationConfig,
                 data: datos,
                 columns: [
@@ -44,34 +44,52 @@
         };
 
         var llenarTabla = function () {
-            var url = '@Url.Content("~/Cliente/ListadoJson")';
+            // url que retorna listado
+            var url = '@Url.Content("~/Cliente/List")';
 
             $.get(url, function (data) {
-                tablaClientes(data);
+                // llenamos la tabla con los datos del servidor
+                tabla(data);
+
+                //agregamos el boton de crear
+                var urlCrear = '@Url.Content("~/Cliente/Create")';
+                var btnCrear = "<a class='crear btn btn-success' title='Crear' href='" + urlCrear + "' style='margin-left: 30px; margin-bottom: 5px;'><i class='fa fa-plus'></i></a>"
+                $(btnCrear).appendTo('#tablaClientes_filter');
             }).fail(function (error) {
-                alert("Ocurrio un error en el servidor. Detalle del error: " + error);
+                alert("Ocurrio un error en el servidor");
             });
         };
 
         $(document).ready(function () {
-            // llamamos la funcion para recuperar listado de clientes y llenar la tabla
+            // llamamos la funcion para obtener los datos y llenar la tabla
             llenarTabla();
 
             // evento para boton editar
-            $("#tablaClientes tbody").on("click", "a.editar", function () {
+            $("#tablaClientes tbody").on("click", "a.editar", function (e) {
+                e.preventDefault();
                 var data = $('#tablaClientes').DataTable().row($(this).parents("tr")).data();
                 var idCliente = data.id;
-                console.log(idCliente);
+
+                // redirigimos a otra vista
+                location.href = '@Url.Content("~/Cliente/Edit")' + "/" + idCliente;
             });
 
-            // evento para boton editar
-            $("#tablaClientes tbody").on("click", "a.borrar", function () {
+            // evento para boton borrar
+            $("#tablaClientes tbody").on("click", "a.borrar", function (e) {
+                e.preventDefault();
                 var data = $('#tablaClientes').DataTable().row($(this).parents("tr")).data();
-                var idCliente = data.id;
+                var id = data.id;
                 var nombreCliente = data.nombreCompleto;
+
+                // confirmamos antes de borrar
                 if (confirm("Seguro que desea eliminar al cliente " + nombreCliente)) {
-                    console.log(idCliente);
-                    alert("Eliminado");
+                    var urlBorrar = '@Url.Content("~/Cliente/Delete")';
+                    $.post(urlBorrar, { id }, function (data) {
+                        alert("Registro eliminado exitosamente");
+                        location.reload(); // recargamos la pagina
+                    }).fail(function () {
+                        alert("Ocurrio un error en el servidor");
+                    });                    
                 }
             });
         });
