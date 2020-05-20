@@ -10,17 +10,17 @@ using RepairHouse.Models;
 
 namespace RepairHouse.Controllers
 {
-    public class InventariosController : Controller
+    public class InventarioController : Controller
     {
         private casa_reparadoraEntities db = new casa_reparadoraEntities();
 
-        // GET: Inventarios
-        public ActionResult Inventario()
+        // GET: Inventario
+        public ActionResult Index()
         {
             return View(db.Inventario.ToList());
         }
 
-        // GET: Inventarios/Details/5
+        // GET: Inventario/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace RepairHouse.Controllers
             return View(inventario);
         }
 
-        // GET: Inventarios/Create
+        // GET: Inventario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Inventarios/Create
+        // POST: Inventario/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +58,7 @@ namespace RepairHouse.Controllers
             return View(inventario);
         }
 
-        // GET: Inventarios/Edit/5
+        // GET: Inventario/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,7 +73,7 @@ namespace RepairHouse.Controllers
             return View(inventario);
         }
 
-        // POST: Inventarios/Edit/5
+        // POST: Inventario/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace RepairHouse.Controllers
             return View(inventario);
         }
 
-        // GET: Inventarios/Delete/5
+        // GET: Inventario/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace RepairHouse.Controllers
             return View(inventario);
         }
 
-        // POST: Inventarios/Delete/5
+        // POST: Inventario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

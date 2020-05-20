@@ -129,13 +129,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InventariosController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
-    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Daos\ClienteDao.cs" />
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
+    <Compile Include="Dtos\Cliente\ClienteItemTablaDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +174,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\Diagnostico.jpg" />
+    <Content Include="img\Mantenimiento.jpg" />
+    <Content Include="img\reparacion.png" />
+    <Content Include="img\reparacion2.jpg" />
     <Content Include="Models\BDCasaModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BDCasaModel1.Context.cs</LastGenOutput>
@@ -328,21 +333,15 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Reporte\ReporteDiagnostico.cshtml" />
-    <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Inventarios\Create.cshtml" />
-    <Content Include="Views\Inventarios\Delete.cshtml" />
-    <Content Include="Views\Inventarios\Details.cshtml" />
-    <Content Include="Views\Inventarios\Edit.cshtml" />
-    <Content Include="Views\Inventarios\Index.cshtml" />
-    <Content Include="Views\Cliente\Edit.cshtml" />
-    <Content Include="Views\Cliente\Create.cshtml" />
-    <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Proveedor\Create.cshtml" />
-    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Cliente\Listado.cshtml" />
+    <Content Include="Views\Inventario\Create.cshtml" />
+    <Content Include="Views\Inventario\Delete.cshtml" />
+    <Content Include="Views\Inventario\Details.cshtml" />
+    <Content Include="Views\Inventario\Edit.cshtml" />
+    <Content Include="Views\Inventario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dtos\Cliente\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
