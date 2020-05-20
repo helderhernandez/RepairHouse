@@ -17,7 +17,8 @@ namespace RepairHouse.Controllers
         // GET: Inventario
         public ActionResult Index()
         {
-            return View(db.Inventario.ToList());
+            var inventario = db.Inventario.Include(i => i.Proveedor);
+            return View(inventario.ToList());
         }
 
         // GET: Inventario/Details/5
@@ -38,6 +39,7 @@ namespace RepairHouse.Controllers
         // GET: Inventario/Create
         public ActionResult Create()
         {
+            ViewBag.IdProveedor = new SelectList(db.Proveedor, "IdProveedor", "Nombre");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace RepairHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Producto,Cantidad,PrecioNeto,Iva,TotalUnitario,Fecha,IdTecnico,IdCliente")] Inventario inventario)
+        public ActionResult Create([Bind(Include = "Id,Producto,Cantidad,PrecioNeto,Iva,TotalUnitario,Fecha,IdProveedor")] Inventario inventario)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace RepairHouse.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdProveedor = new SelectList(db.Proveedor, "IdProveedor", "Nombre", inventario.IdProveedor);
             return View(inventario);
         }
 
@@ -70,6 +73,7 @@ namespace RepairHouse.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdProveedor = new SelectList(db.Proveedor, "IdProveedor", "Nombre", inventario.IdProveedor);
             return View(inventario);
         }
 
@@ -78,7 +82,7 @@ namespace RepairHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Producto,Cantidad,PrecioNeto,Iva,TotalUnitario,Fecha,IdTecnico,IdCliente")] Inventario inventario)
+        public ActionResult Edit([Bind(Include = "Id,Producto,Cantidad,PrecioNeto,Iva,TotalUnitario,Fecha,IdProveedor")] Inventario inventario)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace RepairHouse.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdProveedor = new SelectList(db.Proveedor, "IdProveedor", "Nombre", inventario.IdProveedor);
             return View(inventario);
         }
 

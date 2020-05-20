@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Estas seguro de eliminar este campo</h3>
 <div>
     <h4>Inventario</h4>
     <hr />
@@ -60,19 +60,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdTecnico)
+            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdTecnico)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdCliente)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdCliente)
+            @Html.DisplayFor(model => model.Proveedor.Nombre)
         </dd>
 
     </dl>

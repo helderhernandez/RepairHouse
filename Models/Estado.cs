@@ -12,23 +12,18 @@ namespace RepairHouse.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Proveedor
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Proveedor()
+        public Estado()
         {
-            this.Inventario = new HashSet<Inventario>();
+            this.Proveedor = new HashSet<Proveedor>();
         }
     
-        public int IdProveedor { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> IdMunicipio { get; set; }
-        public Nullable<int> Estado { get; set; }
-        public System.DateTime FechaRegistro { get; set; }
+        public int IdEstado { get; set; }
+        public string Estado1 { get; set; }
     
-        public virtual Estado Estado1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventario> Inventario { get; set; }
-        public virtual Municipio Municipio { get; set; }
+        public virtual ICollection<Proveedor> Proveedor { get; set; }
     }
 }

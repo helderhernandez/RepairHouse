@@ -5,15 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="afd00223d46a430b9565e071207961e7" Name="Diagram1">
-        <EntityTypeShape EntityType="casa_reparadoraModel.Inventario" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="casa_reparadoraModel.Cliente" Width="1.5" PointX="7.75" PointY="0.5" />
         <EntityTypeShape EntityType="casa_reparadoraModel.Departamento" Width="1.5" PointX="2.25" PointY="0.5" />
         <EntityTypeShape EntityType="casa_reparadoraModel.Municipio" Width="1.5" PointX="4.125" PointY="0.5" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Proveedor" Width="1.5" PointX="5.875" PointY="0.5" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Cliente_Municipio" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Municipio_Departamento" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Estado" Width="1.5" PointX="0.5" PointY="2.75" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Inventario" Width="1.5" PointX="2.375" PointY="2.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Proveedor" Width="1.5" PointX="6" PointY="0.625" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Proveedor_Estado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Inventario_Proveedor" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Proveedor_Municipio" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

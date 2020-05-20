@@ -159,6 +159,9 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Estado.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Inventario.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
