@@ -152,7 +152,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BDCasaModel1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Departamento.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Inventario.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Municipio.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proveedor.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
