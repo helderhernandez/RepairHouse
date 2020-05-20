@@ -25,10 +25,11 @@ namespace RepairHouse.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Inventario> Inventario { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<Inventario> Inventario { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
     }
 }

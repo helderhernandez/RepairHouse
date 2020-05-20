@@ -11,17 +11,19 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Inventario
     {
         public int Id { get; set; }
         public string Producto { get; set; }
-        public int Cantidad { get; set; }
+        public int Cantidad { get; set; }       
         public Nullable<decimal> PrecioNeto { get; set; }
         public Nullable<decimal> Iva { get; set; }
         public Nullable<decimal> TotalUnitario { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        public Nullable<int> IdTecnico { get; set; }
-        public Nullable<int> IdCliente { get; set; }
+        public int IdProveedor { get; set; }
+    
+        public virtual Proveedor Proveedor { get; set; }
     }
 }
