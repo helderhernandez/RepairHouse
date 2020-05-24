@@ -12,18 +12,18 @@ namespace RepairHouse.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class EstadoEmpleado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Departamento()
+        public EstadoEmpleado()
         {
-            this.Municipio = new HashSet<Municipio>();
+            this.Empleado = new HashSet<Empleado>();
         }
     
-        public int IdDepartamento { get; set; }
-        public string Departamento1 { get; set; }
+        public int IdEstado { get; set; }
+        public string Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Municipio> Municipio { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
     }
 }

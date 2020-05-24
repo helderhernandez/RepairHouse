@@ -12,39 +12,36 @@ namespace RepairHouse.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Inventario
+    public partial class Equipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventario()
+        public Equipo()
         {
-            this.DiagnosticoCotizacion = new HashSet<DiagnosticoCotizacion>();
+            this.Diagnostico = new HashSet<Diagnostico>();
             this.FacturaDetalle = new HashSet<FacturaDetalle>();
             this.OrdenDiagnosticoDetalle = new HashSet<OrdenDiagnosticoDetalle>();
             this.OrdenReparacionDetalle = new HashSet<OrdenReparacionDetalle>();
-            this.TipoEquipo = new HashSet<TipoEquipo>();
         }
     
-        public int IdInventario { get; set; }
-        public string Descripcion { get; set; }
-        public int Cantidad { get; set; }
-        public Nullable<decimal> PrecioNeto { get; set; }
-        public Nullable<decimal> Iva { get; set; }
-        public Nullable<decimal> TotalUnitario { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public int IdProveedor { get; set; }
-        public int IdCategoria { get; set; }
+        public int IdEquipo { get; set; }
+        public int IdCliente { get; set; }
+        public int IdMarca { get; set; }
+        public int IdModelo { get; set; }
+        public string NumeroSerie { get; set; }
+        public string Color { get; set; }
+        public int IdTipoEquipo { get; set; }
     
-        public virtual CategoriaInventario CategoriaInventario { get; set; }
+        public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiagnosticoCotizacion> DiagnosticoCotizacion { get; set; }
+        public virtual ICollection<Diagnostico> Diagnostico { get; set; }
+        public virtual MarcaEquipo MarcaEquipo { get; set; }
+        public virtual ModeloEquipo ModeloEquipo { get; set; }
+        public virtual TipoEquipo TipoEquipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturaDetalle> FacturaDetalle { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenDiagnosticoDetalle> OrdenDiagnosticoDetalle { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenReparacionDetalle> OrdenReparacionDetalle { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TipoEquipo> TipoEquipo { get; set; }
     }
 }

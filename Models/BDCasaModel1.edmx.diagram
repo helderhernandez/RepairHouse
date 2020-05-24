@@ -4,19 +4,83 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="afd00223d46a430b9565e071207961e7" Name="Diagram1">
-        <EntityTypeShape EntityType="casa_reparadoraModel.Cliente" Width="1.5" PointX="7.75" PointY="0.5" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Departamento" Width="1.5" PointX="2.25" PointY="0.5" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Municipio" Width="1.5" PointX="4.125" PointY="0.5" />
+      <Diagram DiagramId="afd00223d46a430b9565e071207961e7" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="casa_reparadoraModel.Cargo" Width="1.5" PointX="0.75" PointY="17" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.CategoriaInventario" Width="1.5" PointX="1.5" PointY="31.375" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Cliente" Width="1.5" PointX="6" PointY="18.5" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Departamento" Width="1.5" PointX="1.5" PointY="25" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Diagnostico" Width="1.5" PointX="10.5" PointY="24.25" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.DiagnosticoCotizacion" Width="1.5" PointX="12.75" PointY="25.75" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Empleado" Width="1.5" PointX="3" PointY="17.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Equipo" Width="1.5" PointX="8.25" PointY="13.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.EstadoEmpleado" Width="1.5" PointX="0.75" PointY="34" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.EstadoOrdenDiagnostico" Width="1.5" PointX="6" PointY="25" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.EstadoOrdenReparacion" Width="1.5" PointX="9" PointY="11" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Factura" Width="1.5" PointX="8.25" PointY="18.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.FacturaDetalle" Width="1.5" PointX="10.5" PointY="14.75" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Inventario" Width="1.5" PointX="3.75" PointY="28.375" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.MarcaEquipo" Width="1.5" PointX="6" PointY="10.625" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.ModeloEquipo" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Municipio" Width="1.5" PointX="3.75" PointY="24.5" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenCompra" Width="1.5" PointX="3.75" PointY="33.625" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenDiagnostico" Width="1.5" PointX="8.25" PointY="23.5" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenDiagnosticoDetalle" Width="1.5" PointX="13.5" PointY="21.5" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenReparacion" Width="1.5" PointX="11.25" PointY="18.625" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenReparacionDetalle" Width="1.5" PointX="13.5" PointY="17.125" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Proveedor" Width="1.5" PointX="1.5" PointY="27.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Rol" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Sexo" Width="1.5" PointX="0.75" PointY="19.875" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Sucursal" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.TipoEquipo" Width="1.5" PointX="6" PointY="29.375" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.Usuario" Width="1.5" PointX="5.25" PointY="14.5" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Empleado_Cargo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Inventario_CategoriaInventario" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Cliente_Municipio" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Cliente_Sexo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Equipo_Cliente" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Factura_Cliente" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Ordendiagnostico_Cliente" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacion_Cliente" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Municipio_Departamento" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Estado" Width="1.5" PointX="0.5" PointY="2.75" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Inventario" Width="1.5" PointX="2.375" PointY="2.875" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.Proveedor" Width="1.5" PointX="6" PointY="0.625" />
-        <AssociationConnector Association="casa_reparadoraModel.FK_Proveedor_Estado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Diagnostico_Equipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Diagnostico_OrdenDiagnostico" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_DiagnosticoCotizacion_Diagnostico" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Diagnosticos_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_DiagnosticoCotizacion_Inventario" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Empleado_EstadoEmpleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Empleado_Municipio" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Empleado_Sexo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Empleado_Sucursal" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Factura_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Ordendiagnostico_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacion_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacionDetalle_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Usuario_Empleado" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Equipo_MarcaEquipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Equipo_ModeloEquipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Equipo_TipoEquipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_FacturaDetalle_Equipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenDiagnosticoDetalle_Equipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacionDetalle_Equipo" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenDiagnostico_EstadoOrdenDiagnostico" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacion_EstadoOrdenReparacion" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Factura_Sucursal" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_FacturaDetalle_Factura" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_FacturaDetalle_Inventario" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Inventario_Proveedor" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenDiagnosticoDetalle_Inventario" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacionDetalle_Inventario" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_TipoEquipo_Inventario" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_ModeloEquipo_MarcaEquipo" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Proveedor_Municipio" />
-        </Diagram>
+        <AssociationConnector Association="casa_reparadoraModel.FK_Sucursal_Municipio" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenCompra_Proveedor" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Ordendiagnostico_Sucursal" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenDiagnosticoDetalle_OrdenDiagnostico" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacion_Sucursal" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacionDetalle_OrdenReparacion" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_Usuario_Rol" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
