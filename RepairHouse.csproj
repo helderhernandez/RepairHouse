@@ -137,6 +137,7 @@
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
+    <Compile Include="DecimalModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
