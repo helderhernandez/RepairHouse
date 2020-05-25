@@ -25,33 +25,5 @@ namespace RepairHouse.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cargo> Cargo { get; set; }
-        public virtual DbSet<CategoriaInventario> CategoriaInventario { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<Departamento> Departamento { get; set; }
-        public virtual DbSet<Diagnostico> Diagnostico { get; set; }
-        public virtual DbSet<DiagnosticoCotizacion> DiagnosticoCotizacion { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
-        public virtual DbSet<Equipo> Equipo { get; set; }
-        public virtual DbSet<EstadoEmpleado> EstadoEmpleado { get; set; }
-        public virtual DbSet<EstadoOrdenDiagnostico> EstadoOrdenDiagnostico { get; set; }
-        public virtual DbSet<EstadoOrdenReparacion> EstadoOrdenReparacion { get; set; }
-        public virtual DbSet<Factura> Factura { get; set; }
-        public virtual DbSet<FacturaDetalle> FacturaDetalle { get; set; }
-        public virtual DbSet<Inventario> Inventario { get; set; }
-        public virtual DbSet<MarcaEquipo> MarcaEquipo { get; set; }
-        public virtual DbSet<ModeloEquipo> ModeloEquipo { get; set; }
-        public virtual DbSet<Municipio> Municipio { get; set; }
-        public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
-        public virtual DbSet<OrdenDiagnostico> OrdenDiagnostico { get; set; }
-        public virtual DbSet<OrdenDiagnosticoDetalle> OrdenDiagnosticoDetalle { get; set; }
-        public virtual DbSet<OrdenReparacion> OrdenReparacion { get; set; }
-        public virtual DbSet<OrdenReparacionDetalle> OrdenReparacionDetalle { get; set; }
-        public virtual DbSet<Proveedor> Proveedor { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<Sexo> Sexo { get; set; }
-        public virtual DbSet<Sucursal> Sucursal { get; set; }
-        public virtual DbSet<TipoEquipo> TipoEquipo { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }
