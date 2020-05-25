@@ -128,18 +128,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
-    <Compile Include="Controllers\DiagnosticoesController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
-    <Compile Include="Controllers\OrdenComprasController.cs" />
-    <Compile Include="Controllers\OrdenReparacionsController.cs" />
+    <Compile Include="Controllers\OrdenDiagnosticoesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
+    <Compile Include="DecimalModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -440,21 +439,11 @@
     <Content Include="Views\Inventarios\Details.cshtml" />
     <Content Include="Views\Inventarios\Edit.cshtml" />
     <Content Include="Views\Inventarios\Index.cshtml" />
-    <Content Include="Views\OrdenReparacions\Create.cshtml" />
-    <Content Include="Views\OrdenReparacions\Delete.cshtml" />
-    <Content Include="Views\OrdenReparacions\Details.cshtml" />
-    <Content Include="Views\OrdenReparacions\Edit.cshtml" />
-    <Content Include="Views\OrdenReparacions\Index.cshtml" />
-    <Content Include="Views\Diagnosticoes\Create.cshtml" />
-    <Content Include="Views\Diagnosticoes\Delete.cshtml" />
-    <Content Include="Views\Diagnosticoes\Details.cshtml" />
-    <Content Include="Views\Diagnosticoes\Edit.cshtml" />
-    <Content Include="Views\Diagnosticoes\Index.cshtml" />
-    <Content Include="Views\OrdenCompras\Create.cshtml" />
-    <Content Include="Views\OrdenCompras\Delete.cshtml" />
-    <Content Include="Views\OrdenCompras\Details.cshtml" />
-    <Content Include="Views\OrdenCompras\Edit.cshtml" />
-    <Content Include="Views\OrdenCompras\Index.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Create.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Delete.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Details.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Edit.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
