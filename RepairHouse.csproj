@@ -133,6 +133,7 @@
     <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
+    <Compile Include="Controllers\OrdenDiagnosticoesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Daos\Connection.cs" />
@@ -437,6 +438,11 @@
     <Content Include="Views\Inventarios\Details.cshtml" />
     <Content Include="Views\Inventarios\Edit.cshtml" />
     <Content Include="Views\Inventarios\Index.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Create.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Delete.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Details.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Edit.cshtml" />
+    <Content Include="Views\OrdenDiagnosticoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
