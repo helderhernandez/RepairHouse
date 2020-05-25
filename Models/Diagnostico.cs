@@ -12,18 +12,27 @@ namespace RepairHouse.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class Diagnostico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Departamento()
+        public Diagnostico()
         {
-            this.Municipio = new HashSet<Municipio>();
+            this.DiagnosticoCotizacion = new HashSet<DiagnosticoCotizacion>();
         }
     
-        public int IdDepartamento { get; set; }
-        public string Departamento1 { get; set; }
+        public int IdDiagnostico { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public int IdEquipo { get; set; }
+        public int IdTecnico { get; set; }
+        public int IdOrdenDiagnostico { get; set; }
+        public string Diagnostico1 { get; set; }
+        public string ComentariosCotizacion { get; set; }
+        public Nullable<decimal> TotalCotizacion { get; set; }
     
+        public virtual Equipo Equipo { get; set; }
+        public virtual OrdenDiagnostico OrdenDiagnostico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Municipio> Municipio { get; set; }
+        public virtual ICollection<DiagnosticoCotizacion> DiagnosticoCotizacion { get; set; }
+        public virtual Empleado Empleado { get; set; }
     }
 }
