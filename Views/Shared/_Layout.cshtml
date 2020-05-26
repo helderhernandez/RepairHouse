@@ -5,12 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Casa Reparadora</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <link href="~/Content/Styles/app.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @*iconos*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*datatables*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">*@
+
+    <link href="~/Content/custom/app.css" rel="stylesheet" />
+
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -26,27 +32,14 @@
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Registro</a>
+                    <a class="nav-link" href="@Url.Action("Index", "OrdenDiagnosticos")">Diagnósticos</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Diagnóstico
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                        <a class="dropdown-item disabled" href="#">Diagnóstico Técnico</a>
-                        <a class="dropdown-item disabled" href="#">Diagnóstico Final</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "OrdenReparaciones")">Reparaciones</a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Inventario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                        <a class="dropdown-item" href="@Url.Action("Index", "Inventarios")">Lista Inventario</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Inventarios")">Inventario</a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reporte
@@ -84,8 +77,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
-    <script src="~/Scripts/datatables/translation-spanish.js"></script>
+
+    @*<script src="~/Scripts/datatables/jquery.dataTables.js"></script>*@
+    @*<script src="~/Scripts/datatables/translation-spanish.js"></script>*@
+
+    <script src="~/Scripts/custom/app.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
