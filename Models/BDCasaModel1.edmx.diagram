@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="afd00223d46a430b9565e071207961e7" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="afd00223d46a430b9565e071207961e7" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="casa_reparadoraModel.Cargo" Width="1.5" PointX="0.75" PointY="18.375" />
         <EntityTypeShape EntityType="casa_reparadoraModel.CategoriaInventario" Width="1.5" PointX="1.5" PointY="8.5" />
         <EntityTypeShape EntityType="casa_reparadoraModel.Cliente" Width="1.5" PointX="6" PointY="19.875" />
@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="casa_reparadoraModel.MarcaEquipo" Width="1.5" PointX="6" PointY="28.625" />
         <EntityTypeShape EntityType="casa_reparadoraModel.ModeloEquipo" Width="1.5" PointX="6" PointY="25.875" />
         <EntityTypeShape EntityType="casa_reparadoraModel.Municipio" Width="1.5" PointX="3.75" PointY="26" />
-        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenCompra" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="casa_reparadoraModel.OrdenDiagnostico" Width="1.5" PointX="10.375" PointY="1" />
         <EntityTypeShape EntityType="casa_reparadoraModel.OrdenDiagnosticoDetalle" Width="1.5" PointX="10.5" PointY="15.5" />
         <EntityTypeShape EntityType="casa_reparadoraModel.OrdenReparacion" Width="1.5" PointX="11.25" PointY="20.125" />
@@ -75,12 +74,13 @@
         <AssociationConnector Association="casa_reparadoraModel.FK_ModeloEquipo_MarcaEquipo" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Proveedor_Municipio" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Sucursal_Municipio" />
-        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenCompra_Proveedor" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Ordendiagnostico_Sucursal" />
         <AssociationConnector Association="casa_reparadoraModel.FK_OrdenDiagnosticoDetalle_OrdenDiagnostico" />
         <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacion_Sucursal" />
         <AssociationConnector Association="casa_reparadoraModel.FK_OrdenReparacionDetalle_OrdenReparacion" />
         <AssociationConnector Association="casa_reparadoraModel.FK_Usuario_Rol" />
+        <EntityTypeShape EntityType="casa_reparadoraModel.OrdenCompra" Width="1.5" PointX="4.25" PointY="11.625" />
+        <AssociationConnector Association="casa_reparadoraModel.FK_OrdenCompra_Proveedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,8 +11,7 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +22,6 @@ namespace RepairHouse.Models
     
         public int IdCargo { get; set; }
         public string Descripcion { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<int> Estado { get; set; }
     

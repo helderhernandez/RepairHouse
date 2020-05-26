@@ -42,7 +42,6 @@ namespace RepairHouse.Models
         public virtual DbSet<MarcaEquipo> MarcaEquipo { get; set; }
         public virtual DbSet<ModeloEquipo> ModeloEquipo { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
-        public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
         public virtual DbSet<OrdenDiagnostico> OrdenDiagnostico { get; set; }
         public virtual DbSet<OrdenDiagnosticoDetalle> OrdenDiagnosticoDetalle { get; set; }
         public virtual DbSet<OrdenReparacion> OrdenReparacion { get; set; }
@@ -54,5 +53,6 @@ namespace RepairHouse.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoEquipo> TipoEquipo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
     }
 }

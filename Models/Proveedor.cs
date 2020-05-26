@@ -11,8 +11,7 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Proveedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,15 +21,11 @@ namespace RepairHouse.Models
             this.OrdenCompra = new HashSet<OrdenCompra>();
         }
     
-        [Display(Name = "Id")]
         public int IdProveedor { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
-
-        [Display(Name = "Nombre de contacto")]
         public string NombreContacto { get; set; }
-
         public int IdMunicipio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

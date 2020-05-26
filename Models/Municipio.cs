@@ -11,8 +11,7 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Municipio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,13 +22,9 @@ namespace RepairHouse.Models
             this.Proveedor = new HashSet<Proveedor>();
             this.Sucursal = new HashSet<Sucursal>();
         }
-
-        [Display(Name = "Id")]
+    
         public int IdMunicipio { get; set; }
-
-        [Display(Name = "Municipio")]
         public string Municipio1 { get; set; }
-
         public int IdDepartamento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -130,6 +130,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\EquipoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -453,16 +454,21 @@
     <Content Include="Views\Diagnosticos\Details.cshtml" />
     <Content Include="Views\Diagnosticos\Edit.cshtml" />
     <Content Include="Views\Diagnosticos\Index.cshtml" />
-    <Content Include="Views\OrdenCompras\Create.cshtml" />
-    <Content Include="Views\OrdenCompras\Delete.cshtml" />
-    <Content Include="Views\OrdenCompras\Details.cshtml" />
-    <Content Include="Views\OrdenCompras\Edit.cshtml" />
-    <Content Include="Views\OrdenCompras\Index.cshtml" />
     <Content Include="Views\OrdenReparaciones\Create.cshtml" />
     <Content Include="Views\OrdenReparaciones\Delete.cshtml" />
     <Content Include="Views\OrdenReparaciones\Details.cshtml" />
     <Content Include="Views\OrdenReparaciones\Edit.cshtml" />
     <Content Include="Views\OrdenReparaciones\Index.cshtml" />
+    <Content Include="Views\Equipoes\Create.cshtml" />
+    <Content Include="Views\Equipoes\Delete.cshtml" />
+    <Content Include="Views\Equipoes\Details.cshtml" />
+    <Content Include="Views\Equipoes\Edit.cshtml" />
+    <Content Include="Views\Equipoes\Index.cshtml" />
+    <Content Include="Views\OrdenCompras\Create.cshtml" />
+    <Content Include="Views\OrdenCompras\Delete.cshtml" />
+    <Content Include="Views\OrdenCompras\Details.cshtml" />
+    <Content Include="Views\OrdenCompras\Edit.cshtml" />
+    <Content Include="Views\OrdenCompras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
