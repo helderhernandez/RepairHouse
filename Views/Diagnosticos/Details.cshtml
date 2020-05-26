@@ -1,0 +1,82 @@
+﻿@model RepairHouse.Models.Diagnostico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Diagnostico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdTecnico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdTecnico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnostico1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnostico1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComentariosCotizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComentariosCotizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCotizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCotizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipo.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipo.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdenDiagnostico.Comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdenDiagnostico.Comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.PrimerNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.PrimerNombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDiagnostico }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
