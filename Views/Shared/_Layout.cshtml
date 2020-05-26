@@ -5,12 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Casa Reparadora</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <link href="~/Content/Styles/app.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @*iconos*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*datatables*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">*@
+
+    <link href="~/Content/custom/app.css" rel="stylesheet" />
+
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -71,8 +77,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
-    <script src="~/Scripts/datatables/translation-spanish.js"></script>
+
+    @*<script src="~/Scripts/datatables/jquery.dataTables.js"></script>*@
+    @*<script src="~/Scripts/datatables/translation-spanish.js"></script>*@
+
+    <script src="~/Scripts/custom/app.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
