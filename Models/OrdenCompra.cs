@@ -11,25 +11,19 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class OrdenCompra
     {
-        [Display(Name = "ID de Orden de Compra")]
         public int IdOrdenCompra { get; set; }
         public Nullable<int> Codigo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Cantidad { get; set; }
-        [Display(Name = "Proveedor")]
         public Nullable<int> IdProveedor { get; set; }
-        [Display(Name = "Fecha de Ingreso")]
         public Nullable<System.DateTime> FechaIngreso { get; set; }
-        [Display(Name = "Precio Bruto")]
         public Nullable<decimal> PrecioBruto { get; set; }
         public Nullable<decimal> SubTotal { get; set; }
         public Nullable<decimal> Iva { get; set; }
         public Nullable<decimal> Total { get; set; }
-        [Display(Name = "No. de Factura Proveedor")]
         public Nullable<int> FacturaProveedor { get; set; }
     
         public virtual Proveedor Proveedor { get; set; }
