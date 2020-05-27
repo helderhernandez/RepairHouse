@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RepairHouse.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habilitado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdRol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empleado.PrimerNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rol.Rol1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contrasena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Habilitado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdRol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleado.PrimerNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rol.Rol1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })
+        </td>
+    </tr>
+}
+
+</table>
