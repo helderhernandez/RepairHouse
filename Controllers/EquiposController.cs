@@ -10,7 +10,7 @@ using RepairHouse.Models;
 
 namespace RepairHouse.Controllers
 {
-    public class EquipoesController : Controller
+    public class EquiposController : Controller
     {
         private casa_reparadoraEntities db = new casa_reparadoraEntities();
 

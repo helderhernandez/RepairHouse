@@ -70,7 +70,7 @@
 
     <hr />
     <h5>Detalle</h5>
-    <a href="/" target="_blank" class="btn btn-success">Registrar nuevo equipo</a> <span> | </span>
+    <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-success">Registrar nuevo equipo</a> <span> | </span>
     <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-success">Buscar equipos del usuario</a>
     <br /><br />
     <div v-for="Detalle in Detalles" class="card mb-3">
