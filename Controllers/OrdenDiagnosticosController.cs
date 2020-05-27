@@ -80,6 +80,15 @@ namespace RepairHouse.Controllers
             return Json(equipos, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult Create(OrdenDiagnosticoViewModel viewModel)
+        {
+            Debug.WriteLine("Create....");
+            Debug.WriteLine(viewModel);
+
+            return Json("Create", JsonRequestBehavior.DenyGet);
+        }
+
         // GET: OrdenDiagnosticoes/Edit/5
         public ActionResult Edit(int? id)
         {

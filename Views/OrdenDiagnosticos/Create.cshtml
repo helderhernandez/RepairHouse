@@ -58,8 +58,8 @@
                     <label>Precio:</label>
                     <input v-model="Orden.PrecioBruto" type="number" class="form-control" disabled />
 
-                    <label>Descuento:</label>
-                    <input v-model="Orden.Descuento" type="number" class="form-control" />
+                    <label>Descuento %:</label>
+                    <input v-model="Orden.Descuento" type="number"  class="form-control" min="0" maxlength="2" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
 
                     <label>Total:</label>
                     <input v-model="Orden.PrecioNeto" type="number" class="form-control" disabled />
@@ -83,8 +83,8 @@
                     Precio diagnostico: <b>$ {{Detalle.TotalUnitario}}</b>
                 </div>
                 @*<div class="col">
-                    <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
-                </div>*@
+                        <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
+                    </div>*@
                 <div class="col">
                     <button v-on:click="quitarEnDetalles(Detalle)" class="btn btn-warning">Quitar</button>
                 </div>
@@ -132,7 +132,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script>        
+    <script>
+
 
         var app = new Vue({
             el: '#app',
@@ -141,8 +142,19 @@
                 Detalles: [],
                 Equipos: [],
                 Sucursales: [],
-                Empleados:[],
+                Empleados: [],
                 Clientes: []
+            },
+            watch: {
+                Detalles: {
+                    handler() {
+                        this.recalcularEncabezado();
+                    },
+                    deep: true
+                },
+                'Orden.Descuento': function (newVal, oldVal) {
+                    this.recalcularEncabezado();
+                }
             },
             methods: {
                 getEquipos() {
@@ -168,12 +180,26 @@
 
                 },
                 quitarEnDetalles(Equipo) {
-                    // sacamos un equpo del detalle 
+                    // sacamos un equpo del detalle
                     this.Detalles = this.Detalles.filter(e => e.IdEquipo != Equipo.IdEquipo);
                 },
                 limpiarDetalles() {
                     // sacamos todos los equipos del detalle
                     this.Detalles = [];
+                },
+                recalcularEncabezado() {
+                    var nEquipos = this.Detalles.length;
+                    var sumaCostoDiagnosticos = 0;
+
+                    this.Detalles.forEach(e => {
+                        sumaCostoDiagnosticos += e.TotalUnitario;
+                    })
+
+                    var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos* this.Orden.Descuento * 0.01);
+
+                    this.Orden.CantidadEquipos = nEquipos;
+                    this.Orden.PrecioBruto = sumaCostoDiagnosticos;
+                    this.Orden.PrecioNeto = sumaCostoTotal;
                 }
             },
             created() {
