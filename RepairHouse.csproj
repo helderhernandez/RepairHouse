@@ -260,6 +260,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -301,6 +302,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom\loader.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.js" />
     <Content Include="Scripts\datatables\translation-spanish.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -474,11 +476,6 @@
     <Content Include="Views\OrdenReparaciones\Details.cshtml" />
     <Content Include="Views\OrdenReparaciones\Edit.cshtml" />
     <Content Include="Views\OrdenReparaciones\Index.cshtml" />
-    <Content Include="Views\Equipoes\Create.cshtml" />
-    <Content Include="Views\Equipoes\Delete.cshtml" />
-    <Content Include="Views\Equipoes\Details.cshtml" />
-    <Content Include="Views\Equipoes\Edit.cshtml" />
-    <Content Include="Views\Equipoes\Index.cshtml" />
     <Content Include="Views\Inventarios\Create.cshtml" />
     <Content Include="Views\Inventarios\Delete.cshtml" />
     <Content Include="Views\Inventarios\Details.cshtml" />

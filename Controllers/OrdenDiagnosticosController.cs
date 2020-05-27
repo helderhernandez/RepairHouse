@@ -273,7 +273,7 @@ namespace RepairHouse.Controllers
             db.OrdenDiagnosticoDetalle.RemoveRange(detalles);
             db.OrdenDiagnostico.Remove(ordenDiagnostico);
             
-            db.SaveChanges();
+            db.SaveChanges(); //hola
 
             return RedirectToAction("Index");
         }
