@@ -451,7 +451,6 @@
     <Content Include="Views\Inventarios\Details.cshtml" />
     <Content Include="Views\Inventarios\Edit.cshtml" />
     <Content Include="Views\Inventarios\Index.cshtml" />
-    <Content Include="Views\OrdenDiagnosticos\Create.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Delete.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Details.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Edit.cshtml" />
@@ -471,9 +470,9 @@
     <Content Include="Views\OrdenReparaciones\Details.cshtml" />
     <Content Include="Views\OrdenReparaciones\Edit.cshtml" />
     <Content Include="Views\OrdenReparaciones\Index.cshtml" />
-    <Content Include="Views\OrdenDiagnosticos\Create2.cshtml" />
     <Content Include="Views\OrdenesDiagnostico\Edit.cshtml" />
     <Content Include="Views\OrdenesDiagnostico\Create.cshtml" />
+    <Content Include="Views\OrdenDiagnosticos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

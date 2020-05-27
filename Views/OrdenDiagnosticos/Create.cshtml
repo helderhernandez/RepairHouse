@@ -1,175 +1,196 @@
-﻿@model RepairHouse.Models.OrdenDiagnostico
-
+﻿
 @{
-    ViewBag.Title = "Nuevo Registro";
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Crear Orden de Diagnostico</h2>
 
+<div id="app">
+    <form>
+        <h5>Encabezado</h5>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        <div class="form-horizontal">
 
-<div class="form-horizontal">
-    <h4>OrdenDiagnostico</h4>
+            <div class="row">
+                <div class="col">
+                    <label>Sucursal:</label>
+                    <select v-model="Orden.IdSucursal" class="form-control">
+                        <option v-for="Item in Sucursales" :value="Item.IdSucursal">{{Item.Nombre}}</option>
+                    </select>
+
+                    <label>Empleado:</label>
+                    <select v-model="Orden.IdEmpleado" class="form-control">
+                        <option v-for="Item in Empleados" :value="Item.IdEmpleado">{{Item.Nombre}} - {{Item.Descripcion}}</option>
+                    </select>
+
+                    <label>Cliente:</label>
+                    <select v-model="Orden.IdCliente" class="form-control" v-on:change="limpiarDetalles()">
+                        <option v-for="Item in Clientes" :value="Item.IdCliente">{{Item.Nombre}} - {{Item.DUI}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Fecha emision:</label>
+                    <input v-model="Orden.FechaEmision" type="date" class="form-control" />
+
+                    <label>Fecha resolucion:</label>
+                    <input v-model="Orden.FechaResolucion" type="date" class="form-control" />
+
+                    @*<label>Estado:</label>
+                        <select class="form-control">
+                            <option>Item</option>
+                        </select>
+
+                        <label>Facturado:</label>
+                        <select class="form-control">
+                            <option>Item</option>
+                        </select>*@
+                </div>
+                <div class="col">
+                    <label>Comentarios:</label>
+                    <textarea v-model="Orden.Comentarios" class="form-control"></textarea>
+
+                    <label>N. equipos:</label>
+                    <input v-model="Orden.CantidadEquipos" type="number" class="form-control" disabled />
+
+                </div>
+                <div class="col">
+                    <label>Precio:</label>
+                    <input v-model="Orden.PrecioBruto" type="number" class="form-control" disabled />
+
+                    <label>Descuento:</label>
+                    <input v-model="Orden.Descuento" type="number" class="form-control" />
+
+                    <label>Total:</label>
+                    <input v-model="Orden.PrecioNeto" type="number" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+    </form>
+
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.FechaEmision, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FechaEmision, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FechaEmision, "", new { @class = "text-danger" })
+    <h5>Detalle</h5>
+    <a href="/" target="_blank" class="btn btn-success">Registrar nuevo equipo</a> <span> | </span>
+    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-success">Buscar equipos del usuario</a>
+    <br /><br />
+    <div v-for="Detalle in Detalles" class="card mb-3">
+        <div class="card-header">
+            Equipo: <b>{{Detalle.Marca}} {{Detalle.Modelo}}</b>
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FechaResolucion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FechaResolucion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FechaResolucion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdSucursal, "IdSucursal", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdSucursal", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdEmpleado, "IdEmpleado", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdEmpleado", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdEmpleado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdCliente, "IdCliente", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdCliente", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdCliente, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CantidadEquipos, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CantidadEquipos, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CantidadEquipos, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PrecioBruto, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PrecioBruto, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PrecioBruto, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Descuento, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Descuento, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descuento, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PrecioNeto, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PrecioNeto, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PrecioNeto, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdEstado, "IdEstado", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdEstado", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdEstado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Facturado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Facturado)
-                @Html.ValidationMessageFor(model => model.Facturado, "", new { @class = "text-danger" })
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    Precio diagnostico: <b>$ {{Detalle.TotalUnitario}}</b>
+                </div>
+                @*<div class="col">
+                    <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
+                </div>*@
+                <div class="col">
+                    <button v-on:click="quitarEnDetalles(Detalle)" class="btn btn-warning">Quitar</button>
+                </div>
             </div>
         </div>
     </div>
 
-    @Html.LabelFor(model => Model.OrdenDiagnosticoDetalle)
-    @for (var i = 0; i < Model.OrdenDiagnosticoDetalle.Count; i++)
-    {
-        @Html.EditorFor(model => Model.OrdenDiagnosticoDetalle.ElementAt(i).IdEquipo)
-        <input name="OrdenDiagnosticoDetalle.IdEquipo" value="@Model.OrdenDiagnosticoDetalle.ElementAt(i).IdEquipo" />
-    }
-
-    @*@Html.LabelFor(model => model.OrdenDiagnosticoDetalle)
-        @foreach (var ordenDiagnosticoDetalle in Model.OrdenDiagnosticoDetalle)
-
-        {
-            @Html.EditorFor(modelItem => ordenDiagnosticoDetalle.IdEquipo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.DisplayFor(modelItem => ordenDiagnosticoDetalle.IdEquipo)
-
-        }*@
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" onclick="DoAjaxPostAndMore(this)" />
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div v-if="Orden.IdCliente == null" class="modal-header">
+                    <h5>Seleccione un cliente</h5>
+                </div>
+                <div v-else>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Equipos del Cliente</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div v-for="Equipo in Equipos" class="card mb-3">
+                            <div class="card-header">
+                                Equipo: <b>{{Equipo.Marca}} {{Equipo.Modelo}}</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        Precio diagnostico: <b>$ {{Equipo.TotalUnitario}}</b>
+                                    </div>
+                                    <div class="col">
+                                        <button v-on:click="agregarEnDetalles(Equipo)" class="btn btn-success">Agregar a esta orden</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
-        function DoAjaxPostAndMore(btnClicked) {
-            var $form = $(btnClicked).parents('form');
-            console.log("A ENVIAR");
+    <script>        
 
-            console.log($form);
-            console.log($form.serialize());
+        var app = new Vue({
+            el: '#app',
+            data: {
+                Orden: {},
+                Detalles: [],
+                Equipos: [],
+                Sucursales: [],
+                Empleados:[],
+                Clientes: []
+            },
+            methods: {
+                getEquipos() {
+                    //obtenemos los equipos del cliente
+                    if (this.Orden.IdCliente == null) {
+                        return;
+                    }
 
-            return;
-            $.ajax({
-                type: "POST",
-                url: $form.attr('action'),
-                data: $form.serialize(),
-                error: function (xhr, status, error) {
-                    //do something about the error
-                    console.log("ERRORRRRRR");
+                    var url = '@Url.Content("~/OrdenDiagnosticos/GetEquiposByClienteJsonGet")' + '?idCliente=' + this.Orden.IdCliente;
+                    axios.get(url).then((result) => {
+                        console.log(result.data);
+                        this.Equipos = result.data;
+                    });
                 },
-                success: function (response) {
-                    //do something with response
-                    console.log("TODO SALIO BIEN");
+                agregarEnDetalles(Equipo) {
+                    // agregamos un equpo al detalle
+                    var result = this.Detalles.filter(e => e.IdEquipo == Equipo.IdEquipo);
+                    if (result != 0) {
+                        return;
+                    }
 
+                    this.Detalles.push(Equipo);
+
+                },
+                quitarEnDetalles(Equipo) {
+                    // sacamos un equpo del detalle 
+                    this.Detalles = this.Detalles.filter(e => e.IdEquipo != Equipo.IdEquipo);
+                },
+                limpiarDetalles() {
+                    // sacamos todos los equipos del detalle
+                    this.Detalles = [];
                 }
-            });
+            },
+            created() {
+                var url = '@Url.Content("~/OrdenDiagnosticos/CreateJsonGet")';
 
-            return false;// if it's a link to prevent post
+                axios.get(url).then((result) => {
+                    console.log(result.data);
 
-        }
+                    var { sucursales, empleados, clientes, orden } = result.data;
+                    this.Sucursales = sucursales;
+                    this.Empleados = empleados;
+                    this.Clientes = clientes;
+
+                    this.Orden = orden;
+                    this.Orden.FechaEmision = moment(this.Orden.FechaEmision).format("YYYY-MM-DD");
+                });
+            }
+        })
     </script>
 }

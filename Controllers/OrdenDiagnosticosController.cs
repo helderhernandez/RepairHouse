@@ -40,201 +40,44 @@ namespace RepairHouse.Controllers
             return View(ordenDiagnostico);
         }
 
-        //// GET: OrdenDiagnosticoes/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre");
-        //    ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre");
-        //    ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado");
-        //    ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre");
-        //    OrdenDiagnostico orden = new OrdenDiagnostico();
-        //    orden.FechaEmision = new DateTime();
-        //    orden.PrecioBruto = (decimal)5.0;
-        //    orden.PrecioNeto = (decimal)5.0;
-        //    orden.Facturado = true;
-
-
-        //    orden.Comentarios = "HOLA";
-        //    OrdenDiagnosticoDetalle tt = new OrdenDiagnosticoDetalle();
-        //    tt.IdEquipo = 99;
-
-        //    OrdenDiagnosticoDetalle tt2 = new OrdenDiagnosticoDetalle();
-        //    tt2.IdEquipo = 77;
-        //    orden.OrdenDiagnosticoDetalle.Add(tt);
-        //    orden.OrdenDiagnosticoDetalle.Add(tt2);
-
-        //    return View(orden);
-        //}
-
-        //// POST: OrdenDiagnosticoes/Create
-        //// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        //// más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "IdOrdenDiagnostico,FechaEmision,FechaResolucion,IdSucursal,IdEmpleado,IdCliente,Comentarios,CantidadEquipos,PrecioBruto,Descuento,PrecioNeto,IdEstado,Facturado,OrdenDiagnosticoDetalle")] OrdenDiagnostico ordenDiagnostico)
-        //{
-        //    Debug.WriteLine("Create");
-        //    Debug.WriteLine(ordenDiagnostico.FechaEmision);
-        //    Debug.WriteLine(ordenDiagnostico.FechaEmision);
-        //    Debug.WriteLine(ordenDiagnostico.OrdenDiagnosticoDetalle.Count);
-
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    db.OrdenDiagnostico.Add(ordenDiagnostico);
-        //    //    db.SaveChanges();
-        //    //    return RedirectToAction("Index");
-        //    //}
-
-        //    //Type objType = ordenDiagnostico.GetType();
-        //    //PropertyInfo[] propertyInfoList = objType.GetProperties();
-        //    //StringBuilder result = new StringBuilder();
-        //    //foreach (PropertyInfo propertyInfo in propertyInfoList)
-        //    //    result.AppendFormat("{0}={1} ", propertyInfo.Name, propertyInfo.GetValue(ordenDiagnostico));
-
-        //    //Debug.WriteLine(result.ToString());
-
-        //    //OrdenDiagnosticoDetalle detalle1 = new OrdenDiagnosticoDetalle();
-        //    //detalle1.IdEquipo = 1;
-        //    //detalle1.OrdenDiagnostico = ordenDiagnostico;
-        //    //detalle1.IdInventario = 5;
-        //    //detalle1.Cantidad = 1;
-        //    //detalle1.Precio = (decimal) 2.0;
-        //    //detalle1.SubTotal = (decimal) 2.0;
-
-        //    //OrdenDiagnosticoDetalle detalle2 = new OrdenDiagnosticoDetalle();
-        //    //detalle2.IdEquipo = 2;
-        //    //detalle2.OrdenDiagnostico = ordenDiagnostico;
-        //    //detalle2.IdInventario = 5;
-        //    //detalle2.Cantidad = 1;
-        //    //detalle2.Precio = (decimal)2.0;
-        //    //detalle2.SubTotal = (decimal)2.0;
-
-        //    //ordenDiagnostico.OrdenDiagnosticoDetalle.Add(detalle1);
-        //    //ordenDiagnostico.OrdenDiagnosticoDetalle.Add(detalle2);
-
-
-        //    //db.OrdenDiagnostico.Add(ordenDiagnostico);
-        //    //db.SaveChanges();
-
-
-            
-
-        //    ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-        //    ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-        //    ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-        //    ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-        //    return View(ordenDiagnostico);
-        //}
-
-        public ActionResult Create2()
+        public ActionResult Create()
         {
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre");
-            ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre");
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado");
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre");
-
-            OrdenDiagnosticoViewModel o = new OrdenDiagnosticoViewModel();
-            OrdenDiagnostico orden = new OrdenDiagnostico();
-            orden.FechaEmision = new DateTime();
-            orden.PrecioBruto = (decimal)5.0;
-            orden.PrecioNeto = (decimal)5.0;
-            orden.Facturado = true;
-
-
-            orden.Comentarios = "HOLA";
-            OrdenDiagnosticoDetalle tt = new OrdenDiagnosticoDetalle();
-            tt.IdEquipo = 99;
-
-            OrdenDiagnosticoDetalle tt2 = new OrdenDiagnosticoDetalle();
-            tt2.IdEquipo = 77;
-
-
-            o.OrdenDiagnostico = orden;
-
-            o.Detalle = new List<OrdenDiagnosticoDetalle>();
-            o.Detalle.Add(tt);
-            o.Detalle.Add(tt2);
-
-
-            return View(o);
+            return View();
         }
 
-        // POST: OrdenDiagnosticoes/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create2(OrdenDiagnosticoViewModel orden)
+        public JsonResult CreateJsonGet()
         {
-            OrdenDiagnostico ordenDiagnostico = orden.OrdenDiagnostico;
+            var empleados = db.Empleado
+                .Where(x => x.IdCargo == 1)
+                .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
+            var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
+            var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
 
-            Debug.WriteLine("Create++++++++++++++++++++++++++++++++++");
-            Debug.WriteLine(ordenDiagnostico.FechaEmision);
-            Debug.WriteLine(ordenDiagnostico.FechaEmision);
-            Debug.WriteLine(orden.Detalle.Count);
-            ordenDiagnostico.CantidadEquipos = ordenDiagnostico.CantidadEquipos +1;
+            var orden = new OrdenDiagnostico
+            {
+                FechaEmision = DateTime.Today,
+                CantidadEquipos = 0,
+                PrecioBruto = (decimal)0.0,
+                Descuento = (decimal)0.0,
+                PrecioNeto = (decimal)0.0
+            };
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.OrdenDiagnostico.Add(ordenDiagnostico);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //Type objType = ordenDiagnostico.GetType();
-            //PropertyInfo[] propertyInfoList = objType.GetProperties();
-            //StringBuilder result = new StringBuilder();
-            //foreach (PropertyInfo propertyInfo in propertyInfoList)
-            //    result.AppendFormat("{0}={1} ", propertyInfo.Name, propertyInfo.GetValue(ordenDiagnostico));
-
-            //Debug.WriteLine(result.ToString());
-
-            //OrdenDiagnosticoDetalle detalle1 = new OrdenDiagnosticoDetalle();
-            //detalle1.IdEquipo = 1;
-            //detalle1.OrdenDiagnostico = ordenDiagnostico;
-            //detalle1.IdInventario = 5;
-            //detalle1.Cantidad = 1;
-            //detalle1.Precio = (decimal) 2.0;
-            //detalle1.SubTotal = (decimal) 2.0;
-
-            //OrdenDiagnosticoDetalle detalle2 = new OrdenDiagnosticoDetalle();
-            //detalle2.IdEquipo = 2;
-            //detalle2.OrdenDiagnostico = ordenDiagnostico;
-            //detalle2.IdInventario = 5;
-            //detalle2.Cantidad = 1;
-            //detalle2.Precio = (decimal)2.0;
-            //detalle2.SubTotal = (decimal)2.0;
-
-            //ordenDiagnostico.OrdenDiagnosticoDetalle.Add(detalle1);
-            //ordenDiagnostico.OrdenDiagnosticoDetalle.Add(detalle2);
-
-
-            //db.OrdenDiagnostico.Add(ordenDiagnostico);
-            //db.SaveChanges();
-
-
-
-
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-            ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-            return View(orden);
+            var payload = new { empleados, sucursales, clientes, orden };
+            return Json(payload, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult AgregarEquipo(Equipo equipo)
+        public JsonResult GetEquiposByClienteJsonGet(int idCliente)
         {
-            Debug.WriteLine("AgregarEquipo");
-            Debug.WriteLine(equipo);
-            return Json(true, JsonRequestBehavior.AllowGet);
-        }
+            var equipos = db.Equipo.Where(x => x.IdCliente == idCliente)
+                .Select(x => new
+                {
+                    x.IdEquipo,
+                    x.MarcaEquipo.Marca,
+                    x.ModeloEquipo.Modelo,
+                    x.TipoEquipo.Inventario.TotalUnitario
+                });
 
-            public JsonResult Editar(int id)
-        {
-            Debug.WriteLine("Hola");
-            Debug.WriteLine(id);
-            return Json("hola", JsonRequestBehavior.AllowGet);
+            return Json(equipos, JsonRequestBehavior.AllowGet);
         }
 
         // GET: OrdenDiagnosticoes/Edit/5
