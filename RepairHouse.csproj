@@ -474,11 +474,6 @@
     <Content Include="Views\OrdenReparaciones\Details.cshtml" />
     <Content Include="Views\OrdenReparaciones\Edit.cshtml" />
     <Content Include="Views\OrdenReparaciones\Index.cshtml" />
-    <Content Include="Views\Equipoes\Create.cshtml" />
-    <Content Include="Views\Equipoes\Delete.cshtml" />
-    <Content Include="Views\Equipoes\Details.cshtml" />
-    <Content Include="Views\Equipoes\Edit.cshtml" />
-    <Content Include="Views\Equipoes\Index.cshtml" />
     <Content Include="Views\Inventarios\Create.cshtml" />
     <Content Include="Views\Inventarios\Delete.cshtml" />
     <Content Include="Views\Inventarios\Details.cshtml" />
