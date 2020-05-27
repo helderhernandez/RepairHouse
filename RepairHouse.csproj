@@ -130,13 +130,14 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
-    <Compile Include="Controllers\EquipoesController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
     <Compile Include="Controllers\OrdenComprasController.cs" />
     <Compile Include="Controllers\OrdenDiagnosticosController.cs" />
+    <Compile Include="Controllers\OrdenesDiagnosticoController.cs" />
     <Compile Include="Controllers\OrdenReparacionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -248,6 +249,8 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewsModels\OrdenDiagnosticoFormViewModel.cs" />
+    <Compile Include="Models\ViewsModels\OrdenDiagnosticoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,9 +261,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\app.css" />
+    <Content Include="Content\custom\loader.css" />
     <Content Include="Content\datatables\INFO.txt" />
     <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\Images\background-1.png" />
+    <Content Include="Content\Images\spinner.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -284,6 +289,7 @@
       <DependentUpon>BDCasaModel1.edmx</DependentUpon>
       <LastGenOutput>BDCasaModel1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\axios\axios.min.js" />
     <Content Include="Scripts\custom\app.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -328,6 +334,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -399,6 +406,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\vue\vue.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -475,6 +483,13 @@
     <Content Include="Views\OrdenCompras\Details.cshtml" />
     <Content Include="Views\OrdenCompras\Edit.cshtml" />
     <Content Include="Views\OrdenCompras\Index.cshtml" />
+    <Content Include="Views\Equipos\Create.cshtml" />
+    <Content Include="Views\Equipos\Delete.cshtml" />
+    <Content Include="Views\Equipos\Details.cshtml" />
+    <Content Include="Views\Equipos\Edit.cshtml" />
+    <Content Include="Views\Equipos\Index.cshtml" />
+    <Content Include="Views\OrdenesDiagnostico\Create.cshtml" />
+    <Content Include="Views\OrdenesDiagnostico\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
