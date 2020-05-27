@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear Orden de Diagnostico</h2>
+
+<div id="app">
+    <form>
+        <h5>Encabezado</h5>
+
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col">
+                    <label>Sucursal:</label>
+                    <select v-model="Orden.IdSucursal" class="form-control">
+                        <option v-for="Item in Sucursales" :value="Item.IdSucursal">{{Item.Nombre}}</option>
+                    </select>
+
+                    <label>Empleado:</label>
+                    <select v-model="Orden.IdEmpleado" class="form-control">
+                        <option v-for="Item in Empleados" :value="Item.IdEmpleado">{{Item.Nombre}} - {{Item.Descripcion}}</option>
+                    </select>
+
+                    <label>Cliente:</label>
+                    <select v-model="Orden.IdCliente" class="form-control" v-on:change="limpiarDetalles()">
+                        <option v-for="Item in Clientes" :value="Item.IdCliente">{{Item.Nombre}} - {{Item.DUI}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Fecha emision:</label>
+                    <input v-model="Orden.FechaEmision" type="date" class="form-control" />
+
+                    <label>Fecha resolucion:</label>
+                    <input v-model="Orden.FechaResolucion" type="date" class="form-control" />
+
+                    @*<label>Estado:</label>
+                        <select class="form-control">
+                            <option>Item</option>
+                        </select>
+
+                        <label>Facturado:</label>
+                        <select class="form-control">
+                            <option>Item</option>
+                        </select>*@
+                </div>
+                <div class="col">
+                    <label>Comentarios:</label>
+                    <textarea v-model="Orden.Comentarios" class="form-control"></textarea>
+
+                    <label>N. equipos:</label>
+                    <input v-model="Orden.CantidadEquipos" type="number" class="form-control" disabled />
+
+                </div>
+                <div class="col">
+                    <label>Precio:</label>
+                    <input v-model="Orden.PrecioBruto" type="number" class="form-control" disabled />
+
+                    <label>Descuento:</label>
+                    <input v-model="Orden.Descuento" type="number" class="form-control" />
+
+                    <label>Total:</label>
+                    <input v-model="Orden.PrecioNeto" type="number" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <h5>Detalle</h5>
+    <a href="/" target="_blank" class="btn btn-success">Registrar nuevo equipo</a> <span> | </span>
+    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-success">Buscar equipos del usuario</a>
+    <br /><br />
+    <div v-for="Detalle in Detalles" class="card mb-3">
+        <div class="card-header">
+            Equipo: <b>{{Detalle.Marca}} {{Detalle.Modelo}}</b>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    Precio diagnostico: <b>$ {{Detalle.TotalUnitario}}</b>
+                </div>
+                @*<div class="col">
+                    <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
+                </div>*@
+                <div class="col">
+                    <button v-on:click="quitarEnDetalles(Detalle)" class="btn btn-warning">Quitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div v-if="Orden.IdCliente == null" class="modal-header">
+                    <h5>Seleccione un cliente</h5>
+                </div>
+                <div v-else>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Equipos del Cliente</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div v-for="Equipo in Equipos" class="card mb-3">
+                            <div class="card-header">
+                                Equipo: <b>{{Equipo.Marca}} {{Equipo.Modelo}}</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        Precio diagnostico: <b>$ {{Equipo.TotalUnitario}}</b>
+                                    </div>
+                                    <div class="col">
+                                        <button v-on:click="agregarEnDetalles(Equipo)" class="btn btn-success">Agregar a esta orden</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                Orden: {},
+                Detalles: [],
+                Equipos: [],
+                Sucursales: [],
+                Empleados:[],
+                Clientes: []
+            },
+            methods: {
+                getEquipos() {
+                    //obtenemos los equipos del cliente
+                    if (this.Orden.IdCliente == null) {
+                        return;
+                    }
+
+                    var url = '@Url.Content("~/OrdenesDiagnostico/GetEquiposByClienteJsonGet")' + '?idCliente=' + this.Orden.IdCliente;
+                    axios.get(url).then((result) => {
+                        console.log(result.data);
+                        this.Equipos = result.data;
+                    });
+                },
+                agregarEnDetalles(Equipo) {
+                    // agregamos un equpo al detalle
+                    var result = this.Detalles.filter(e => e.IdEquipo == Equipo.IdEquipo);
+                    if (result != 0) {
+                        return;
+                    }
+
+                    this.Detalles.push(Equipo);
+
+                },
+                quitarEnDetalles(Equipo) {
+                    // sacamos un equpo del detalle 
+                    this.Detalles = this.Detalles.filter(e => e.IdEquipo != Equipo.IdEquipo);
+                },
+                limpiarDetalles() {
+                    // sacamos todos los equipos del detalle
+                    this.Detalles = [];
+                }
+            },
+            created() {
+                var url = '@Url.Content("~/OrdenesDiagnostico/CreateJsonGet")';
+
+                axios.get(url).then((result) => {
+                    console.log(result.data);
+
+                    var { sucursales, empleados, clientes, orden } = result.data;
+                    this.Sucursales = sucursales;
+                    this.Empleados = empleados;
+                    this.Clientes = clientes;
+
+                    this.Orden = orden;
+                    this.Orden.FechaEmision = moment(this.Orden.FechaEmision).format("YYYY-MM-DD");
+                });
+            }
+        })
+    </script>
+}

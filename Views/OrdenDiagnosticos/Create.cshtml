@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h4>OrdenDiagnostico</h4>
     <hr />
@@ -113,9 +113,25 @@
         </div>
     </div>
 
+    @Html.LabelFor(model => Model.OrdenDiagnosticoDetalle)
+    @for (var i = 0; i < Model.OrdenDiagnosticoDetalle.Count; i++)
+    {
+        @Html.EditorFor(model => Model.OrdenDiagnosticoDetalle.ElementAt(i).IdEquipo)
+        <input name="OrdenDiagnosticoDetalle.IdEquipo" value="@Model.OrdenDiagnosticoDetalle.ElementAt(i).IdEquipo" />
+    }
+
+    @*@Html.LabelFor(model => model.OrdenDiagnosticoDetalle)
+        @foreach (var ordenDiagnosticoDetalle in Model.OrdenDiagnosticoDetalle)
+
+        {
+            @Html.EditorFor(modelItem => ordenDiagnosticoDetalle.IdEquipo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(modelItem => ordenDiagnosticoDetalle.IdEquipo)
+
+        }*@
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-default" onclick="DoAjaxPostAndMore(this)" />
         </div>
     </div>
 </div>
@@ -127,4 +143,33 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function DoAjaxPostAndMore(btnClicked) {
+            var $form = $(btnClicked).parents('form');
+            console.log("A ENVIAR");
+
+            console.log($form);
+            console.log($form.serialize());
+
+            return;
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    console.log("ERRORRRRRR");
+                },
+                success: function (response) {
+                    //do something with response
+                    console.log("TODO SALIO BIEN");
+
+                }
+            });
+
+            return false;// if it's a link to prevent post
+
+        }
+    </script>
 }

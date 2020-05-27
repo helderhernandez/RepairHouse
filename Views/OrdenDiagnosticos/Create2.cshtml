@@ -1,0 +1,261 @@
+﻿@model RepairHouse.Models.ViewsModels.OrdenDiagnosticoViewModel
+
+@{
+    ViewBag.Title = "Create2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create2</h2>
+<h4>OrdenDiagnostico</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+
+            <div class="col">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.FechaEmision, htmlAttributes: new { @class = "control-label col-md" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.FechaEmision, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.FechaEmision, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.FechaResolucion, htmlAttributes: new { @class = "control-label col-md" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.FechaResolucion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.FechaResolucion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.IdSucursal, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdSucursal", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.IdEmpleado, "Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdEmpleado", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.IdEmpleado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.IdCliente, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdCliente", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.IdCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.Comentarios, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.CantidadEquipos, htmlAttributes: new { @class = "control-label col-md" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.CantidadEquipos, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.CantidadEquipos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.PrecioBruto, htmlAttributes: new { @class = "control-label col-md" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.PrecioBruto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.PrecioBruto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.Descuento, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.Descuento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.Descuento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrdenDiagnostico.PrecioNeto, htmlAttributes: new { @class = "control-label col-md" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OrdenDiagnostico.PrecioNeto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.OrdenDiagnostico.PrecioNeto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.OrdenDiagnostico.IdEstado, "IdEstado", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("IdEstado", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OrdenDiagnostico.IdEstado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OrdenDiagnostico.Facturado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.OrdenDiagnostico.Facturado)
+                                @Html.ValidationMessageFor(model => model.OrdenDiagnostico.Facturado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+
+
+        <hr />
+
+        <div>
+
+
+            @Html.LabelFor(model => model.Detalle)
+            @*@for (var i = 0; i < Model.Detalle.Count; i++)
+            {
+                @Html.EditorFor(model => model.Detalle[i].IdOrdenDiagnosticoDetalle)
+                @Html.EditorFor(model => model.Detalle[i].IdEquipo)
+                @Html.EditorFor(model => model.Detalle[i].IdOrdenDiagnostico)
+                @Html.EditorFor(model => model.Detalle[i].IdInventario)
+                @Html.EditorFor(model => model.Detalle[i].Cantidad)
+                @Html.EditorFor(model => model.Detalle[i].Precio)
+                @Html.EditorFor(model => model.Detalle[i].SubTotal)
+            }*@
+
+            <table class="table">
+                <tr>
+                    <th>
+                        1
+                    </th>
+                    <th>
+                        2
+                    </th>
+                    <th>
+                        3
+                    </th>
+                    <th>
+                        4
+                    </th>
+                    <th>
+                        5
+                    </th>
+                    <th>
+                        6
+                    </th>
+                    <th>
+                        7
+                    </th>
+                    <th></th>
+                </tr>
+
+                @for (var i = 0; i < Model.Detalle.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].IdOrdenDiagnosticoDetalle)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].IdEquipo)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].IdOrdenDiagnostico)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].IdInventario)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].Cantidad)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].Precio)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Detalle[i].SubTotal)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.IdOrdenDiagnostico }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IdOrdenDiagnostico }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdenDiagnostico })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-default" onclick="DoAjaxPostAndMore(this)" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+
+
+        function DoAjaxPostAndMore(btnClicked) {
+            var $form = $(btnClicked).parents('form');
+            console.log("A ENVIAR");
+
+            console.log($form.validate().form());
+            if (!$form.validate().form()) {
+                return;
+            }
+
+
+            console.log($form);
+            console.log($form.serialize());
+            //return false;
+            alert("Anestida");
+            console.log("SEGUIMOS----------------------------->")
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    console.log("ERRORRRRRR");
+                },
+                success: function (response) {
+                    //do something with response
+                    console.log("TODO SALIO BIEN");
+
+                }
+            });
+
+            return false;// if it's a link to prevent post
+
+        }
+    </script>
+}
