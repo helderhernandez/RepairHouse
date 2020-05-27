@@ -2,3 +2,14 @@
     background: url('/Content/Images/background-1.png');
     background-size: cover;
 }
+
+/* pone de color blanco los items (no seleccionado) de un nav-tab*/
+.nav-tabs > .nav-item {
+    color: white !important;
+}
+
+/* pone de color negro el item seleccionado de un nav-tab*/
+.nav-tabs > .active {
+    color: black !important;
+}
+

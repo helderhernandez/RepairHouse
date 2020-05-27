@@ -196,10 +196,10 @@
           <Property Name="Cantidad" Type="int" />
           <Property Name="IdProveedor" Type="int" />
           <Property Name="FechaIngreso" Type="datetime" />
-          <Property Name="PrecioBruto" Type="numeric" Precision="4" Scale="2" />
-          <Property Name="SubTotal" Type="numeric" Precision="4" Scale="2" />
-          <Property Name="Iva" Type="numeric" Precision="4" Scale="2" />
-          <Property Name="Total" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="PrecioBruto" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Iva" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="FacturaProveedor" Type="int" />
         </EntityType>
         <EntityType Name="OrdenDiagnostico">
@@ -1129,7 +1129,6 @@
           <EntitySet Name="MarcaEquipo" EntityType="casa_reparadoraModel.MarcaEquipo" />
           <EntitySet Name="ModeloEquipo" EntityType="casa_reparadoraModel.ModeloEquipo" />
           <EntitySet Name="Municipio" EntityType="casa_reparadoraModel.Municipio" />
-          <EntitySet Name="OrdenCompra" EntityType="casa_reparadoraModel.OrdenCompra" />
           <EntitySet Name="OrdenDiagnostico" EntityType="casa_reparadoraModel.OrdenDiagnostico" />
           <EntitySet Name="OrdenDiagnosticoDetalle" EntityType="casa_reparadoraModel.OrdenDiagnosticoDetalle" />
           <EntitySet Name="OrdenReparacion" EntityType="casa_reparadoraModel.OrdenReparacion" />
@@ -1305,10 +1304,6 @@
             <End Role="Municipio" EntitySet="Municipio" />
             <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrdenCompra_Proveedor" Association="casa_reparadoraModel.FK_OrdenCompra_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ordendiagnostico_Sucursal" Association="casa_reparadoraModel.FK_Ordendiagnostico_Sucursal">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
@@ -1328,6 +1323,11 @@
           <AssociationSet Name="FK_Usuario_Rol" Association="casa_reparadoraModel.FK_Usuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="OrdenCompra" EntityType="casa_reparadoraModel.OrdenCompra" />
+          <AssociationSet Name="FK_OrdenCompra_Proveedor" Association="casa_reparadoraModel.FK_OrdenCompra_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cargo">
@@ -1570,23 +1570,6 @@
           <NavigationProperty Name="Empleado" Relationship="casa_reparadoraModel.FK_Empleado_Municipio" FromRole="Municipio" ToRole="Empleado" />
           <NavigationProperty Name="Proveedor" Relationship="casa_reparadoraModel.FK_Proveedor_Municipio" FromRole="Municipio" ToRole="Proveedor" />
           <NavigationProperty Name="Sucursal" Relationship="casa_reparadoraModel.FK_Sucursal_Municipio" FromRole="Municipio" ToRole="Sucursal" />
-        </EntityType>
-        <EntityType Name="OrdenCompra">
-          <Key>
-            <PropertyRef Name="IdOrdenCompra" />
-          </Key>
-          <Property Name="IdOrdenCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="IdProveedor" Type="Int32" />
-          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
-          <Property Name="PrecioBruto" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="SubTotal" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="Total" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="FacturaProveedor" Type="Int32" />
-          <NavigationProperty Name="Proveedor" Relationship="casa_reparadoraModel.FK_OrdenCompra_Proveedor" FromRole="OrdenCompra" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="OrdenDiagnostico">
           <Key>
@@ -2235,18 +2218,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrdenCompra_Proveedor">
-          <End Type="casa_reparadoraModel.Proveedor" Role="Proveedor" Multiplicity="0..1" />
-          <End Type="casa_reparadoraModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="IdProveedor" />
-            </Principal>
-            <Dependent Role="OrdenCompra">
-              <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ordendiagnostico_Sucursal">
           <End Type="casa_reparadoraModel.Sucursal" Role="Sucursal" Multiplicity="1" />
           <End Type="casa_reparadoraModel.OrdenDiagnostico" Role="OrdenDiagnostico" Multiplicity="*" />
@@ -2304,6 +2275,35 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrdenCompra">
+          <Key>
+            <PropertyRef Name="IdOrdenCompra" />
+          </Key>
+          <Property Name="IdOrdenCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="PrecioBruto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Iva" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FacturaProveedor" Type="Int32" />
+          <NavigationProperty Name="Proveedor" Relationship="casa_reparadoraModel.FK_OrdenCompra_Proveedor" FromRole="OrdenCompra" ToRole="Proveedor" />
+        </EntityType>
+        <Association Name="FK_OrdenCompra_Proveedor">
+          <End Type="casa_reparadoraModel.Proveedor" Role="Proveedor" Multiplicity="0..1" />
+          <End Type="casa_reparadoraModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="OrdenCompra">
+              <PropertyRef Name="IdProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2511,23 +2511,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrdenCompra">
-            <EntityTypeMapping TypeName="casa_reparadoraModel.OrdenCompra">
-              <MappingFragment StoreEntitySet="OrdenCompra">
-                <ScalarProperty Name="FacturaProveedor" ColumnName="FacturaProveedor" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-                <ScalarProperty Name="PrecioBruto" ColumnName="PrecioBruto" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrdenDiagnostico">
             <EntityTypeMapping TypeName="casa_reparadoraModel.OrdenDiagnostico">
               <MappingFragment StoreEntitySet="OrdenDiagnostico">
@@ -2658,6 +2641,23 @@
                 <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
                 <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenCompra">
+            <EntityTypeMapping TypeName="casa_reparadoraModel.OrdenCompra">
+              <MappingFragment StoreEntitySet="OrdenCompra">
+                <ScalarProperty Name="FacturaProveedor" ColumnName="FacturaProveedor" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="PrecioBruto" ColumnName="PrecioBruto" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

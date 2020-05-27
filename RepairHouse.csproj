@@ -127,18 +127,26 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
+    <Compile Include="Controllers\CategoriaInventariosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
+    <Compile Include="Controllers\MarcaEquiposController.cs" />
+    <Compile Include="Controllers\ModeloEquiposController.cs" />
     <Compile Include="Controllers\OrdenComprasController.cs" />
     <Compile Include="Controllers\OrdenDiagnosticosController.cs" />
+    <Compile Include="Controllers\OrdenesDiagnosticoController.cs" />
     <Compile Include="Controllers\OrdenReparacionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\TipoEquiposController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
     <Compile Include="DecimalModelBinder.cs" />
@@ -247,6 +255,8 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewsModels\OrdenDiagnosticoFormViewModel.cs" />
+    <Compile Include="Models\ViewsModels\OrdenDiagnosticoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -257,13 +267,21 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\app.css" />
+    <Content Include="Content\custom\loader.css" />
     <Content Include="Content\datatables\INFO.txt" />
     <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\Images\background-1.png" />
+    <Content Include="Content\Images\spinner.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\cas1.jpg" />
+    <Content Include="img\cas2.jpg" />
+    <Content Include="img\cas3.jpg" />
+    <Content Include="img\Cas4.jpg" />
     <Content Include="img\Diagnostico.jpg" />
+    <Content Include="img\fondo 4.jpg" />
+    <Content Include="img\Logo.png" />
     <Content Include="img\Mantenimiento.jpg" />
     <Content Include="img\reparacion.png" />
     <Content Include="img\reparacion2.jpg" />
@@ -277,6 +295,7 @@
       <DependentUpon>BDCasaModel1.edmx</DependentUpon>
       <LastGenOutput>BDCasaModel1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\axios\axios.min.js" />
     <Content Include="Scripts\custom\app.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -321,6 +340,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -392,6 +412,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\vue\vue.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -438,11 +459,6 @@
     <Content Include="Views\Empleados\Details.cshtml" />
     <Content Include="Views\Empleados\Edit.cshtml" />
     <Content Include="Views\Empleados\Index.cshtml" />
-    <Content Include="Views\Inventarios\Create.cshtml" />
-    <Content Include="Views\Inventarios\Delete.cshtml" />
-    <Content Include="Views\Inventarios\Details.cshtml" />
-    <Content Include="Views\Inventarios\Edit.cshtml" />
-    <Content Include="Views\Inventarios\Index.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Create.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Delete.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Details.cshtml" />
@@ -453,16 +469,63 @@
     <Content Include="Views\Diagnosticos\Details.cshtml" />
     <Content Include="Views\Diagnosticos\Edit.cshtml" />
     <Content Include="Views\Diagnosticos\Index.cshtml" />
-    <Content Include="Views\OrdenCompras\Create.cshtml" />
-    <Content Include="Views\OrdenCompras\Delete.cshtml" />
-    <Content Include="Views\OrdenCompras\Details.cshtml" />
-    <Content Include="Views\OrdenCompras\Edit.cshtml" />
-    <Content Include="Views\OrdenCompras\Index.cshtml" />
     <Content Include="Views\OrdenReparaciones\Create.cshtml" />
     <Content Include="Views\OrdenReparaciones\Delete.cshtml" />
     <Content Include="Views\OrdenReparaciones\Details.cshtml" />
     <Content Include="Views\OrdenReparaciones\Edit.cshtml" />
     <Content Include="Views\OrdenReparaciones\Index.cshtml" />
+    <Content Include="Views\Equipoes\Create.cshtml" />
+    <Content Include="Views\Equipoes\Delete.cshtml" />
+    <Content Include="Views\Equipoes\Details.cshtml" />
+    <Content Include="Views\Equipoes\Edit.cshtml" />
+    <Content Include="Views\Equipoes\Index.cshtml" />
+    <Content Include="Views\Inventarios\Create.cshtml" />
+    <Content Include="Views\Inventarios\Delete.cshtml" />
+    <Content Include="Views\Inventarios\Details.cshtml" />
+    <Content Include="Views\Inventarios\Edit.cshtml" />
+    <Content Include="Views\Inventarios\Index.cshtml" />
+    <Content Include="Views\OrdenCompras\Create.cshtml" />
+    <Content Include="Views\OrdenCompras\Delete.cshtml" />
+    <Content Include="Views\OrdenCompras\Details.cshtml" />
+    <Content Include="Views\OrdenCompras\Edit.cshtml" />
+    <Content Include="Views\OrdenCompras\Index.cshtml" />
+    <Content Include="Views\Equipos\Create.cshtml" />
+    <Content Include="Views\Equipos\Delete.cshtml" />
+    <Content Include="Views\Equipos\Details.cshtml" />
+    <Content Include="Views\Equipos\Edit.cshtml" />
+    <Content Include="Views\Equipos\Index.cshtml" />
+    <Content Include="Views\OrdenesDiagnostico\Create.cshtml" />
+    <Content Include="Views\OrdenesDiagnostico\Edit.cshtml" />
+    <Content Include="Views\ModeloEquipos\Create.cshtml" />
+    <Content Include="Views\ModeloEquipos\Delete.cshtml" />
+    <Content Include="Views\ModeloEquipos\Details.cshtml" />
+    <Content Include="Views\ModeloEquipos\Edit.cshtml" />
+    <Content Include="Views\ModeloEquipos\Index.cshtml" />
+    <Content Include="Views\MarcaEquipos\Create.cshtml" />
+    <Content Include="Views\MarcaEquipos\Delete.cshtml" />
+    <Content Include="Views\MarcaEquipos\Details.cshtml" />
+    <Content Include="Views\MarcaEquipos\Edit.cshtml" />
+    <Content Include="Views\MarcaEquipos\Index.cshtml" />
+    <Content Include="Views\Cargos\Create.cshtml" />
+    <Content Include="Views\Cargos\Delete.cshtml" />
+    <Content Include="Views\Cargos\Details.cshtml" />
+    <Content Include="Views\Cargos\Edit.cshtml" />
+    <Content Include="Views\Cargos\Index.cshtml" />
+    <Content Include="Views\CategoriaInventarios\Create.cshtml" />
+    <Content Include="Views\CategoriaInventarios\Delete.cshtml" />
+    <Content Include="Views\CategoriaInventarios\Details.cshtml" />
+    <Content Include="Views\CategoriaInventarios\Edit.cshtml" />
+    <Content Include="Views\CategoriaInventarios\Index.cshtml" />
+    <Content Include="Views\TipoEquipos\Create.cshtml" />
+    <Content Include="Views\TipoEquipos\Delete.cshtml" />
+    <Content Include="Views\TipoEquipos\Details.cshtml" />
+    <Content Include="Views\TipoEquipos\Edit.cshtml" />
+    <Content Include="Views\TipoEquipos\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

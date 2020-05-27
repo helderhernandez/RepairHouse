@@ -1,0 +1,72 @@
+﻿@model RepairHouse.Models.Equipo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Equipo</h2>
+
+<h3>¿Esta Seguro que deseea Eliminar el registro?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.PrimerNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.PrimerNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarcaEquipo.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarcaEquipo.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModeloEquipo.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModeloEquipo.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEquipo.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEquipo.Tipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

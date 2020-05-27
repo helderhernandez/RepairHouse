@@ -1,0 +1,66 @@
+﻿@model RepairHouse.Models.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrasena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrasena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Habilitado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Habilitado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdRol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdRol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.PrimerNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.PrimerNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol.Rol1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol.Rol1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdUsuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

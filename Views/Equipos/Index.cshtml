@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RepairHouse.Models.Equipo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h2>Registro Equipo</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.PrimerNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarcaEquipo.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModeloEquipo.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoEquipo.Tipo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.PrimerNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarcaEquipo.Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModeloEquipo.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoEquipo.Tipo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdEquipo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdEquipo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdEquipo })
+        </td>
+    </tr>
+}
+
+</table>

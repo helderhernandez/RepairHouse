@@ -1,0 +1,35 @@
+﻿@model RepairHouse.Models.ModeloEquipo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles de modelo Equipos</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarcaEquipo.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarcaEquipo.Marca)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdModelo }) |
+    <div class="form-actions no-color">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</p>

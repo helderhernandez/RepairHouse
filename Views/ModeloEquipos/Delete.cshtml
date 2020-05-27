@@ -1,0 +1,40 @@
+﻿@model RepairHouse.Models.ModeloEquipo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Modelo Equipos</h2>
+
+<h3>¿Esta Seguro que deseea Eliminar el registro?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarcaEquipo.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarcaEquipo.Marca)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
