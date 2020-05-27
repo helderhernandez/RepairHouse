@@ -53,13 +53,17 @@ namespace RepairHouse.Controllers
             var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
             var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
 
+            const int ID_ESTADO_COMPLETADO = 5;
+            const bool FACTURADO_FALSO = false;
             var orden = new OrdenDiagnostico
             {
                 FechaEmision = DateTime.Today,
                 CantidadEquipos = 0,
                 PrecioBruto = (decimal)0.0,
                 Descuento = (decimal)0.0,
-                PrecioNeto = (decimal)0.0
+                PrecioNeto = (decimal)0.0,
+                IdEstado = ID_ESTADO_COMPLETADO,
+                Facturado = FACTURADO_FALSO
             };
 
             var payload = new { empleados, sucursales, clientes, orden };
@@ -68,13 +72,17 @@ namespace RepairHouse.Controllers
 
         public JsonResult GetEquiposByClienteJsonGet(int idCliente)
         {
+            const int CANTIDAD_DEFAULT = 1;
             var equipos = db.Equipo.Where(x => x.IdCliente == idCliente)
                 .Select(x => new
                 {
                     x.IdEquipo,
+                    x.TipoEquipo.Inventario.IdInventario,
+                    Cantidad = CANTIDAD_DEFAULT,
+                    Precio = x.TipoEquipo.Inventario.PrecioNeto,
+                    SubTotal = x.TipoEquipo.Inventario.TotalUnitario,
                     x.MarcaEquipo.Marca,
-                    x.ModeloEquipo.Modelo,
-                    x.TipoEquipo.Inventario.TotalUnitario
+                    x.ModeloEquipo.Modelo
                 });
 
             return Json(equipos, JsonRequestBehavior.AllowGet);
@@ -84,7 +92,25 @@ namespace RepairHouse.Controllers
         public JsonResult Create(OrdenDiagnosticoViewModel viewModel)
         {
             Debug.WriteLine("Create....");
-            Debug.WriteLine(viewModel);
+
+            OrdenDiagnostico orden = viewModel.OrdenDiagnostico;
+
+            List<OrdenDiagnosticoDetalle> detalles = viewModel.Detalle;
+            foreach (var item in detalles)
+            {
+                item.OrdenDiagnostico = orden;
+                orden.OrdenDiagnosticoDetalle.Add(item);
+
+                Debug.WriteLine(item.IdEquipo);
+                Debug.WriteLine(item.SubTotal);
+                Debug.WriteLine(item.IdInventario);
+            }
+
+            Debug.WriteLine(orden.PrecioNeto);
+            Debug.WriteLine(orden.FechaEmision);
+
+            db.OrdenDiagnostico.Add(orden);
+            db.SaveChanges();
 
             return Json("Create", JsonRequestBehavior.DenyGet);
         }

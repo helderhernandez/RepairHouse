@@ -7,7 +7,7 @@
 <h2>Crear Orden de Diagnostico</h2>
 
 <div id="app">
-    <form>
+    <form v-on:submit.prevent="enviarFormulario()">
         <h5>Encabezado</h5>
 
         <div class="form-horizontal">
@@ -15,36 +15,36 @@
             <div class="row">
                 <div class="col">
                     <label>Sucursal:</label>
-                    <select v-model="Orden.IdSucursal" class="form-control">
+                    <select v-model="Orden.IdSucursal" class="form-control" required>
                         <option v-for="Item in Sucursales" :value="Item.IdSucursal">{{Item.Nombre}}</option>
                     </select>
 
                     <label>Empleado:</label>
-                    <select v-model="Orden.IdEmpleado" class="form-control">
+                    <select v-model="Orden.IdEmpleado" class="form-control" required>
                         <option v-for="Item in Empleados" :value="Item.IdEmpleado">{{Item.Nombre}} - {{Item.Descripcion}}</option>
                     </select>
 
                     <label>Cliente:</label>
-                    <select v-model="Orden.IdCliente" class="form-control" v-on:change="limpiarDetalles()">
+                    <select v-model="Orden.IdCliente" class="form-control" v-on:change="limpiarDetalles()" required>
                         <option v-for="Item in Clientes" :value="Item.IdCliente">{{Item.Nombre}} - {{Item.DUI}}</option>
                     </select>
                 </div>
                 <div class="col">
                     <label>Fecha emision:</label>
-                    <input v-model="Orden.FechaEmision" type="date" class="form-control" />
+                    <input v-model="Orden.FechaEmision" type="date" class="form-control" required/>
 
                     <label>Fecha resolucion:</label>
                     <input v-model="Orden.FechaResolucion" type="date" class="form-control" />
 
                     @*<label>Estado:</label>
-                        <select class="form-control">
-                            <option>Item</option>
-                        </select>
+                    <select class="form-control">
+                        <option>Item</option>
+                    </select>
 
-                        <label>Facturado:</label>
-                        <select class="form-control">
-                            <option>Item</option>
-                        </select>*@
+                    <label>Facturado:</label>
+                    <select class="form-control">
+                        <option>Item</option>
+                    </select>*@
                 </div>
                 <div class="col">
                     <label>Comentarios:</label>
@@ -59,20 +59,23 @@
                     <input v-model="Orden.PrecioBruto" type="number" class="form-control" disabled />
 
                     <label>Descuento %:</label>
-                    <input v-model="Orden.Descuento" type="number"  class="form-control" min="0" maxlength="2" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+                    <input v-model="Orden.Descuento" type="number" class="form-control" min="0" maxlength="2" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
 
                     <label>Total:</label>
                     <input v-model="Orden.PrecioNeto" type="number" class="form-control" disabled />
                 </div>
             </div>
         </div>
+
+        <br />
+        <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a> <span> | </span>
+        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
+        <button type="submit" v- class="btn btn-success">Crear orden</button>
     </form>
 
+    
     <hr />
     <h5>Detalle</h5>
-    <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-success">Registrar nuevo equipo</a> <span> | </span>
-    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-success">Buscar equipos del usuario</a>
-    <br /><br />
     <div v-for="Detalle in Detalles" class="card mb-3">
         <div class="card-header">
             Equipo: <b>{{Detalle.Marca}} {{Detalle.Modelo}}</b>
@@ -80,7 +83,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    Precio diagnostico: <b>$ {{Detalle.TotalUnitario}}</b>
+                    Precio diagnostico: <b>$ {{Detalle.SubTotal}}</b>
                 </div>
                 @*<div class="col">
                         <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
@@ -110,7 +113,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        Precio diagnostico: <b>$ {{Equipo.TotalUnitario}}</b>
+                                        Precio diagnostico: <b>$ {{Equipo.SubTotal}}</b>
                                     </div>
                                     <div class="col">
                                         <button v-on:click="agregarEnDetalles(Equipo)" class="btn btn-success">Agregar a esta orden</button>
@@ -133,7 +136,6 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-
 
         var app = new Vue({
             el: '#app',
@@ -164,9 +166,11 @@
                     }
 
                     var url = '@Url.Content("~/OrdenDiagnosticos/GetEquiposByClienteJsonGet")' + '?idCliente=' + this.Orden.IdCliente;
+
                     axios.get(url).then((result) => {
-                        console.log(result.data);
                         this.Equipos = result.data;
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
                     });
                 },
                 agregarEnDetalles(Equipo) {
@@ -177,7 +181,6 @@
                     }
 
                     this.Detalles.push(Equipo);
-
                 },
                 quitarEnDetalles(Equipo) {
                     // sacamos un equpo del detalle
@@ -188,26 +191,44 @@
                     this.Detalles = [];
                 },
                 recalcularEncabezado() {
+                    // recalculamos informacion de encabezado
                     var nEquipos = this.Detalles.length;
                     var sumaCostoDiagnosticos = 0;
 
                     this.Detalles.forEach(e => {
-                        sumaCostoDiagnosticos += e.TotalUnitario;
+                        sumaCostoDiagnosticos += e.SubTotal;
                     })
 
-                    var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos* this.Orden.Descuento * 0.01);
+                    var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos * this.Orden.Descuento * 0.01);
 
                     this.Orden.CantidadEquipos = nEquipos;
                     this.Orden.PrecioBruto = sumaCostoDiagnosticos;
                     this.Orden.PrecioNeto = sumaCostoTotal;
+                },
+                enviarFormulario() {
+                    if (this.Detalles == null || this.Detalles.length == 0) {
+                        alert("Ingrese al menos un equipo en el detalle");
+                        return;
+                    }
+
+                    var url = '@Url.Content("~/OrdenDiagnosticos/Create")';
+
+                    OrdenDiagnostico = this.Orden;
+                    Detalle = this.Detalles;
+
+                    var payload = { OrdenDiagnostico, Detalle };
+
+                    axios.post(url, payload).then((result) => {
+                        location.href = '@Url.Content("~/OrdenDiagnosticos/Index")';
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
                 }
             },
             created() {
                 var url = '@Url.Content("~/OrdenDiagnosticos/CreateJsonGet")';
 
                 axios.get(url).then((result) => {
-                    console.log(result.data);
-
                     var { sucursales, empleados, clientes, orden } = result.data;
                     this.Sucursales = sucursales;
                     this.Empleados = empleados;
@@ -215,6 +236,8 @@
 
                     this.Orden = orden;
                     this.Orden.FechaEmision = moment(this.Orden.FechaEmision).format("YYYY-MM-DD");
+                }).catch((error) => {
+                    alert("Ha ocurrido un error");
                 });
             }
         })
