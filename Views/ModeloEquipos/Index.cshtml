@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RepairHouse.Models.ModeloEquipo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Registro de Modelo de equipos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarcaEquipo.Marca)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarcaEquipo.Marca)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdModelo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdModelo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdModelo })
+        </td>
+    </tr>
+}
+
+</table>

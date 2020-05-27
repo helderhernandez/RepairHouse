@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles de Equipos</h2>
 
 <div>
-    <h4>Equipo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,6 +60,13 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEquipo }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    <div class="parent-style-one">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IdEquipo })
+    </div>
+    <div class="form-actions no-color">
+      
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
 </p>
