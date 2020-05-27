@@ -264,7 +264,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\cas1.jpg" />
+    <Content Include="img\cas2.jpg" />
+    <Content Include="img\cas3.jpg" />
+    <Content Include="img\Cas4.jpg" />
     <Content Include="img\Diagnostico.jpg" />
+    <Content Include="img\fondo 4.jpg" />
+    <Content Include="img\Logo.png" />
     <Content Include="img\Mantenimiento.jpg" />
     <Content Include="img\reparacion.png" />
     <Content Include="img\reparacion2.jpg" />
@@ -439,11 +445,6 @@
     <Content Include="Views\Empleados\Details.cshtml" />
     <Content Include="Views\Empleados\Edit.cshtml" />
     <Content Include="Views\Empleados\Index.cshtml" />
-    <Content Include="Views\Inventarios\Create.cshtml" />
-    <Content Include="Views\Inventarios\Delete.cshtml" />
-    <Content Include="Views\Inventarios\Details.cshtml" />
-    <Content Include="Views\Inventarios\Edit.cshtml" />
-    <Content Include="Views\Inventarios\Index.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Create.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Delete.cshtml" />
     <Content Include="Views\OrdenDiagnosticos\Details.cshtml" />
@@ -464,6 +465,11 @@
     <Content Include="Views\Equipoes\Details.cshtml" />
     <Content Include="Views\Equipoes\Edit.cshtml" />
     <Content Include="Views\Equipoes\Index.cshtml" />
+    <Content Include="Views\Inventarios\Create.cshtml" />
+    <Content Include="Views\Inventarios\Delete.cshtml" />
+    <Content Include="Views\Inventarios\Details.cshtml" />
+    <Content Include="Views\Inventarios\Edit.cshtml" />
+    <Content Include="Views\Inventarios\Index.cshtml" />
     <Content Include="Views\OrdenCompras\Create.cshtml" />
     <Content Include="Views\OrdenCompras\Delete.cshtml" />
     <Content Include="Views\OrdenCompras\Details.cshtml" />
