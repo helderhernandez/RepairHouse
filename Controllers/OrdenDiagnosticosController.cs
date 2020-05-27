@@ -266,9 +266,15 @@ namespace RepairHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             OrdenDiagnostico ordenDiagnostico = db.OrdenDiagnostico.Find(id);
+            List<OrdenDiagnosticoDetalle> detalles = db.OrdenDiagnosticoDetalle.Where(x => x.IdOrdenDiagnostico == id).ToList();
+
+            db.OrdenDiagnosticoDetalle.RemoveRange(detalles);
             db.OrdenDiagnostico.Remove(ordenDiagnostico);
+            
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
