@@ -60,12 +60,12 @@ namespace RepairHouse.Controllers
             return Json(equipos, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        public JsonResult EditJson(int idOrden)
+        public JsonResult EditJson(int id)
         {
             //OrdenDiagnosticoFormViewModel ordenViewModel = new OrdenDiagnosticoFormViewModel();
 

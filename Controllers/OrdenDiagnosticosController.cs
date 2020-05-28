@@ -48,7 +48,7 @@ namespace RepairHouse.Controllers
         public JsonResult CreateJsonGet()
         {
             var empleados = db.Empleado
-                .Where(x => x.IdCargo == 1)
+                //.Where(x => x.IdCargo == 4)
                 .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
             var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
             var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
@@ -112,7 +112,7 @@ namespace RepairHouse.Controllers
             db.OrdenDiagnostico.Add(orden);
             db.SaveChanges();
 
-            return Json("Create", JsonRequestBehavior.DenyGet);
+            return Json("Create OK", JsonRequestBehavior.DenyGet);
         }
 
         // GET: OrdenDiagnosticoes/Edit/5
@@ -123,128 +123,109 @@ namespace RepairHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            OrdenDiagnosticoFormViewModel ordenViewModel = new OrdenDiagnosticoFormViewModel();
+            OrdenDiagnosticoViewModel ordenViewModel = new OrdenDiagnosticoViewModel();
 
-            OrdenDiagnostico ordenDiagnostico = db.OrdenDiagnostico.Find(id);
+            ordenViewModel.OrdenDiagnostico = db.OrdenDiagnostico.Find(id);
 
-            ordenViewModel.OrdenDiagnostico = ordenDiagnostico;
-
-            if (ordenDiagnostico == null)
+            if (ordenViewModel.OrdenDiagnostico == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-            ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
+            //ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
+            //ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
+            //ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
+            //ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
             return View(ordenViewModel);
         }
 
-        [HttpPost]
-        public JsonResult GetDetalle(int idOrden)
+        public JsonResult EditJsonGet(int id)
         {
-            Debug.WriteLine("hOLAAAAA");
-            Debug.WriteLine(idOrden);
-            var detalle = db.OrdenDiagnosticoDetalle
-                .Include(x => x.Equipo)
-                .Where(x => x.IdOrdenDiagnostico == idOrden)
+            Debug.WriteLine("EditJsonGet");
+            Debug.WriteLine(id);
 
+            var empleados = db.Empleado
+                //.Where(x => x.IdCargo == 4)
+                .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
+            var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
+            var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
+            var estados = db.EstadoOrdenDiagnostico.Select(x => new { x.IdEstado, x.Estado});
+
+            var orden = db.OrdenDiagnostico
                 .Select(x => new
                 {
-                    Id = x.IdOrdenDiagnosticoDetalle,
-                    IdEquipo = x.Equipo.IdEquipo,
-                    Marca = x.Equipo.MarcaEquipo.Marca,
-                    Modelo = x.Equipo.ModeloEquipo.Modelo,
-                    PrecioDiagnostico = x.Equipo.TipoEquipo.Inventario.TotalUnitario,
-                })
-                .ToList();
+                    x.IdOrdenDiagnostico,
+                    x.IdSucursal,
+                    x.IdEmpleado,
+                    x.IdCliente,
+                    x.FechaEmision,
+                    x.FechaResolucion,
+                    x.IdEstado,
+                    x.Facturado,
+                    x.Comentarios,
+                    x.CantidadEquipos,
+                    x.PrecioNeto,
+                    x.Descuento,
+                    x.PrecioBruto
+                }).FirstOrDefault(x => x.IdOrdenDiagnostico == id);
 
-            //foreach (var item in detalle)
-            //{
-            //    Debug.WriteLine(item.IdOrdenDiagnosticoDetalle);
-            //    Debug.WriteLine(item.Equipo.Color);
-            //    Debug.WriteLine(item.Equipo.MarcaEquipo.Marca);
-            //    Debug.WriteLine(item.Equipo.TipoEquipo.Inventario.TotalUnitario);
-            //}
+            var detalles = db.OrdenDiagnosticoDetalle.Where(x => x.IdOrdenDiagnostico == id)
+                .Select(x => new
+                {
+                    x.IdEquipo,
+                    x.IdInventario,
+                    x.Cantidad,
+                    x.Precio,
+                    x.SubTotal,
+                    x.Equipo.MarcaEquipo.Marca,
+                    x.Equipo.ModeloEquipo.Modelo
+                });
 
-            //.Select(x => new
-            // {
-            //     Id = x.IdOrdenDiagnosticoDetalle,
-            //     IdEquipo = x.Equipo.IdEquipo,
-            //     Marca = x.Equipo.MarcaEquipo,
-            //     Modelo = x.Equipo.ModeloEquipo,
-            //     PrecioDiagnostico = x.Equipo.TipoEquipo.Inventario.TotalUnitario
-            // })
-
-            return Json(detalle, JsonRequestBehavior.DenyGet);
+            var payload = new { empleados, sucursales, clientes, estados, orden, detalles };
+            return Json(payload, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: OrdenDiagnosticoes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(OrdenDiagnosticoFormViewModel ordenViewModel)
+        public JsonResult Edit(OrdenDiagnosticoViewModel viewModel)
         {
-            OrdenDiagnostico ordenDiagnostico = ordenViewModel.OrdenDiagnostico;
+            Debug.WriteLine("Edit....");
 
-            Debug.WriteLine("Create++++++++++++++++++++++++++++++++++");
-            Debug.WriteLine(ordenDiagnostico.FechaEmision);
-            Debug.WriteLine(ordenDiagnostico.FechaEmision);
-            Debug.WriteLine(ordenViewModel.EquiposId.Count);
+            OrdenDiagnostico orden = viewModel.OrdenDiagnostico;
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(ordenDiagnostico).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-            ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-            return View(ordenViewModel);
+            List<OrdenDiagnosticoDetalle> detalles = viewModel.Detalle;
+            foreach (var item in detalles)
+            {
+                item.OrdenDiagnostico = orden;
+                orden.OrdenDiagnosticoDetalle.Add(item);
+
+                Debug.WriteLine(item.IdEquipo);
+                Debug.WriteLine(item.SubTotal);
+                Debug.WriteLine(item.IdInventario);
+            }
+
+            Debug.WriteLine(orden.PrecioNeto);
+            Debug.WriteLine(orden.FechaEmision);
+
+            db.OrdenDiagnostico.Add(orden);
+            db.SaveChanges();
+
+            return Json("Edit OK", JsonRequestBehavior.DenyGet);
         }
 
-        //// GET: OrdenDiagnosticoes/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    OrdenDiagnostico ordenDiagnostico = db.OrdenDiagnostico.Find(id);
-        //    if (ordenDiagnostico == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-        //    ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-        //    ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-        //    ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-        //    return View(ordenDiagnostico);
-        //}
+        [HttpPost]
+        public JsonResult RemoveEquipoEnDetalle(int idOrdenDiagnostico, int idEquipo)
+        {
+            Debug.WriteLine("RemoveEquipoEnDetalle....");
 
-        //// POST: OrdenDiagnosticoes/Edit/5
-        //// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        //// más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "IdOrdenDiagnostico,FechaEmision,FechaResolucion,IdSucursal,IdEmpleado,IdCliente,Comentarios,CantidadEquipos,PrecioBruto,Descuento,PrecioNeto,IdEstado,Facturado")] OrdenDiagnostico ordenDiagnostico)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(ordenDiagnostico).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-        //    ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-        //    ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-        //    ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-        //    return View(ordenDiagnostico);
-        //}
+            OrdenDiagnosticoDetalle item = db.OrdenDiagnosticoDetalle
+                .Where(x => x.IdOrdenDiagnostico == idOrdenDiagnostico && x.IdEquipo == idEquipo)
+                .FirstOrDefault() ;
+
+            db.OrdenDiagnosticoDetalle.Remove(item);
+            db.SaveChanges();
+
+            return Json("Remove OK", JsonRequestBehavior.DenyGet);
+        }
 
         // GET: OrdenDiagnosticoes/Delete/5
         public ActionResult Delete(int? id)

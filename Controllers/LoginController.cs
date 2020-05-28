@@ -34,6 +34,7 @@ namespace RepairHouse.Controllers
             // si no continuamos el flujo
             if (usuarioDao.buscarPorCredenciales(usuario, contrasena))
             {
+                Session["CURRENT_SESSION"] = usuario;
                 return Content("true");
             }
             else

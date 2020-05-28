@@ -196,9 +196,9 @@
           <Property Name="Cantidad" Type="int" />
           <Property Name="IdProveedor" Type="int" />
           <Property Name="FechaIngreso" Type="datetime" />
-          <Property Name="PrecioBruto" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Iva" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PrecioBruto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Iva" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="FacturaProveedor" Type="int" />
         </EntityType>
@@ -2288,9 +2288,9 @@
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="IdProveedor" Type="Int32" />
           <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
-          <Property Name="PrecioBruto" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Iva" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PrecioBruto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="FacturaProveedor" Type="Int32" />
           <NavigationProperty Name="Proveedor" Relationship="casa_reparadoraModel.FK_OrdenCompra_Proveedor" FromRole="OrdenCompra" ToRole="Proveedor" />
