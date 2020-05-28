@@ -35,55 +35,58 @@
 
                 @if (Session["CURRENT_SESSION"] != null)
                 {
-                    
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "OrdenDiagnosticos")">Diagnósticos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "OrdenReparaciones")">Reparaciones</a>
-                </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Inventario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                        <a class="dropdown-item" href="@Url.Action("Index", "Inventarios")">Inventario</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "CategoriaInventarios")">Categoria de Inventario</a>
-                    </div>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "OrdenDiagnosticos")">Diagnósticos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "OrdenReparaciones")">Reparaciones</a>
+                    </li>
 
-                @*<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Reporte
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                <a class="dropdown-item" href="@Url.Action("ReporteDiagnostico", "Reporte")">Reporte Diagnóstico</a>
-                <a class="dropdown-item disabled" href="#">Documentación Técnico</a>
-            </div>
-        </li>*@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Inventario
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                            <a class="dropdown-item" href="@Url.Action("Index", "Inventarios")">Inventario</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "CategoriaInventarios")">Categoria de Inventario</a>
+                        </div>
+                    </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administración
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                        <a class="dropdown-item" href="@Url.Action("Index", "Empleados")">Empleados</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Clientes")">Clientes</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Proveedores")">Proveedores</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Cargos")">Cargos</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Equipos")">Equipos</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "MarcaEquipos")">Marca de Equpos</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "ModeloEquipos")">Modelo de Equipos</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "OrdenCompras")">Ordenes de Compra</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "TipoEquipos")">Tipos de Equipos</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Usuarios")">Usuarios</a>
+                    @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reporte
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <a class="dropdown-item" href="@Url.Action("ReporteDiagnostico", "Reporte")">Reporte Diagnóstico</a>
+                                <a class="dropdown-item disabled" href="#">Documentación Técnico</a>
+                            </div>
+                        </li>*@
 
-                    </div>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administración
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                            <a class="dropdown-item" href="@Url.Action("Index", "Empleados")">Empleados</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Clientes")">Clientes</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Proveedores")">Proveedores</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Cargos")">Cargos</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Equipos")">Equipos</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "MarcaEquipos")">Marca de Equpos</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "ModeloEquipos")">Modelo de Equipos</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "OrdenCompras")">Ordenes de Compra</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "TipoEquipos")">Tipos de Equipos</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Usuarios")">Usuarios</a>
+
+                        </div>
+                    </li>
                 }
             </ul>
-            <a href="@Url.Action("Index", "Login")" class="nav-link my-2 my-lg-0 text-white">Iniciar Sesión</a>
+            @if (Session["CURRENT_SESSION"] == null)
+            {
+                <a href="@Url.Action("Index", "Login")" class="nav-link my-2 my-lg-0 text-white">Iniciar Sesión</a>
+            }
         </div>
     </nav>
 
