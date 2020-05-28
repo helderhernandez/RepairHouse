@@ -11,8 +11,7 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Inventario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,20 +23,15 @@ namespace RepairHouse.Models
             this.OrdenReparacionDetalle = new HashSet<OrdenReparacionDetalle>();
             this.TipoEquipo = new HashSet<TipoEquipo>();
         }
-
-        [Display(Name = "ID de Inventario")]
+    
         public int IdInventario { get; set; }
         public string Descripcion { get; set; }
         public int Cantidad { get; set; }
-        [Display (Name ="Precio Neto")]
         public Nullable<decimal> PrecioNeto { get; set; }
         public Nullable<decimal> Iva { get; set; }
-        [Display(Name = "Total")]
         public Nullable<decimal> TotalUnitario { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        [Display(Name = "Proveedor")]
         public int IdProveedor { get; set; }
-        [Display(Name = "Categoria")]
         public int IdCategoria { get; set; }
     
         public virtual CategoriaInventario CategoriaInventario { get; set; }
