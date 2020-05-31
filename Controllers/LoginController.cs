@@ -1,5 +1,4 @@
-﻿using RepairHouse.Daos;
-using RepairHouse.Models;
+﻿using RepairHouse.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,8 +14,6 @@ namespace RepairHouse.Controllers
 {
     public class LoginController : Controller
     {
-        UsuarioDao usuarioDao = new UsuarioDao();
-
         private casa_reparadoraEntities db = new casa_reparadoraEntities();
 
         // GET: /login
