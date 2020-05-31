@@ -143,7 +143,6 @@
     <Compile Include="Controllers\ModeloEquiposController.cs" />
     <Compile Include="Controllers\OrdenComprasController.cs" />
     <Compile Include="Controllers\OrdenDiagnosticosController.cs" />
-    <Compile Include="Controllers\OrdenesDiagnosticoController.cs" />
     <Compile Include="Controllers\OrdenReparacionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -257,7 +256,6 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewsModels\OrdenDiagnosticoFormViewModel.cs" />
     <Compile Include="Models\ViewsModels\OrdenDiagnosticoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -488,8 +486,6 @@
     <Content Include="Views\Equipos\Details.cshtml" />
     <Content Include="Views\Equipos\Edit.cshtml" />
     <Content Include="Views\Equipos\Index.cshtml" />
-    <Content Include="Views\OrdenesDiagnostico\Create.cshtml" />
-    <Content Include="Views\OrdenesDiagnostico\Edit.cshtml" />
     <Content Include="Views\ModeloEquipos\Create.cshtml" />
     <Content Include="Views\ModeloEquipos\Delete.cshtml" />
     <Content Include="Views\ModeloEquipos\Details.cshtml" />
@@ -528,7 +524,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
