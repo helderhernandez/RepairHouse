@@ -57,14 +57,14 @@
                     </li>
 
                     @*<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Reporte
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <a class="dropdown-item" href="@Url.Action("ReporteDiagnostico", "Reporte")">Reporte Diagnóstico</a>
-                                <a class="dropdown-item disabled" href="#">Documentación Técnico</a>
-                            </div>
-                        </li>*@
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reporte
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        <a class="dropdown-item" href="@Url.Action("ReporteDiagnostico", "Reporte")">Reporte Diagnóstico</a>
+                        <a class="dropdown-item disabled" href="#">Documentación Técnico</a>
+                    </div>
+                </li>*@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,16 +85,29 @@
                     </li>
                 }
             </ul>
-
-            @if (CURRENT_USER == null)
-            {
-                <a href="@Url.Action("Index", "Login")" class="nav-link my-2 my-lg-0 text-white">Iniciar Sesión</a>
-            }
-            else
-            {
-                <a href="@Url.Action("Index", "Logout")" class="nav-link my-2 my-lg-0 text-white">@CURRENT_USER - Cerrar Sesión</a>
-
-            }
+            <ul class="navbar-nav navbar-right">
+                @if (CURRENT_USER == null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Registrarse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Login")">Iniciar Sesión</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @CURRENT_USER
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown6">
+                            <a class="dropdown-item disabled" href="#">Perfil</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Logout")">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                }
+            </ul>
         </div>
     </nav>
 

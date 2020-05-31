@@ -1,8 +1,10 @@
 ﻿using RepairHouse.Daos;
+using RepairHouse.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,6 +15,8 @@ namespace RepairHouse.Controllers
     public class LoginController : Controller
     {
         UsuarioDao usuarioDao = new UsuarioDao();
+
+        private casa_reparadoraEntities db = new casa_reparadoraEntities();
 
         // GET: /login
         public ActionResult Index()
@@ -29,6 +33,19 @@ namespace RepairHouse.Controllers
             {
                 // lanzamos error si las validaciones no se cumplen
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Usuario y Constraseña requeridos");
+            }
+
+            Usuario result = db.Usuario
+                .Where(x => x.Usuario1 == usuario && x.Contrasena == contrasena && x.Habilitado == true)
+                .Include(x => x.Rol).FirstOrDefault();
+
+            if(result != null)
+            {
+                Debug.WriteLine(result.Rol.Rol1);
+            }
+            else
+            {
+                Debug.WriteLine("result is null");
             }
 
             // si no continuamos el flujo
