@@ -1,7 +1,7 @@
 ﻿function manipularTablas() {
     // tabla principal
     var tablePrincipal = $("table[class='table']")[0];
-    $(tablePrincipal).addClass("table-striped table-dark table-responsive-md"); // agregamos estilos boostrap
+    $(tablePrincipal).addClass("table-striped table-bordered table-dark table-responsive-md"); // agregamos estilos boostrap
 };
 
 function manipularEnlacesInternosTablas() {
@@ -40,8 +40,33 @@ function manipularEnlacesExternosTablas() {
         $(createLink).addClass("btn btn-success")
         $(createLink).append('<span style="margin-left: 10px"><i class="fa fa-plus"></i></span>');
     })
+};
 
-    // enlace regresar
+function manipularInputsCUD() {
+    //input Create (en vista crear)
+    var inputCreate = $("input[value='Create']")[0];
+    $(inputCreate).val("Crear");
+    $(inputCreate).attr("title", "Crear");
+    $(inputCreate).addClass("btn btn-success");   
+
+    //input Save (en vista editar)
+    var inputSave = $("input[value='Save']")[0];
+    $(inputSave).val("Guardar");
+    $(inputSave).attr("title", "Guardar");
+    $(inputSave).addClass("btn btn-success");
+
+    //input Edit (en vista details)
+    var inputSave = $("p a:contains(Edit)")[0];
+    $(inputSave).text("Editar");
+    $(inputSave).attr("title", "Editar");
+    $(inputSave).addClass("btn btn-primary");
+
+     //input Delete
+    var inputDelete = $("input[value='Delete']")[0];
+    $(inputDelete).val("Eliminar");
+    $(inputDelete).attr("title", "Eliminar");
+    $(inputDelete).addClass("btn btn-danger");
+
     $("div a:contains(Back to List)").each(function () {
         var regresarLink = $(this)[0];
         $(regresarLink).text("Regresar");
@@ -50,26 +75,20 @@ function manipularEnlacesExternosTablas() {
         $(regresarLink).prepend('<span style="margin-right: 10px"><i class="fa fa-arrow-left"></i></span>');
 
     })
-};
 
-function manipularInputsCUD() {
-    //input Create
-    var inputCreate = $("input[value='Create']")[0];
-    $(inputCreate).val("Crear");
-    $(inputCreate).attr("title", "Crear");
-    $(inputCreate).addClass("btn btn-success");
+    $("p a:contains(Back to List)").each(function () {
+        var regresarLink = $(this)[0];
+        $(regresarLink).text("Regresar");
+        $(regresarLink).attr("title", "Regresar");
+        $(regresarLink).addClass("btn btn-dark")
+        $(regresarLink).prepend('<span style="margin-right: 10px"><i class="fa fa-arrow-left"></i></span>');
 
-    //input Save
-    var inputSave = $("input[value='Save']")[0];
-    $(inputSave).val("Guardar");
-    $(inputSave).attr("title", "Guardar");
-    $(inputSave).addClass("btn btn-success");
+    })
+}
 
-     //input Delete
-    var inputDelete = $("input[value='Delete']")[0];
-    $(inputDelete).val("Eliminar");
-    $(inputDelete).attr("title", "Eliminar");
-    $(inputDelete).addClass("btn btn-danger");
+function manipularFoms() {
+    var form = $("form > div.form-horizontal")[0];
+    $(form).addClass("col-sm-12 col-md-10 col-lg-8 m-auto");
 }
 
 $(document).ready(function () {
@@ -77,4 +96,5 @@ $(document).ready(function () {
     manipularEnlacesInternosTablas();
     manipularEnlacesExternosTablas();
     manipularInputsCUD();
+    manipularFoms();
 });

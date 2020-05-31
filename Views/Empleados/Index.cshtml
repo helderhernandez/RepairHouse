@@ -8,49 +8,26 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Index", "Usuarios")" class="btn btn-primary">Cuentas de usuario</a>
 </p>
 
 <div class="table-responsive">
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PrimerNombre)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SegundoNombre)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrimerApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SegundoApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeCasada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DUI)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NIT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Domicilio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cargo.Descripcion)
+                Cargo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EstadoEmpleado.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Municipio.Municipio1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexo.Sexo1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sucursal.Nombre)
+                Sucursal
             </th>
             <th></th>
         </tr>
@@ -59,40 +36,19 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PrimerNombre)
+                    @item.IdEmpleado
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SegundoNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrimerApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SegundoApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeCasada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DUI)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NIT)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Domicilio)
+                    @item.PrimerNombre
+                    @item.SegundoNombre
+                    @item.PrimerApellido
+                    @item.SegundoApellido
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cargo.Descripcion)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EstadoEmpleado.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Municipio.Municipio1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sexo.Sexo1)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
@@ -106,10 +62,4 @@
         }
 
     </table>
-
-    <h5>Desea Crear usuario a empleado</h5>
-    <div>
-
-        @Html.ActionLink("Crear Usuario", "Usuarios")
-    </div>
 </div>

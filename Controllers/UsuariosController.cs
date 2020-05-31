@@ -40,7 +40,7 @@ namespace RepairHouse.Controllers
         public ActionResult Create()
         {
             ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre");
-            ViewBag.IdUsuario = new SelectList(db.Rol, "IdRol", "Rol1");
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Rol1");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace RepairHouse.Controllers
             }
 
             ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", usuario.IdEmpleado);
-            ViewBag.IdUsuario = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdUsuario);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdRol);
             return View(usuario);
         }
 
@@ -76,7 +76,7 @@ namespace RepairHouse.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", usuario.IdEmpleado);
-            ViewBag.IdUsuario = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdUsuario);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdRol);
             return View(usuario);
         }
 
@@ -94,7 +94,7 @@ namespace RepairHouse.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", usuario.IdEmpleado);
-            ViewBag.IdUsuario = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdUsuario);
+            ViewBag.IdRol = new SelectList(db.Rol, "IdRol", "Rol1", usuario.IdRol);
             return View(usuario);
         }
 

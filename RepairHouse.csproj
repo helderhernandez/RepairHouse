@@ -508,16 +508,16 @@
     <Content Include="Views\TipoEquipos\Details.cshtml" />
     <Content Include="Views\TipoEquipos\Edit.cshtml" />
     <Content Include="Views\TipoEquipos\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\OrdenCompras\Create.cshtml" />
     <Content Include="Views\OrdenCompras\Delete.cshtml" />
     <Content Include="Views\OrdenCompras\Details.cshtml" />
     <Content Include="Views\OrdenCompras\Edit.cshtml" />
     <Content Include="Views\OrdenCompras\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
