@@ -11,7 +11,7 @@ namespace RepairHouse.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var currentUser =  HttpContext.Current.Session["CURRENT_SESSION"];
+            var currentUser =  HttpContext.Current.Session[Cons.USER_CURRENT_SESSION];
 
             if(currentUser == null)
             {

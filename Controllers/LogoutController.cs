@@ -11,7 +11,7 @@ namespace RepairHouse.Controllers
         // GET: Logout
         public ActionResult Index()
         {
-            Session["CURRENT_SESSION"] = null;
+            Session[Cons.USER_CURRENT_SESSION] = null;
             return RedirectToAction("Index", "Home");
         }
     }

@@ -45,13 +45,13 @@ namespace RepairHouse.Controllers
             }
             else
             {
-                Debug.WriteLine("result is null");
+                return Content("false");
             }
 
             // si no continuamos el flujo
             if (usuarioDao.buscarPorCredenciales(usuario, contrasena))
             {
-                Session["CURRENT_SESSION"] = usuario;
+                Session[Cons.USER_CURRENT_SESSION] = usuario;
                 return Content("true");
             }
             else

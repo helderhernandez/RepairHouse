@@ -20,7 +20,7 @@
 
     @RenderSection("styles", required: false)
     @{
-        var CURRENT_USER = Session["CURRENT_SESSION"];
+        var CURRENT_USER = Session[Cons.USER_CURRENT_SESSION];
     }
 </head>
 <body>
