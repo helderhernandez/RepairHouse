@@ -20,7 +20,7 @@
 
     @RenderSection("styles", required: false)
     @{
-        var CURRENT_USER = Session[Cons.USER_CURRENT_SESSION];
+        var CURRENT_USER = (RepairHouse.Dtos.UserCurrentSessionDto) Session[Cons.USER_CURRENT_SESSION];
     }
 </head>
 <body>
@@ -99,7 +99,7 @@
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @CURRENT_USER
+                            @CURRENT_USER.FullName
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown6">
                             <a class="dropdown-item disabled" href="#">Perfil</a>

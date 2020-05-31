@@ -152,6 +152,7 @@
     <Compile Include="Daos\Connection.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
     <Compile Include="DecimalModelBinder.cs" />
+    <Compile Include="Dtos\UserCurrentSessionDto.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

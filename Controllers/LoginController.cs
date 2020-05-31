@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RepairHouse.Dtos;
 
 namespace RepairHouse.Controllers
 {
@@ -29,6 +30,7 @@ namespace RepairHouse.Controllers
         public ActionResult Entrar(string usuario, string contrasena)
         {
             bool resultVal = usuario == null || contrasena == null || usuario.Trim() == "" || contrasena.Trim() == "";
+
             if (resultVal)
             {
                 // lanzamos error si las validaciones no se cumplen
@@ -37,21 +39,19 @@ namespace RepairHouse.Controllers
 
             Usuario result = db.Usuario
                 .Where(x => x.Usuario1 == usuario && x.Contrasena == contrasena && x.Habilitado == true)
-                .Include(x => x.Rol).FirstOrDefault();
+                .Include(x => x.Rol).Include(x => x.Empleado).FirstOrDefault();
 
             if(result != null)
             {
-                Debug.WriteLine(result.Rol.Rol1);
-            }
-            else
-            {
-                return Content("false");
-            }
+                UserCurrentSessionDto userCurrent = new UserCurrentSessionDto
+                {
+                    Id = result.IdUsuario,
+                    FullName = result.Empleado.PrimerNombre + " " + result.Empleado.PrimerApellido,
+                    Username = result.Usuario1,
+                    Rol = result.Rol.Rol1
+                };
 
-            // si no continuamos el flujo
-            if (usuarioDao.buscarPorCredenciales(usuario, contrasena))
-            {
-                Session[Cons.USER_CURRENT_SESSION] = usuario;
+                Session[Cons.USER_CURRENT_SESSION] = userCurrent;
                 return Content("true");
             }
             else
