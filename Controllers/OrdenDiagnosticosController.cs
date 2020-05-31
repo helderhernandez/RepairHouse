@@ -82,9 +82,7 @@ namespace RepairHouse.Controllers
                 {
                     x.IdEquipo,
                     x.TipoEquipo.Inventario.IdInventario,
-                    Cantidad = CANTIDAD_DEFAULT,
-                    Precio = x.TipoEquipo.Inventario.PrecioNeto,
-                    SubTotal = x.TipoEquipo.Inventario.TotalUnitario,
+                    Costo = x.TipoEquipo.Inventario.TotalUnitario,
                     x.MarcaEquipo.Marca,
                     x.ModeloEquipo.Modelo
                 });
@@ -106,7 +104,6 @@ namespace RepairHouse.Controllers
                 orden.OrdenDiagnosticoDetalle.Add(item);
 
                 Debug.WriteLine(item.IdEquipo);
-                Debug.WriteLine(item.SubTotal);
                 Debug.WriteLine(item.IdInventario);
             }
 
@@ -178,9 +175,7 @@ namespace RepairHouse.Controllers
                 {
                     x.IdEquipo,
                     x.IdInventario,
-                    x.Cantidad,
-                    x.Precio,
-                    x.SubTotal,
+                    x.Costo,
                     x.Equipo.MarcaEquipo.Marca,
                     x.Equipo.ModeloEquipo.Modelo
                 });
@@ -203,7 +198,6 @@ namespace RepairHouse.Controllers
                 orden.OrdenDiagnosticoDetalle.Add(item);
 
                 Debug.WriteLine(item.IdEquipo);
-                Debug.WriteLine(item.SubTotal);
                 Debug.WriteLine(item.IdInventario);
             }
 

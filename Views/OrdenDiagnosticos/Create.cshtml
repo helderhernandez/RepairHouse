@@ -83,7 +83,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    Precio diagnostico: <b>$ {{Detalle.SubTotal}}</b>
+                    Precio diagnostico: <b>$ {{Detalle.Costo}}</b>
                 </div>
                 @*<div class="col">
                         <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
@@ -113,7 +113,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        Precio diagnostico: <b>$ {{Equipo.SubTotal}}</b>
+                                        Precio diagnostico: <b>$ {{Equipo.Costo}}</b>
                                     </div>
                                     <div class="col">
                                         <button v-on:click="agregarEnDetalles(Equipo)" class="btn btn-success">Agregar a esta orden</button>
@@ -196,7 +196,7 @@
                     var sumaCostoDiagnosticos = 0;
 
                     this.Detalles.forEach(e => {
-                        sumaCostoDiagnosticos += e.SubTotal;
+                        sumaCostoDiagnosticos += e.Costo;
                     })
 
                     var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos * this.Orden.Descuento * 0.01);

@@ -247,9 +247,6 @@
     <Compile Include="Models\Sucursal.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>BDCasaModel1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoEquipo.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
