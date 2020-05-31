@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using RepairHouse.Dtos;
 using RepairHouse.Models;
 using RepairHouse.Models.ViewsModels;
 
@@ -47,10 +48,13 @@ namespace RepairHouse.Controllers
 
         public JsonResult CreateJsonGet()
         {
+            UserCurrentSessionDto USER_CURRENT = (UserCurrentSessionDto) Session[Cons.USER_CURRENT_SESSION];
+
             var empleados = db.Empleado
-                //.Where(x => x.IdCargo == 4)
                 .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
-            var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
+            var sucursales = db.Sucursal
+                .Where(x => x.Nombre == USER_CURRENT.Sucursal)
+                .Select(x => new { x.IdSucursal, x.Nombre });
             var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
 
             const int ID_ESTADO_COMPLETADO = 5;

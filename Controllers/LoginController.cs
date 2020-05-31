@@ -44,6 +44,8 @@ namespace RepairHouse.Controllers
                 {
                     Id = result.IdUsuario,
                     FullName = result.Empleado.PrimerNombre + " " + result.Empleado.PrimerApellido,
+                    Cargo = result.Empleado.Cargo.Descripcion,
+                    Sucursal = result.Empleado.Sucursal.Nombre,
                     Username = result.Usuario1,
                     Rol = result.Rol.Rol1
                 };

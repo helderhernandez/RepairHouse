@@ -11,8 +11,14 @@ namespace RepairHouse.Dtos
 
         public string FullName { get; set; }
 
+        public string Cargo { get; set; }
+
+        public string Sucursal { get; set; }
+
         public string Username { get; set; }
 
         public string Rol { get; set; }
+
+        
     }
 }
