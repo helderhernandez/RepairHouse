@@ -1,7 +1,3 @@
-﻿function loaderSpinner() {
+﻿$(document).ready(function () {
     $("#loaderSpinner").fadeOut("slow");
-}
-
-$(document).ready(function () {
-    loaderSpinner();
 });
