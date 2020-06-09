@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<RepairHouse.Models.OrdenDiagnostico>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Orden diagnósticos";
 }
 
-<h2>Index</h2>
+<h2>Orden diagnósticos</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,31 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IdOrdenDiagnostico)
+            Id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaEmision)
+            Emisión
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstadoOrdenDiagnostico.Estado)
+            Estado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CantidadEquipos)
+           # Equipos
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PrecioNeto)
+            Precio
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Facturado)
+            Facturado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente)
+            Cliente
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Empleado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sucursal)
+            Sucursal
         </th>
         <th></th>
     </tr>
@@ -48,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.IdOrdenDiagnostico)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaEmision)
+                @String.Format("{0:yyyy/MM/dd}", item.FechaEmision)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstadoOrdenDiagnostico.Estado)
@@ -60,16 +57,14 @@
                 @Html.DisplayFor(modelItem => item.PrecioNeto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Facturado)
+                @item.Facturado
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.PrimerNombre)
+                @item.Cliente.PrimerNombre
+                @item.Cliente.PrimerApellido
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.PrimerNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sucursal.IdSucursal)
+                @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdenDiagnostico }) |

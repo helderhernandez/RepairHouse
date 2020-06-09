@@ -42,12 +42,13 @@ namespace RepairHouse.Controllers
             {
                 UserCurrentSessionDto userCurrent = new UserCurrentSessionDto
                 {
-                    Id = result.IdUsuario,
-                    FullName = result.Empleado.PrimerNombre + " " + result.Empleado.PrimerApellido,
-                    Cargo = result.Empleado.Cargo.Descripcion,
-                    Sucursal = result.Empleado.Sucursal.Nombre,
-                    Username = result.Usuario1,
-                    Rol = result.Rol.Rol1
+                    IdEmpleado = result.Empleado.IdEmpleado,
+                    NombreEmpleado = result.Empleado.PrimerNombre + " " + result.Empleado.PrimerApellido,
+                    CargoEmpleado = result.Empleado.Cargo.Descripcion,
+                    SucursalEmpleado = result.Empleado.Sucursal.Nombre,
+                    IdUsuario = result.IdUsuario,
+                    NombreUsuario = result.Usuario1,
+                    RolUsuario = result.Rol.Rol1
                 };
 
                 Session[Cons.USER_CURRENT_SESSION] = userCurrent;

@@ -1,124 +1,253 @@
-﻿
+﻿@model RepairHouse.Models.OrdenDiagnostico
+
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Crear Orden de Diagnostico</h2>
+<h2>Crear orden diagnóstico</h2>
 
 <div id="app">
-    <form v-on:submit.prevent="enviarFormulario()">
-        <h5>Encabezado</h5>
+    <form id="ordenFrm">
+        <h5 class="bg-dark text-white p-2">Encabezado</h5>
 
-        <div class="form-horizontal">
-
-            <div class="row">
-                <div class="col">
-                    <label>Sucursal:</label>
-                    <select v-model="Orden.IdSucursal" class="form-control" required>
-                        <option v-for="Item in Sucursales" :value="Item.IdSucursal">{{Item.Nombre}}</option>
-                    </select>
-
-                    <label>Empleado:</label>
-                    <select v-model="Orden.IdEmpleado" class="form-control" required>
-                        <option v-for="Item in Empleados" :value="Item.IdEmpleado">{{Item.Nombre}} - {{Item.Descripcion}}</option>
-                    </select>
-
-                    <label>Cliente:</label>
-                    <select v-model="Orden.IdCliente" class="form-control" v-on:change="limpiarDetalles()" required>
-                        <option v-for="Item in Clientes" :value="Item.IdCliente">{{Item.Nombre}} - {{Item.DUI}}</option>
-                    </select>
+        <div class="row">
+            <div class="col">
+                <label>Fecha emision:</label>
+                <input v-model="OrdenEncabezado.FechaEmision" type="date" class="form-control" required />
+            </div>
+            <div class="col-2">
+                <label>Id empleado</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" data-toggle="modal" data-target="#EmpleadosModal" v-on:click="searchEmpleado()">
+                        <button class="input-group-text" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input v-model="OrdenEncabezado.IdEmpleado" type="text" class="form-control app-readonly" required />
                 </div>
-                <div class="col">
-                    <label>Fecha emision:</label>
-                    <input v-model="Orden.FechaEmision" type="date" class="form-control" required/>
-
-                    <label>Fecha resolucion:</label>
-                    <input v-model="Orden.FechaResolucion" type="date" class="form-control" />
-
-                    @*<label>Estado:</label>
-                    <select class="form-control">
-                        <option>Item</option>
-                    </select>
-
-                    <label>Facturado:</label>
-                    <select class="form-control">
-                        <option>Item</option>
-                    </select>*@
+            </div>
+            <div class="col-4">
+                <label>Nombre empleado</label>
+                <div class="input-group mb-3">
+                    <input v-model="OrdenEncabezado.NombreEmpleado" type="text" class="form-control" disabled />
                 </div>
-                <div class="col">
-                    <label>Comentarios:</label>
-                    <textarea v-model="Orden.Comentarios" class="form-control"></textarea>
+            </div>
+            <div class="col">
+                <label>Sucursal</label>
+                <input v-model="OrdenEncabezado.IdSucursal" type="hidden" class="col-3" />
+                <input v-model="OrdenEncabezado.NombreSucursal" type="text" class="form-control" disabled />
+            </div>
+        </div>
 
-                    <label>N. equipos:</label>
-                    <input v-model="Orden.CantidadEquipos" type="number" class="form-control" disabled />
-
+        <div class="row">
+            <div class="col">
+                <label>Fecha resolucion:</label>
+                <input v-model="OrdenEncabezado.FechaResolucion" type="date" class="form-control" />
+            </div>
+            <div class="col-2">
+                <label>Id cliente</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" data-toggle="modal" data-target="#ClientesModal" v-on:click="searchCliente()">
+                        <button class="input-group-text" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input v-model="OrdenEncabezado.IdCliente" type="text" class="form-control app-readonly" required />
                 </div>
-                <div class="col">
-                    <label>Precio:</label>
-                    <input v-model="Orden.PrecioBruto" type="number" class="form-control" disabled />
-
-                    <label>Descuento %:</label>
-                    <input v-model="Orden.Descuento" type="number" class="form-control" min="0" maxlength="2" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
-
-                    <label>Total:</label>
-                    <input v-model="Orden.PrecioNeto" type="number" class="form-control" disabled />
+            </div>
+            <div class="col-4">
+                <label>Nombre cliente</label>
+                <div class="input-group mb-3">
+                    <input v-model="OrdenEncabezado.NombreCliente" type="text" class="form-control" disabled />
                 </div>
+            </div>
+            <div class="col">
+                <label>DUI cliente</label>
+                <input v-model="OrdenEncabezado.DUI" type="text" class="form-control" disabled />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Comentarios:</label>
+                <textarea v-model="OrdenEncabezado.Comentarios" class="form-control"></textarea>
             </div>
         </div>
 
         <br />
+
+        <h5 class="bg-dark text-white p-2">Detalle</h5>
+
+        <div class="row">
+            <div class="col">
+                <label>N. equipos:</label>
+                <input v-model="OrdenEncabezado.CantidadEquipos" type="number" class="form-control" disabled />
+            </div>
+            <div class="col">
+                <label>Precio:</label>
+                <input v-model="OrdenEncabezado.PrecioBruto" type="number" class="form-control" disabled />
+            </div>
+            <div class="col">
+                <label>Descuento %:</label>
+                <input v-model="OrdenEncabezado.Descuento" type="number" class="form-control" min="0" maxlength="2" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+            </div>
+            <div class="col">
+                <label>Total:</label>
+                <input v-model="OrdenEncabezado.PrecioNeto" type="number" class="form-control" disabled />
+            </div>
+        </div>
+
+        <br />
+        <div style="overflow-y: scroll; height:175px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripción</th>
+                        <th>Precio diagnóstico</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="Detalle in OrdenDetalle">
+                        <td>{{Detalle.IdEquipo}}</td>
+                        <td>{{Detalle.Marca}} {{Detalle.Modelo}}</td>
+                        <td>$ {{Detalle.Costo}}</td>
+                        <td><button v-on:click="quitarEquipoEnDetalle(Detalle)" class="btn btn-warning">Quitar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+
+        <a href="#" data-toggle="modal" data-target="#EquiposClienteModal" v-on:click="searchEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
         <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a> <span> | </span>
-        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" v-on:click="getEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
-        <button type="submit" v- class="btn btn-success">Crear orden</button>
+        <button v-on:click="enviarFormulario()" type="button" v- class="btn btn-success">Crear orden</button>
     </form>
 
-    
-    <hr />
-    <h5>Detalle</h5>
-    <div v-for="Detalle in Detalles" class="card mb-3">
-        <div class="card-header">
-            Equipo: <b>{{Detalle.Marca}} {{Detalle.Modelo}}</b>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    Precio diagnostico: <b>$ {{Detalle.Costo}}</b>
+    <div class="modal fade bd-example-modal-lg" id="EmpleadosModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Empleados</h5>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input v-model="NombreEmpleado" type="search" class="form-control">
+                                <div class="input-group-append" v-on:click="searchEmpleado()">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="overflow-y: scroll; height:300px;">
+                        <table class="table table-bordered table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Empleado</th>
+                                    <th>Cargo</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="Empleado in Empleados">
+                                    <td>{{Empleado.IdEmpleado}}</td>
+                                    <td>{{Empleado.NombreEmpleado}}</td>
+                                    <td>{{Empleado.Cargo}}</td>
+                                    <td><button v-on:click="setEmpleadoEnEncabezado(Empleado)" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                @*<div class="col">
-                        <button v-on:click="agregarEnDetalle(Equipo)" class="btn btn-secondary">Ficha diagnostico</button>
-                    </div>*@
-                <div class="col">
-                    <button v-on:click="quitarEnDetalles(Detalle)" class="btn btn-warning">Quitar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="ClientesModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div v-if="Orden.IdCliente == null" class="modal-header">
+                <div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Clientes</h5>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input v-model="NombreCliente" type="search" class="form-control">
+                                <div class="input-group-append" v-on:click="searchCliente()">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                                </div>
+                                <a href="@Url.Action("Create", "Clientes")" target="_blank" class="btn btn-primary ml-4">Registrar nuevo cliente</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="overflow-y: scroll; height:300px;">
+                        <table class="table table-bordered table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Cliente</th>
+                                    <th>DUI</th>
+                                    <th>Municipio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="Cliente in Clientes">
+                                    <td>{{Cliente.IdCliente}}</td>
+                                    <td>{{Cliente.NombreCliente}}</td>
+                                    <td>{{Cliente.DUI}}</td>
+                                    <td>{{Cliente.Municipio}}</td>
+                                    <td><button v-on:click="setClienteEnEncabezado(Cliente)" data-dismiss="modal" class="btn btn-success"><i class="fa fa-check"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="EquiposClienteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div v-if="OrdenEncabezado.IdCliente == null" class="modal-header">
                     <h5>Seleccione un cliente</h5>
                 </div>
                 <div v-else>
-                    <div class="modal-header">
-                        <h5 class="modal-title">Equipos del Cliente</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div v-for="Equipo in Equipos" class="card mb-3">
-                            <div class="card-header">
-                                Equipo: <b>{{Equipo.Marca}} {{Equipo.Modelo}}</b>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        Precio diagnostico: <b>$ {{Equipo.Costo}}</b>
-                                    </div>
-                                    <div class="col">
-                                        <button v-on:click="agregarEnDetalles(Equipo)" class="btn btn-success">Agregar a esta orden</button>
-                                    </div>
-                                </div>
+                    <div>
+                        <div class="modal-header">
+                            <h5 v-if="Equipos.length == 0" class="modal-title">El cliente no tiene equipos</h5>
+                            <h5 v-else class="modal-title">Equipos del Cliente</h5>
+                            <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-body" style="overflow-y: scroll; height:300px;">
+                                <table class="table table-bordered table-dark table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Marca</th>
+                                            <th>Modelo</th>
+                                            <th>Precio dianóstico</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="Equipo in Equipos">
+                                            <td>{{Equipo.IdEquipo}}</td>
+                                            <td>{{Equipo.Marca}}</td>
+                                            <td>{{Equipo.Modelo}}</td>
+                                            <td>$ {{Equipo.Costo}}</td>
+                                            <td><button v-on:click="agregarEquipoEnDetalle(Equipo)" data-dismiss="modal" class="btn btn-success"><i class="fa fa-check"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -132,93 +261,223 @@
 
 </div>
 
+@{
+    var ordenEncabezado = new
+    {
+        Model.IdOrdenDiagnostico,
+        FechaEmision = @String.Format("{0:yyyy-MM-dd}", @Model.FechaEmision),
+        Model.FechaResolucion,
+        Model.Sucursal.IdSucursal,
+        NombreSucursal = Model.Sucursal.Nombre,
+        IdEmpleado = Model.Empleado.IdEmpleado,
+        NombreEmpleado = (Model.Empleado.PrimerNombre + " " + Model.Empleado.SegundoNombre + " " + Model.Empleado.PrimerApellido + " " + Model.Empleado.SegundoApellido).Trim(),
+        IdCliente = Model.Cliente.IdCliente,
+        NombreCliente = (Model.Cliente.PrimerNombre + " " + Model.Cliente.SegundoNombre + " " + Model.Cliente.PrimerApellido + " " + Model.Cliente.SegundoApellido).Trim(),
+        Model.Cliente.DUI,
+        Model.Comentarios,
+        Model.CantidadEquipos,
+        Model.PrecioBruto,
+        Model.Descuento,
+        Model.PrecioNeto,
+        Model.IdEstado,
+        Model.Facturado
+
+    };
+
+    List<Object> ordenDetalle = new List<object>();
+
+    foreach (var item in Model.OrdenDiagnosticoDetalle)
+    {
+        ordenDetalle.Add(new
+        {
+            item.IdOrdenDiagnosticoDetalle,
+            item.IdEquipo,
+            item.Equipo.MarcaEquipo.Marca,
+            item.Equipo.ModeloEquipo.Modelo,
+            item.IdOrdenDiagnostico,
+            item.IdInventario,
+            item.Costo
+        });
+    };
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
     <script>
+        var OrdenEncabezado = JSON.parse('@Html.Raw(Json.Encode(ordenEncabezado))');
+        console.log(OrdenEncabezado);
+
+        var OrdenDetalle = JSON.parse('@Html.Raw(Json.Encode(ordenDetalle))');
+        console.log(OrdenDetalle);
 
         var app = new Vue({
             el: '#app',
             data: {
-                Orden: {},
-                Detalles: [],
-                Equipos: [],
-                Sucursales: [],
+                OrdenEncabezado,
+                OrdenDetalle,
                 Empleados: [],
-                Clientes: []
+                NombreEmpleado: this.OrdenEncabezado.NombreEmpleado,
+                Clientes: [],
+                NombreCliente: this.OrdenEncabezado.NombreCliente,
+                Equipos: []
             },
             watch: {
-                Detalles: {
+                OrdenDetalle: {
+                    // cada vez que se agrega o quita un equipo recalculamos el encabezado
                     handler() {
                         this.recalcularEncabezado();
                     },
                     deep: true
                 },
-                'Orden.Descuento': function (newVal, oldVal) {
+                'OrdenEncabezado.Descuento': function (newVal, oldVal) {
+                    // cada vez que se modifica el descuento recalculamos el encabezado
                     this.recalcularEncabezado();
+                },
+                'OrdenEncabezado.IdCliente': function (newVal, oldVal) {
+                    // cada vez que se cambia de cliente limpiamos el detalle (por consecuencia se disparan otros watch)
+                    this.OrdenDetalle = [];
+                },
+                'NombreEmpleado': function (newVal, oldVal) {
+                     // para buscar empleados mientras escribe
+                   this.searchEmpleado();
+                },
+                'NombreCliente': function (newVal, oldVal) {
+                    // para buscar clientes mientras escribe
+                    this.searchCliente();
                 }
             },
             methods: {
-                getEquipos() {
-                    //obtenemos los equipos del cliente
-                    if (this.Orden.IdCliente == null) {
-                        return;
-                    }
+                searchEmpleado() {
+                    // buscamos empleados
+                    var nombreEmpleado = this.NombreEmpleado;
+                    var nombreSucursal = this.OrdenEncabezado.NombreSucursal;
 
-                    var url = '@Url.Content("~/OrdenDiagnosticos/GetEquiposByClienteJsonGet")' + '?idCliente=' + this.Orden.IdCliente;
+                    var params = "nombreEmpleado=" + nombreEmpleado + "&nombreSucursal=" + nombreSucursal;
+                    var url = '@Url.Content("~/Empleados/Search?")' + params;
 
                     axios.get(url).then((result) => {
-                        this.Equipos = result.data;
+                        var { data } = result;
+
+                        this.Empleados = [];
+                        data.forEach((e) => {
+                            var item = new Object();
+                            item.IdEmpleado = e.IdEmpleado;
+                            item.NombreEmpleado = e.NombreEmpleado;
+                            item.Cargo = e.Cargo.Descripcion;
+
+                            this.Empleados.push(item);
+                        })
                     }).catch((error) => {
                         alert("Ha ocurrido un error");
                     });
                 },
-                agregarEnDetalles(Equipo) {
-                    // agregamos un equpo al detalle
-                    var result = this.Detalles.filter(e => e.IdEquipo == Equipo.IdEquipo);
-                    if (result != 0) {
+                setEmpleadoEnEncabezado(empleado) {
+                    // set empleado en el form encabezado
+                    this.OrdenEncabezado.IdEmpleado = empleado.IdEmpleado;
+                    this.OrdenEncabezado.NombreEmpleado = empleado.NombreEmpleado;
+                },
+                searchCliente() {
+                    // buscamos el cliente
+                    var nombreCliente = this.NombreCliente;
+
+                    var url = '@Url.Content("~/Clientes/Search?nombreCliente=")' + nombreCliente;
+
+                    axios.get(url).then((result) => {
+                        var { data } = result;
+
+                        this.Clientes = [];
+                        data.forEach((e) => {
+                            var item = new Object();
+                            item.IdCliente = e.IdCliente;
+                            item.NombreCliente = e.NombreCliente;
+                            item.DUI = e.DUI;
+                            item.Municipio = e.Municipio.Municipio;
+
+                            this.Clientes.push(item);
+                        })
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
+                },
+                setClienteEnEncabezado(cliente) {
+                    // set cliente en el form encabezado
+                    this.OrdenEncabezado.IdCliente = cliente.IdCliente;
+                    this.OrdenEncabezado.NombreCliente = cliente.NombreCliente;
+                    this.OrdenEncabezado.DUI = cliente.DUI;
+                },
+                searchEquipos() {
+                    // buscamos los equipos
+                    if (this.OrdenEncabezado.IdCliente == null) {
                         return;
                     }
 
-                    this.Detalles.push(Equipo);
+                    var idCliente = this.OrdenEncabezado.IdCliente;
+                    var url = '@Url.Content("~/Equipos/Search?idCliente=")' + idCliente;
+
+                    axios.get(url).then((result) => {
+                        var { data } = result;
+                        this.Equipos = [];
+                        data.forEach((e) => {
+                            var item = new Object();
+                            item.IdEquipo = e.IdEquipo;
+                            item.Marca = e.Marca.Marca;
+                            item.Modelo = e.Modelo.Modelo;
+                            item.IdInventario = e.Tipo.Inventario.IdInventario;
+                            item.Costo = e.Tipo.Inventario.TotalUnitario;
+
+                            this.Equipos.push(item);
+                        })
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
                 },
-                quitarEnDetalles(Equipo) {
+                agregarEquipoEnDetalle(Equipo) {
+                    // agregamos un equpo al detalle
+                    var result = this.OrdenDetalle.filter(e => e.IdEquipo == Equipo.IdEquipo);
+                    if (result != 0) {
+                        alert("Este equipo ya ha sido agregado");
+                        return;
+                    }
+
+                    this.OrdenDetalle.push(Equipo);
+                },
+                quitarEquipoEnDetalle(Equipo) {
                     // sacamos un equpo del detalle
-                    this.Detalles = this.Detalles.filter(e => e.IdEquipo != Equipo.IdEquipo);
-                },
-                limpiarDetalles() {
-                    // sacamos todos los equipos del detalle
-                    this.Detalles = [];
+                    this.OrdenDetalle = this.OrdenDetalle.filter(e => e.IdEquipo != Equipo.IdEquipo);
                 },
                 recalcularEncabezado() {
                     // recalculamos informacion de encabezado
-                    var nEquipos = this.Detalles.length;
+                    var nEquipos = this.OrdenDetalle.length;
                     var sumaCostoDiagnosticos = 0;
 
-                    this.Detalles.forEach(e => {
+                    this.OrdenDetalle.forEach(e => {
                         sumaCostoDiagnosticos += e.Costo;
                     })
 
-                    var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos * this.Orden.Descuento * 0.01);
+                    var sumaCostoTotal = sumaCostoDiagnosticos - (sumaCostoDiagnosticos * this.OrdenEncabezado.Descuento * 0.01);
 
-                    this.Orden.CantidadEquipos = nEquipos;
-                    this.Orden.PrecioBruto = sumaCostoDiagnosticos;
-                    this.Orden.PrecioNeto = sumaCostoTotal;
+                    this.OrdenEncabezado.CantidadEquipos = nEquipos;
+                    this.OrdenEncabezado.PrecioBruto = sumaCostoDiagnosticos;
+                    this.OrdenEncabezado.PrecioNeto = sumaCostoTotal;
                 },
                 enviarFormulario() {
-                    if (this.Detalles == null || this.Detalles.length == 0) {
+                    var statusForm = document.getElementById('ordenFrm').reportValidity();
+
+                    if (!statusForm) {
+                        return;
+                    }
+
+                    if (this.OrdenDetalle == null || this.OrdenDetalle.length == 0) {
                         alert("Ingrese al menos un equipo en el detalle");
                         return;
                     }
 
                     var url = '@Url.Content("~/OrdenDiagnosticos/Create")';
 
-                    OrdenDiagnostico = this.Orden;
-                    Detalle = this.Detalles;
+                    var OrdenDiagnostico = { ...this.OrdenEncabezado };
+                    OrdenDiagnostico.OrdenDiagnosticoDetalle = this.OrdenDetalle;
 
-                    var payload = { OrdenDiagnostico, Detalle };
-
-                    axios.post(url, payload).then((result) => {
+                    axios.post(url, OrdenDiagnostico).then((result) => {
                         location.href = '@Url.Content("~/OrdenDiagnosticos/Index")';
                     }).catch((error) => {
                         alert("Ha ocurrido un error");
@@ -226,19 +485,7 @@
                 }
             },
             created() {
-                var url = '@Url.Content("~/OrdenDiagnosticos/CreateJsonGet")';
-
-                axios.get(url).then((result) => {
-                    var { sucursales, empleados, clientes, orden } = result.data;
-                    this.Sucursales = sucursales;
-                    this.Empleados = empleados;
-                    this.Clientes = clientes;
-
-                    this.Orden = orden;
-                    this.Orden.FechaEmision = moment(this.Orden.FechaEmision).format("YYYY-MM-DD");
-                }).catch((error) => {
-                    alert("Ha ocurrido un error");
-                });
+                this.OrdenEncabezado.IdCliente = null;
             }
         })
     </script>

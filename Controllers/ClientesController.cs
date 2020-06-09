@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using RepairHouse.Dtos;
 using RepairHouse.Models;
 
 namespace RepairHouse.Controllers
@@ -135,6 +138,37 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Clientes/Search
+        public ActionResult Search(string nombreCliente)
+        {
+            Debug.WriteLine(nombreCliente);
+
+            var clientes = db.Cliente
+                .Where(x =>
+                    x.PrimerNombre.Contains(nombreCliente) ||
+                    x.SegundoNombre.Contains(nombreCliente) ||
+                    x.PrimerApellido.Contains(nombreCliente) ||
+                    x.SegundoApellido.Contains(nombreCliente) ||
+                    nombreCliente.Contains(x.PrimerNombre) ||
+                    nombreCliente.Contains(x.SegundoNombre) ||
+                    nombreCliente.Contains(x.PrimerApellido) ||
+                    nombreCliente.Contains(x.SegundoApellido)
+                )
+                .Select(x => new
+                {
+                    x.IdCliente,
+                    NombreCliente = (x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido).Trim(),
+                    x.DUI,
+                    x.NIT,
+                    x.Email,
+                    x.Domicilio,
+                    Sexo = new { x.Sexo.IdSexo, Sexo = x.Sexo.Sexo1 },
+                    Municipio = new { x.Municipio.IdMunicipio, Municipio = x.Municipio.Municipio1 },
+                });
+
+            return Json(clientes, JsonRequestBehavior.AllowGet);
         }
     }
 }

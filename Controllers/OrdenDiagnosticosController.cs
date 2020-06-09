@@ -11,7 +11,6 @@ using System.Web;
 using System.Web.Mvc;
 using RepairHouse.Dtos;
 using RepairHouse.Models;
-using RepairHouse.Models.ViewsModels;
 
 namespace RepairHouse.Controllers
 {
@@ -43,72 +42,34 @@ namespace RepairHouse.Controllers
 
         public ActionResult Create()
         {
-            return View();
-        }
+            UserCurrentSessionDto USER_CURRENT = (UserCurrentSessionDto)Session[Cons.USER_CURRENT_SESSION];
 
-        public JsonResult CreateJsonGet()
-        {
-            UserCurrentSessionDto USER_CURRENT = (UserCurrentSessionDto) Session[Cons.USER_CURRENT_SESSION];
-
-            var empleados = db.Empleado
-                .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
-            var sucursales = db.Sucursal
-                .Where(x => x.Nombre == USER_CURRENT.Sucursal)
-                .Select(x => new { x.IdSucursal, x.Nombre });
-            var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
-
-            const int ID_ESTADO_COMPLETADO = 5;
+            const int ID_ESTADO_CREADO = 5;
             const bool FACTURADO_FALSO = false;
-            var orden = new OrdenDiagnostico
+
+            Sucursal sucursal = db.Sucursal.FirstOrDefault(x => x.Nombre == USER_CURRENT.SucursalEmpleado);
+            Empleado empleado = db.Empleado.FirstOrDefault(x => x.IdEmpleado == USER_CURRENT.IdEmpleado);
+
+            OrdenDiagnostico ordenDiagnostico = new OrdenDiagnostico()
             {
                 FechaEmision = DateTime.Today,
-                CantidadEquipos = 0,
+                Sucursal = sucursal,
+                Empleado = empleado,
+                Cliente = new Cliente(),
                 PrecioBruto = (decimal)0.0,
                 Descuento = (decimal)0.0,
                 PrecioNeto = (decimal)0.0,
-                IdEstado = ID_ESTADO_COMPLETADO,
+                IdEstado = ID_ESTADO_CREADO,
                 Facturado = FACTURADO_FALSO
             };
 
-            var payload = new { empleados, sucursales, clientes, orden };
-            return Json(payload, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetEquiposByClienteJsonGet(int idCliente)
-        {
-            const int CANTIDAD_DEFAULT = 1;
-            var equipos = db.Equipo.Where(x => x.IdCliente == idCliente)
-                .Select(x => new
-                {
-                    x.IdEquipo,
-                    x.TipoEquipo.Inventario.IdInventario,
-                    Costo = x.TipoEquipo.Inventario.TotalUnitario,
-                    x.MarcaEquipo.Marca,
-                    x.ModeloEquipo.Modelo
-                });
-
-            return Json(equipos, JsonRequestBehavior.AllowGet);
+            return View(ordenDiagnostico);
         }
 
         [HttpPost]
-        public JsonResult Create(OrdenDiagnosticoViewModel viewModel)
+        public JsonResult Create(OrdenDiagnostico orden)
         {
-            Debug.WriteLine("Create....");
-
-            OrdenDiagnostico orden = viewModel.OrdenDiagnostico;
-
-            List<OrdenDiagnosticoDetalle> detalles = viewModel.Detalle;
-            foreach (var item in detalles)
-            {
-                item.OrdenDiagnostico = orden;
-                orden.OrdenDiagnosticoDetalle.Add(item);
-
-                Debug.WriteLine(item.IdEquipo);
-                Debug.WriteLine(item.IdInventario);
-            }
-
-            Debug.WriteLine(orden.PrecioNeto);
-            Debug.WriteLine(orden.FechaEmision);
+            orden.OrdenDiagnosticoDetalle.ToList().ForEach(x => x.OrdenDiagnostico = orden);
 
             db.OrdenDiagnostico.Add(orden);
             db.SaveChanges();
@@ -124,106 +85,52 @@ namespace RepairHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            OrdenDiagnosticoViewModel ordenViewModel = new OrdenDiagnosticoViewModel();
+            //OrdenDiagnosticoViewModel0 ordenViewModel = new OrdenDiagnosticoViewModel0();
 
-            ordenViewModel.OrdenDiagnostico = db.OrdenDiagnostico.Find(id);
+            OrdenDiagnostico ordenDiagnostico = db.OrdenDiagnostico.Find(id);
 
-            if (ordenViewModel.OrdenDiagnostico == null)
+            if (ordenDiagnostico == null)
             {
                 return HttpNotFound();
             }
 
-            //ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", ordenDiagnostico.IdCliente);
-            //ViewBag.IdEmpleado = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", ordenDiagnostico.IdEmpleado);
-            //ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", ordenDiagnostico.IdEstado);
-            //ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", ordenDiagnostico.IdSucursal);
-            return View(ordenViewModel);
-        }
-
-        public JsonResult EditJsonGet(int id)
-        {
-            Debug.WriteLine("EditJsonGet");
-            Debug.WriteLine(id);
-
-            var empleados = db.Empleado
-                //.Where(x => x.IdCargo == 4)
-                .Select(x => new { x.IdEmpleado, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.Cargo.Descripcion });
-            var sucursales = db.Sucursal.Select(x => new { x.IdSucursal, x.Nombre });
-            var clientes = db.Cliente.Select(x => new { x.IdCliente, Nombre = x.PrimerNombre + " " + x.PrimerApellido, x.DUI });
-            var estados = db.EstadoOrdenDiagnostico.Select(x => new { x.IdEstado, x.Estado});
-
-            var orden = db.OrdenDiagnostico
-                .Select(x => new
-                {
-                    x.IdOrdenDiagnostico,
-                    x.IdSucursal,
-                    x.IdEmpleado,
-                    x.IdCliente,
-                    x.FechaEmision,
-                    x.FechaResolucion,
-                    x.IdEstado,
-                    x.Facturado,
-                    x.Comentarios,
-                    x.CantidadEquipos,
-                    x.PrecioNeto,
-                    x.Descuento,
-                    x.PrecioBruto
-                }).FirstOrDefault(x => x.IdOrdenDiagnostico == id);
-
-            var detalles = db.OrdenDiagnosticoDetalle.Where(x => x.IdOrdenDiagnostico == id)
-                .Select(x => new
-                {
-                    x.IdEquipo,
-                    x.IdInventario,
-                    x.Costo,
-                    x.Equipo.MarcaEquipo.Marca,
-                    x.Equipo.ModeloEquipo.Modelo
-                });
-
-            var payload = new { empleados, sucursales, clientes, estados, orden, detalles };
-            return Json(payload, JsonRequestBehavior.AllowGet);
+            return View(ordenDiagnostico);
         }
 
         [HttpPost]
-        public JsonResult Edit(OrdenDiagnosticoViewModel viewModel)
+        public JsonResult Edit(OrdenDiagnostico orden)
         {
-            Debug.WriteLine("Edit....");
-
-            OrdenDiagnostico orden = viewModel.OrdenDiagnostico;
-
-            List<OrdenDiagnosticoDetalle> detalles = viewModel.Detalle;
-            foreach (var item in detalles)
+            orden.OrdenDiagnosticoDetalle.ToList().ForEach(x => x.OrdenDiagnostico = orden);
+            foreach (OrdenDiagnosticoDetalle item in orden.OrdenDiagnosticoDetalle)
             {
                 item.OrdenDiagnostico = orden;
-                orden.OrdenDiagnosticoDetalle.Add(item);
-
-                Debug.WriteLine(item.IdEquipo);
-                Debug.WriteLine(item.IdInventario);
+                if (item.IdOrdenDiagnosticoDetalle > 0)
+                {
+                    db.Entry(item).State = EntityState.Modified; //para no duplicar
+                }
             }
 
-            Debug.WriteLine(orden.PrecioNeto);
-            Debug.WriteLine(orden.FechaEmision);
-
             db.OrdenDiagnostico.Add(orden);
+            db.Entry(orden).State = EntityState.Modified; //para no duplicar
             db.SaveChanges();
 
             return Json("Edit OK", JsonRequestBehavior.DenyGet);
         }
 
-        [HttpPost]
-        public JsonResult RemoveEquipoEnDetalle(int idOrdenDiagnostico, int idEquipo)
-        {
-            Debug.WriteLine("RemoveEquipoEnDetalle....");
+        //[HttpPost]
+        //public JsonResult RemoveEquipoEnDetalle(int idOrdenDiagnostico, int idEquipo)
+        //{
+        //    Debug.WriteLine("RemoveEquipoEnDetalle....");
 
-            OrdenDiagnosticoDetalle item = db.OrdenDiagnosticoDetalle
-                .Where(x => x.IdOrdenDiagnostico == idOrdenDiagnostico && x.IdEquipo == idEquipo)
-                .FirstOrDefault() ;
+        //    OrdenDiagnosticoDetalle item = db.OrdenDiagnosticoDetalle
+        //        .Where(x => x.IdOrdenDiagnostico == idOrdenDiagnostico && x.IdEquipo == idEquipo)
+        //        .FirstOrDefault() ;
 
-            db.OrdenDiagnosticoDetalle.Remove(item);
-            db.SaveChanges();
+        //    db.OrdenDiagnosticoDetalle.Remove(item);
+        //    db.SaveChanges();
 
-            return Json("Remove OK", JsonRequestBehavior.DenyGet);
-        }
+        //    return Json("Remove OK", JsonRequestBehavior.DenyGet);
+        //}
 
         // GET: OrdenDiagnosticoes/Delete/5
         public ActionResult Delete(int? id)
@@ -252,7 +159,7 @@ namespace RepairHouse.Controllers
             db.OrdenDiagnosticoDetalle.RemoveRange(detalles);
             db.OrdenDiagnostico.Remove(ordenDiagnostico);
             
-            db.SaveChanges(); //hola
+            db.SaveChanges(); 
 
             return RedirectToAction("Index");
         }
@@ -264,6 +171,6 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }        
     }
 }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RepairHouse.Dtos;
 using RepairHouse.Models;
 
 namespace RepairHouse.Controllers
@@ -147,6 +149,40 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Empleados/Search
+        public ActionResult Search(string nombreEmpleado, string nombreSucursal)
+        {
+            Debug.WriteLine(nombreEmpleado);
+            Debug.WriteLine(nombreSucursal);
+
+            var empleados = db.Empleado                
+                .Where(x =>
+                    x.PrimerNombre.Contains(nombreEmpleado) ||
+                    x.SegundoNombre.Contains(nombreEmpleado) ||
+                    x.PrimerApellido.Contains(nombreEmpleado) ||
+                    x.SegundoApellido.Contains(nombreEmpleado) ||
+                    nombreEmpleado.Contains(x.PrimerNombre) ||
+                    nombreEmpleado.Contains(x.SegundoNombre) ||
+                    nombreEmpleado.Contains(x.PrimerApellido) ||
+                    nombreEmpleado.Contains(x.SegundoApellido) &&
+                    x.Sucursal.Nombre == nombreSucursal
+                ).Select(x => new
+                {
+                    x.IdEmpleado,
+                    NombreEmpleado = (x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido).Trim(),
+                    x.DUI,
+                    x.NIT,
+                    x.Domicilio,
+                    Sexo = new { x.Sexo.IdSexo, Sexo = x.Sexo.Sexo1 },
+                    Municipio = new { x.Municipio.IdMunicipio, Municipio = x.Municipio.Municipio1 },
+                    Sucursal = new { x.Sucursal.IdSucursal, x.Sucursal.Nombre },
+                    Cargo = new { x.Cargo.IdCargo, x.Cargo.Descripcion },
+                    Estado = new { x.EstadoEmpleado.IdEstado, x.EstadoEmpleado.Estado }
+                }).ToList();
+
+            return Json(empleados, JsonRequestBehavior.AllowGet);
         }
     }
 }

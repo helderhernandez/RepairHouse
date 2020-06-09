@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -253,7 +254,6 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewsModels\OrdenDiagnosticoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -265,7 +265,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\app.css" />
-    <Content Include="Content\custom\loader.css" />
+    <Content Include="Content\custom\app-loader.css" />
     <Content Include="Content\datatables\INFO.txt" />
     <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\Images\background-1.png" />
@@ -294,12 +294,13 @@
       <LastGenOutput>BDCasaModel1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\axios\axios.min.js" />
-    <Content Include="Scripts\custom\app.js" />
+    <Content Include="Scripts\custom\app-styles-forms.js" />
+    <Content Include="Scripts\custom\app-styles-tables.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\custom\loader.js" />
+    <Content Include="Scripts\custom\app-loader.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.js" />
     <Content Include="Scripts\datatables\translation-spanish.js" />
     <Content Include="Scripts\esm\popper-utils.js" />

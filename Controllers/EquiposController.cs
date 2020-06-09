@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -139,6 +140,27 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Equipos/Search
+        public ActionResult Search(int idCliente)
+        {
+            Debug.WriteLine(idCliente);
+
+            var equipos = db.Equipo
+                .Where(x => x.IdCliente == idCliente)
+                .Select(x => new
+                {
+                    x.IdEquipo,
+                    Marca = new { x.MarcaEquipo.Marca },
+                    Modelo = new { x.ModeloEquipo.Modelo },
+                    Tipo = new
+                    {
+                        Inventario = new { x.TipoEquipo.Inventario.IdInventario, x.TipoEquipo.Inventario.TotalUnitario }
+                    }
+                }).ToList();
+
+            return Json(equipos, JsonRequestBehavior.AllowGet);
         }
     }
 }
