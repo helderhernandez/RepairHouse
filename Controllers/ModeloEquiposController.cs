@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -127,6 +128,23 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Modelos/Search
+        public ActionResult Search(int idMarca)
+        {
+            Debug.WriteLine(idMarca);
+
+            var modelos = db.ModeloEquipo
+                .Where(x => x.IdMarca == idMarca)
+                .Select(x => new
+                {
+                    x.IdModelo,
+                    x.Modelo,
+                    x.IdMarca
+                }).ToList();
+
+            return Json(modelos, JsonRequestBehavior.AllowGet);
         }
     }
 }

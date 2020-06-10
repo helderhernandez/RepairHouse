@@ -45,6 +45,7 @@
 function stylesForms() {
     var form = $("form > div.form-horizontal")[0];
     $(form).addClass("col-sm-12 col-md-10 col-lg-8 m-auto");
+    $(".control-label").css("display", "inline");
 }
 
 function stylesInputsReadonlyValidate() {
