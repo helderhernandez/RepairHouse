@@ -19,10 +19,24 @@ namespace RepairHouse.Controllers
         private casa_reparadoraEntities db = new casa_reparadoraEntities();
 
         // GET: OrdenDiagnosticoes
-        public ActionResult Index()
+        public ActionResult Index(int? idEstado)
         {
             var ordenDiagnostico = db.OrdenDiagnostico.Include(o => o.Cliente).Include(o => o.Empleado).Include(o => o.EstadoOrdenDiagnostico).Include(o => o.Sucursal);
-            return View(ordenDiagnostico.OrderByDescending(x => x.FechaEmision).ToList());
+
+            var estados = db.EstadoOrdenDiagnostico.Select(x => new { x.IdEstado, x.Estado }).ToList();
+            estados.Add(new { IdEstado = 0, Estado = "Todos" });
+
+            if (idEstado > 0)
+            {
+                ViewBag.IdEstado = new SelectList(estados.OrderBy(x => x.IdEstado), "IdEstado", "Estado", idEstado);
+                return View(ordenDiagnostico.Where(x => x.IdEstado == idEstado).OrderByDescending(x => x.FechaEmision).ToList());
+            }
+            else
+            {
+                const int ID_TODOS= 0;
+                ViewBag.IdEstado = new SelectList(estados.OrderBy(x => x.IdEstado), "IdEstado", "Estado", ID_TODOS);
+                return View(ordenDiagnostico.OrderByDescending(x => x.FechaEmision).ToList());
+            }
         }
 
         // GET: OrdenDiagnosticoes/Details/5

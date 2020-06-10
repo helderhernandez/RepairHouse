@@ -112,7 +112,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Id equipo</th>
                         <th>Descripción</th>
                         <th>Precio diagnóstico</th>
                         <th></th>
@@ -124,7 +124,7 @@
                         <td>{{Detalle.Marca}} {{Detalle.Modelo}}</td>
                         <td>$ {{Detalle.Costo}}</td>
                         @*<td><button v-on:click="quitarEquipoEnDetalle(Detalle)" class="btn btn-warning">Quitar</button></td>*@
-                        <td><button v-on:click="alert('FLUJO PARA DIAGNOSTICO')" type="button" class="btn btn-primary">Crear diagnóstico</button></td>
+                        @*<td><button v-on:click="searchDiagnostico(Detalle)" type="button" class="btn btn-primary">Crear diagnóstico</button></td>*@
                     </tr>
                 </tbody>
             </table>
@@ -132,8 +132,8 @@
 
         <br />
 
-        <button v-if="OrdenEncabezado.Facturado" type="button" class="btn btn-secondary" disabled>Facturar</button>
-        <button v-else v-on:click="alert('FLOJO PARA FACTURACION')" type="button" class="btn btn-primary">Facturar</button><span> | </span>
+        @*<button v-if="OrdenEncabezado.Facturado" type="button" class="btn btn-secondary" disabled>Facturar</button>*@
+        @*<button v-else v-on:click="alert('FLOJO PARA FACTURACION')" type="button" class="btn btn-primary">Facturar</button><span> | </span>*@
 
         @*<a href="#" data-toggle="modal" data-target="#EquiposClienteModal" v-on:click="searchEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
         <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a> <span> | </span>*@
@@ -483,6 +483,33 @@
                     this.OrdenEncabezado.CantidadEquipos = nEquipos;
                     this.OrdenEncabezado.PrecioBruto = sumaCostoDiagnosticos;
                     this.OrdenEncabezado.PrecioNeto = sumaCostoTotal;
+                },
+                searchDiagnostico(Detalle) {
+                    alert('FLUJO PARA DIAGNOSTICO')
+                    console.log(Detalle);
+
+                    var idOrdenDiagnostico = Detalle.IdOrdenDiagnostico;
+                    var idEquipo = Detalle.IdEquipo;
+
+                    var params = "?idOrdenDiagnostico=" + idOrdenDiagnostico + "&idEquipo=" + idEquipo;
+
+                    var url = '@Url.Content("~/Diagnosticos/Search")' + params;
+
+                    console.log(url);
+
+                    axios.get(url).then((result) => {
+                        var { data } = result;
+
+                        console.log(data);
+                        return;
+                        if (data != null) {
+                            location.href = '@Url.Content("~/OrdenDiagnosticos/Edit")';
+                        } else {
+                            location.href = '@Url.Content("~/OrdenDiagnosticos/Create")';
+                        }                        
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
                 },
                 enviarFormulario() {
                     var statusForm = document.getElementById('ordenFrm').reportValidity();

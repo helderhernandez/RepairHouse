@@ -266,8 +266,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\app.css" />
     <Content Include="Content\custom\app-loader.css" />
-    <Content Include="Content\datatables\INFO.txt" />
-    <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\Images\background-1.png" />
     <Content Include="Content\Images\spinner.gif" />
     <Content Include="favicon.ico" />
@@ -301,8 +299,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\app-loader.js" />
-    <Content Include="Scripts\datatables\jquery.dataTables.js" />
-    <Content Include="Scripts\datatables\translation-spanish.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -340,7 +336,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\moment\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
