@@ -1,4 +1,5 @@
 ﻿@model RepairHouse.Models.OrdenDiagnostico
+@using RepairHouse.Models
 
 @{
     ViewBag.Title = "Edit";
@@ -13,7 +14,7 @@
         <div class="row">
             <div class="col">
                 <label>Fecha emision:</label>
-                <input v-model="OrdenEncabezado.FechaEmision" type="date" class="form-control" required disabled/>
+                <input v-model="OrdenEncabezado.FechaEmision" type="date" class="form-control" required disabled />
             </div>
             <div class="col-2">
                 <label>Id empleado</label>
@@ -70,6 +71,19 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col">
+                <label>Facturado:</label>
+                <input v-model="OrdenEncabezado.Facturado" type="text" class="form-control" disabled />
+            </div>
+            <div class="col">
+                <label>Estado diagnóstico</label>
+                <select v-model="OrdenEncabezado.IdEstado" type="text" class="form-control">
+                    <option v-for="Estado in Estados" :value="Estado.IdEstado">{{Estado.Estado}}</option>
+                </select>
+            </div>
+        </div>
+
         <br />
 
         <h5 class="bg-dark text-white p-2">Detalle</h5>
@@ -98,10 +112,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Id equipo</th>
                         <th>Descripción</th>
                         <th>Precio diagnóstico</th>
-                        @*<th></th>*@
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,6 +124,7 @@
                         <td>{{Detalle.Marca}} {{Detalle.Modelo}}</td>
                         <td>$ {{Detalle.Costo}}</td>
                         @*<td><button v-on:click="quitarEquipoEnDetalle(Detalle)" class="btn btn-warning">Quitar</button></td>*@
+                        @*<td><button v-on:click="searchDiagnostico(Detalle)" type="button" class="btn btn-primary">Crear diagnóstico</button></td>*@
                     </tr>
                 </tbody>
             </table>
@@ -117,8 +132,11 @@
 
         <br />
 
-        <a href="#" data-toggle="modal" data-target="#EquiposClienteModal" v-on:click="searchEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
-        <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a> <span> | </span>
+        @*<button v-if="OrdenEncabezado.Facturado" type="button" class="btn btn-secondary" disabled>Facturar</button>*@
+        @*<button v-else v-on:click="alert('FLOJO PARA FACTURACION')" type="button" class="btn btn-primary">Facturar</button><span> | </span>*@
+
+        @*<a href="#" data-toggle="modal" data-target="#EquiposClienteModal" v-on:click="searchEquipos()" class="btn btn-primary">Buscar equipos del usuario</a><span> | </span>
+        <a href="@Url.Action("Create", "Equipos")" target="_blank" class="btn btn-primary">Registrar nuevo equipo</a> <span> | </span>*@
         <button v-on:click="enviarFormulario()" type="button" v- class="btn btn-success">Editar orden</button>
     </form>
 
@@ -277,7 +295,8 @@
         Model.PrecioBruto,
         Model.Descuento,
         Model.PrecioNeto,
-        Model.IdEstado,
+        Model.EstadoOrdenDiagnostico.IdEstado,
+        Model.EstadoOrdenDiagnostico.Estado,
         Model.Facturado
 
     };
@@ -297,6 +316,9 @@
             item.Costo
         });
     };
+
+    casa_reparadoraEntities db = new casa_reparadoraEntities();
+    var estados = db.EstadoOrdenDiagnostico.Select(x => new { x.IdEstado, x.Estado });
 }
 
 @section Scripts {
@@ -308,6 +330,9 @@
         var OrdenDetalle = JSON.parse('@Html.Raw(Json.Encode(ordenDetalle))');
         console.log(OrdenDetalle);
 
+        var Estados = JSON.parse('@Html.Raw(Json.Encode(estados))');
+        console.log(Estados);
+
         var app = new Vue({
             el: '#app',
             data: {
@@ -317,7 +342,8 @@
                 NombreEmpleado: this.OrdenEncabezado.NombreEmpleado,
                 Clientes: [],
                 NombreCliente: this.OrdenEncabezado.NombreCliente,
-                Equipos: []
+                Equipos: [],
+                Estados
             },
             watch: {
                 OrdenDetalle: {
@@ -457,6 +483,33 @@
                     this.OrdenEncabezado.CantidadEquipos = nEquipos;
                     this.OrdenEncabezado.PrecioBruto = sumaCostoDiagnosticos;
                     this.OrdenEncabezado.PrecioNeto = sumaCostoTotal;
+                },
+                searchDiagnostico(Detalle) {
+                    alert('FLUJO PARA DIAGNOSTICO')
+                    console.log(Detalle);
+
+                    var idOrdenDiagnostico = Detalle.IdOrdenDiagnostico;
+                    var idEquipo = Detalle.IdEquipo;
+
+                    var params = "?idOrdenDiagnostico=" + idOrdenDiagnostico + "&idEquipo=" + idEquipo;
+
+                    var url = '@Url.Content("~/Diagnosticos/Search")' + params;
+
+                    console.log(url);
+
+                    axios.get(url).then((result) => {
+                        var { data } = result;
+
+                        console.log(data);
+                        return;
+                        if (data != null) {
+                            location.href = '@Url.Content("~/OrdenDiagnosticos/Edit")';
+                        } else {
+                            location.href = '@Url.Content("~/OrdenDiagnosticos/Create")';
+                        }                        
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
                 },
                 enviarFormulario() {
                     var statusForm = document.getElementById('ordenFrm').reportValidity();

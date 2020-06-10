@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -41,7 +42,7 @@ namespace RepairHouse.Controllers
         {
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie");
             ViewBag.IdOrdenDiagnostico = new SelectList(db.OrdenDiagnostico, "IdOrdenDiagnostico", "Comentarios");
-            ViewBag.IdDiagnostico = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre");
+            ViewBag.IdTecnico = new SelectList(db.Empleado.Where(x => x.IdCargo == 1 || x.IdCargo == 2), "IdEmpleado", "PrimerNombre");
             return View();
         }
 
@@ -61,7 +62,7 @@ namespace RepairHouse.Controllers
 
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", diagnostico.IdEquipo);
             ViewBag.IdOrdenDiagnostico = new SelectList(db.OrdenDiagnostico, "IdOrdenDiagnostico", "Comentarios", diagnostico.IdOrdenDiagnostico);
-            ViewBag.IdDiagnostico = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", diagnostico.IdDiagnostico);
+            ViewBag.IdTecnico = new SelectList(db.Empleado.Where(x => x.IdCargo == 1 || x.IdCargo == 2), "IdEmpleado", "PrimerNombre");
             return View(diagnostico);
         }
 
@@ -79,7 +80,7 @@ namespace RepairHouse.Controllers
             }
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", diagnostico.IdEquipo);
             ViewBag.IdOrdenDiagnostico = new SelectList(db.OrdenDiagnostico, "IdOrdenDiagnostico", "Comentarios", diagnostico.IdOrdenDiagnostico);
-            ViewBag.IdDiagnostico = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", diagnostico.IdDiagnostico);
+            ViewBag.IdTecnico = new SelectList(db.Empleado.Where(x => x.IdCargo == 1 || x.IdCargo == 2), "IdEmpleado", "PrimerNombre");
             return View(diagnostico);
         }
 
@@ -98,7 +99,7 @@ namespace RepairHouse.Controllers
             }
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", diagnostico.IdEquipo);
             ViewBag.IdOrdenDiagnostico = new SelectList(db.OrdenDiagnostico, "IdOrdenDiagnostico", "Comentarios", diagnostico.IdOrdenDiagnostico);
-            ViewBag.IdDiagnostico = new SelectList(db.Empleado, "IdEmpleado", "PrimerNombre", diagnostico.IdDiagnostico);
+            ViewBag.IdTecnico = new SelectList(db.Empleado.Where(x => x.IdCargo == 1 || x.IdCargo == 2), "IdEmpleado", "PrimerNombre");
             return View(diagnostico);
         }
 
@@ -135,6 +136,25 @@ namespace RepairHouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Diagnosticoes/Search
+        public ActionResult Search(int idOrdenDiagnostico, int idEquipo)
+        {
+            Debug.WriteLine(idOrdenDiagnostico);
+            Debug.WriteLine(idEquipo);
+
+            var diagnostico = db.Diagnostico.Where(x => 
+                x.IdOrdenDiagnostico == idOrdenDiagnostico &&
+                x.IdEquipo == idEquipo)
+                .Select(x => new
+                {
+                    x.IdDiagnostico,
+                    x.IdOrdenDiagnostico,
+                    x.IdEquipo
+                }).FirstOrDefault();
+
+            return Json(diagnostico, JsonRequestBehavior.AllowGet);
         }
     }
 }

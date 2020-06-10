@@ -40,9 +40,13 @@ namespace RepairHouse.Controllers
         // GET: Equipoes/Create
         public ActionResult Create()
         {
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre");
-            ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca");
-            ViewBag.IdModelo = new SelectList(db.ModeloEquipo, "IdModelo", "Modelo");
+            List<MarcaEquipo> marcas = db.MarcaEquipo.ToList();
+            ViewBag.IdMarca = new SelectList(marcas, "IdMarca", "Marca");
+
+            var IdMarca = marcas.First().IdMarca;
+            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == IdMarca).ToList();
+            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo");
+
             ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo");
             return View();
         }
@@ -52,18 +56,21 @@ namespace RepairHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdEquipo,IdCliente,IdMarca,IdModelo,NumeroSerie,Color,IdTipoEquipo")] Equipo equipo)
+        public ActionResult Create(Equipo equipo)
         {
             if (ModelState.IsValid)
             {
+                equipo.Cliente = null; // para que no intente persistir el cliente
                 db.Equipo.Add(equipo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", equipo.IdCliente);
             ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
-            ViewBag.IdModelo = new SelectList(db.ModeloEquipo, "IdModelo", "Modelo", equipo.IdModelo);
+
+            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
+            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
+
             ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
             return View(equipo);
         }
@@ -80,9 +87,12 @@ namespace RepairHouse.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", equipo.IdCliente);
+
             ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
-            ViewBag.IdModelo = new SelectList(db.ModeloEquipo, "IdModelo", "Modelo", equipo.IdModelo);
+
+            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
+            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
+
             ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
             return View(equipo);
         }
@@ -92,17 +102,21 @@ namespace RepairHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdEquipo,IdCliente,IdMarca,IdModelo,NumeroSerie,Color,IdTipoEquipo")] Equipo equipo)
+        public ActionResult Edit(Equipo equipo)
         {
             if (ModelState.IsValid)
             {
+                equipo.Cliente = null; // para que no intente persistir el cliente
                 db.Entry(equipo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", equipo.IdCliente);
+
             ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
-            ViewBag.IdModelo = new SelectList(db.ModeloEquipo, "IdModelo", "Modelo", equipo.IdModelo);
+
+            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
+            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
+
             ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
             return View(equipo);
         }

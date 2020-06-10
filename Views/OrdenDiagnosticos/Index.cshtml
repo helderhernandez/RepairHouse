@@ -8,6 +8,8 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    <label>Filtrar por estado:</label>
+    @Html.DropDownList("IdEstado", null, htmlAttributes: new { @class = "form-control d-inline w-25", @onchange = "filtrarOrdenes(this)" })
 </p>
 <table class="table">
     <tr>
@@ -21,7 +23,7 @@
             Estado
         </th>
         <th>
-           # Equipos
+            # Equipos
         </th>
         <th>
             Precio
@@ -68,10 +70,21 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdenDiagnostico }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdOrdenDiagnostico }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdenDiagnostico })
+                @Html.ActionLink("Details", "Details", new { id = item.IdOrdenDiagnostico }) @*|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdenDiagnostico })*@
             </td>
         </tr>
     }
 
 </table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function filtrarOrdenes(e) {
+            var url = '@Url.Content("~/OrdenDiagnosticos?idEstado=")' + $(e).val();
+            location.href = url;
+        }
+    </script>
+}
