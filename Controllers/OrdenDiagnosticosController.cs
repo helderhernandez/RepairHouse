@@ -22,7 +22,7 @@ namespace RepairHouse.Controllers
         public ActionResult Index()
         {
             var ordenDiagnostico = db.OrdenDiagnostico.Include(o => o.Cliente).Include(o => o.Empleado).Include(o => o.EstadoOrdenDiagnostico).Include(o => o.Sucursal);
-            return View(ordenDiagnostico.ToList());
+            return View(ordenDiagnostico.OrderByDescending(x => x.FechaEmision).ToList());
         }
 
         // GET: OrdenDiagnosticoes/Details/5
