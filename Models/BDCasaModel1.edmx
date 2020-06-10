@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="casa_reparadoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure">
+    <Schema Namespace="casa_reparadoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cargo">
           <Key>
             <PropertyRef Name="IdCargo" />
           </Key>
-          <Property Name="IdCargo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Descripcion" MaxLength="50" Type="varchar" />
+          <Property Name="IdCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="Estado" Type="int" />
         </EntityType>
@@ -18,303 +18,364 @@
           <Key>
             <PropertyRef Name="IdCategoriaInventario" />
           </Key>
-          <Property Name="IdCategoriaInventario" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Categoria" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="IdCategoriaInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="Id_Citas" />
+          </Key>
+          <Property Name="Id_Citas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdEquipo" Type="int" />
+          <Property Name="IdEstado" Type="int" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="500" />
+          <Property Name="FechaCita" Type="datetime" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="IdCliente" />
           </Key>
-          <Property Name="IdCliente" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="PrimerNombre" MaxLength="80" Type="varchar" />
-          <Property Name="SegundoNombre" MaxLength="80" Type="varchar" />
-          <Property Name="PrimerApellido" MaxLength="80" Type="varchar" />
-          <Property Name="SegundoApellido" MaxLength="80" Type="varchar" />
-          <Property Name="DeCasada" MaxLength="80" Type="varchar" />
-          <Property Name="IdSexo" Nullable="false" Type="int" />
-          <Property Name="Email" MaxLength="150" Type="varchar" />
-          <Property Name="DUI" MaxLength="10" Type="varchar" />
-          <Property Name="NIT" MaxLength="14" Type="varchar" />
-          <Property Name="Telefono" MaxLength="9" Type="nchar" />
-          <Property Name="IdMunicipio" Nullable="false" Type="int" />
-          <Property Name="Domicilio" MaxLength="150" Type="varchar" />
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimerNombre" Type="varchar" MaxLength="80" />
+          <Property Name="SegundoNombre" Type="varchar" MaxLength="80" />
+          <Property Name="PrimerApellido" Type="varchar" MaxLength="80" />
+          <Property Name="SegundoApellido" Type="varchar" MaxLength="80" />
+          <Property Name="DeCasada" Type="varchar" MaxLength="80" />
+          <Property Name="IdSexo" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="DUI" Type="varchar" MaxLength="10" />
+          <Property Name="NIT" Type="varchar" MaxLength="14" />
+          <Property Name="Telefono" Type="nchar" MaxLength="9" />
+          <Property Name="IdMunicipio" Type="int" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="150" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="nchar" MaxLength="8" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="IdDepartamento" />
           </Key>
-          <Property Name="IdDepartamento" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Departamento" MaxLength="100" Type="varchar" />
+          <Property Name="IdDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departamento" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Diagnostico">
           <Key>
             <PropertyRef Name="IdDiagnostico" />
           </Key>
-          <Property Name="IdDiagnostico" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="IdDiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FechaRegistro" Type="datetime" />
-          <Property Name="IdEquipo" Nullable="false" Type="int" />
-          <Property Name="IdTecnico" Nullable="false" Type="int" />
-          <Property Name="IdOrdenDiagnostico" Nullable="false" Type="int" />
-          <Property Name="Diagnostico" MaxLength="500" Type="varchar" />
-          <Property Name="ComentariosCotizacion" MaxLength="500" Type="varchar" />
-          <Property Name="TotalCotizacion" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="IdEquipo" Type="int" Nullable="false" />
+          <Property Name="IdTecnico" Type="int" Nullable="false" />
+          <Property Name="IdOrdenDiagnostico" Type="int" Nullable="false" />
+          <Property Name="Diagnostico" Type="varchar" MaxLength="500" />
+          <Property Name="ComentariosCotizacion" Type="varchar" MaxLength="500" />
+          <Property Name="TotalCotizacion" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="DiagnosticoCotizacion">
           <Key>
             <PropertyRef Name="IdDiagnosticoCotizacion" />
           </Key>
-          <Property Name="IdDiagnosticoCotizacion" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="IdDiagnostico" Nullable="false" Type="int" />
-          <Property Name="IdInventario" Nullable="false" Type="int" />
+          <Property Name="IdDiagnosticoCotizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDiagnostico" Type="int" Nullable="false" />
+          <Property Name="IdInventario" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
-          <Property Name="Precio" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="SubTotal" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="Precio" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
             <PropertyRef Name="IdEmpleado" />
           </Key>
-          <Property Name="IdEmpleado" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="PrimerNombre" MaxLength="80" Type="varchar" />
-          <Property Name="SegundoNombre" MaxLength="80" Type="varchar" />
-          <Property Name="PrimerApellido" MaxLength="80" Type="varchar" />
-          <Property Name="SegundoApellido" MaxLength="80" Type="varchar" />
-          <Property Name="DeCasada" MaxLength="80" Type="varchar" />
-          <Property Name="IdSexo" Nullable="false" Type="int" />
-          <Property Name="DUI" MaxLength="10" Type="varchar" />
-          <Property Name="NIT" MaxLength="14" Type="varchar" />
-          <Property Name="IdMunicipio" Nullable="false" Type="int" />
-          <Property Name="Domicilio" MaxLength="150" Type="varchar" />
-          <Property Name="IdSucursal" Nullable="false" Type="int" />
-          <Property Name="IdCargo" Nullable="false" Type="int" />
-          <Property Name="IdEstado" Nullable="false" Type="int" />
+          <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimerNombre" Type="varchar" MaxLength="80" />
+          <Property Name="SegundoNombre" Type="varchar" MaxLength="80" />
+          <Property Name="PrimerApellido" Type="varchar" MaxLength="80" />
+          <Property Name="SegundoApellido" Type="varchar" MaxLength="80" />
+          <Property Name="DeCasada" Type="varchar" MaxLength="80" />
+          <Property Name="IdSexo" Type="int" Nullable="false" />
+          <Property Name="DUI" Type="varchar" MaxLength="10" />
+          <Property Name="NIT" Type="varchar" MaxLength="14" />
+          <Property Name="IdMunicipio" Type="int" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="150" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdCargo" Type="int" Nullable="false" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipo">
           <Key>
             <PropertyRef Name="IdEquipo" />
           </Key>
-          <Property Name="IdEquipo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="IdCliente" Nullable="false" Type="int" />
-          <Property Name="IdMarca" Nullable="false" Type="int" />
-          <Property Name="IdModelo" Nullable="false" Type="int" />
-          <Property Name="NumeroSerie" MaxLength="50" Type="nchar" />
-          <Property Name="Color" MaxLength="10" Type="nchar" />
-          <Property Name="IdTipoEquipo" Nullable="false" Type="int" />
+          <Property Name="IdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="IdModelo" Type="int" Nullable="false" />
+          <Property Name="NumeroSerie" Type="nchar" MaxLength="50" />
+          <Property Name="Color" Type="nchar" MaxLength="10" />
+          <Property Name="IdTipoEquipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoEmpleado">
           <Key>
             <PropertyRef Name="IdEstado" />
           </Key>
-          <Property Name="IdEstado" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Estado" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoOrdenDiagnostico">
           <Key>
             <PropertyRef Name="IdEstado" />
           </Key>
-          <Property Name="IdEstado" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Estado" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoOrdenReparacion">
           <Key>
             <PropertyRef Name="IdEstado" />
           </Key>
-          <Property Name="IdEstado" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Estado" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
             <PropertyRef Name="IdFactura" />
           </Key>
-          <Property Name="IdFactura" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="IdSucursal" Nullable="false" Type="int" />
-          <Property Name="IdEmpelado" Nullable="false" Type="int" />
-          <Property Name="IdCliente" Nullable="false" Type="int" />
+          <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpelado" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="Anulada" Type="bit" />
           <Property Name="FechaCreacion" Type="datetime" />
-          <Property Name="PrecioBruto" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="Descuento" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="Iva" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="PrecioNeto" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="PrecioBruto" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Descuento" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Iva" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="PrecioNeto" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="FacturaDetalle">
           <Key>
             <PropertyRef Name="IdFacturaDetalle" />
           </Key>
-          <Property Name="IdFacturaDetalle" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="IdFactura" Nullable="false" Type="int" />
-          <Property Name="IdEquipo" Nullable="false" Type="int" />
-          <Property Name="IdInventario" Nullable="false" Type="int" />
+          <Property Name="IdFacturaDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" Nullable="false" />
+          <Property Name="IdEquipo" Type="int" Nullable="false" />
+          <Property Name="IdInventario" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
-          <Property Name="Precio" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="SubTotal" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="Precio" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="Inventario">
           <Key>
             <PropertyRef Name="IdInventario" />
           </Key>
-          <Property Name="IdInventario" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Descripcion" Nullable="false" MaxLength="500" Type="varchar" />
-          <Property Name="Cantidad" Nullable="false" Type="int" />
-          <Property Name="PrecioNeto" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="Iva" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="TotalUnitario" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="IdInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioNeto" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Iva" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="TotalUnitario" Type="decimal" Precision="4" Scale="2" />
           <Property Name="Fecha" Type="date" />
-          <Property Name="IdProveedor" Nullable="false" Type="int" />
-          <Property Name="IdCategoria" Nullable="false" Type="int" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MarcaEquipo">
           <Key>
             <PropertyRef Name="IdMarca" />
           </Key>
-          <Property Name="IdMarca" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Marca" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ModeloEquipo">
           <Key>
             <PropertyRef Name="IdModelo" />
           </Key>
-          <Property Name="IdModelo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Modelo" Nullable="false" MaxLength="50" Type="varchar" />
-          <Property Name="IdMarca" Nullable="false" Type="int" />
+          <Property Name="IdModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Municipio">
           <Key>
             <PropertyRef Name="IdMunicipio" />
           </Key>
-          <Property Name="IdMunicipio" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Municipio" Nullable="false" MaxLength="100" Type="varchar" />
-          <Property Name="IdDepartamento" Nullable="false" Type="int" />
+          <Property Name="IdMunicipio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrdenCompra">
           <Key>
             <PropertyRef Name="IdOrdenCompra" />
           </Key>
-          <Property Name="IdOrdenCompra" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="IdOrdenCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo" Type="int" />
-          <Property Name="Descripcion" MaxLength="150" Type="varchar" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="IdProveedor" Type="int" />
           <Property Name="FechaIngreso" Type="datetime" />
-          <Property Name="PrecioBruto" Precision="18" Scale="2" Type="decimal" />
-          <Property Name="SubTotal" Precision="18" Scale="2" Type="decimal" />
-          <Property Name="Iva" Precision="18" Scale="2" Type="decimal" />
-          <Property Name="Total" Precision="18" Scale="0" Type="decimal" />
+          <Property Name="PrecioBruto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Iva" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="FacturaProveedor" Type="int" />
         </EntityType>
         <EntityType Name="OrdenDiagnostico">
           <Key>
             <PropertyRef Name="IdOrdenDiagnostico" />
           </Key>
-          <Property Name="IdOrdenDiagnostico" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="IdOrdenDiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FechaEmision" Type="datetime" />
           <Property Name="FechaResolucion" Type="datetime" />
-          <Property Name="IdSucursal" Nullable="false" Type="int" />
-          <Property Name="IdEmpleado" Nullable="false" Type="int" />
-          <Property Name="IdCliente" Nullable="false" Type="int" />
-          <Property Name="Comentarios" MaxLength="200" Type="varchar" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
           <Property Name="CantidadEquipos" Type="int" />
-          <Property Name="PrecioBruto" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="Descuento" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="PrecioNeto" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="IdEstado" Nullable="false" Type="int" />
+          <Property Name="PrecioBruto" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Descuento" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="PrecioNeto" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
           <Property Name="Facturado" Type="bit" />
         </EntityType>
         <EntityType Name="OrdenDiagnosticoDetalle">
           <Key>
             <PropertyRef Name="IdOrdenDiagnosticoDetalle" />
           </Key>
-          <Property Name="IdOrdenDiagnosticoDetalle" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="IdEquipo" Nullable="false" Type="int" />
-          <Property Name="IdOrdenDiagnostico" Nullable="false" Type="int" />
-          <Property Name="IdInventario" Nullable="false" Type="int" />
-          <Property Name="Costo" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="IdOrdenDiagnosticoDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEquipo" Type="int" Nullable="false" />
+          <Property Name="IdOrdenDiagnostico" Type="int" Nullable="false" />
+          <Property Name="IdInventario" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="OrdenReparacion">
           <Key>
             <PropertyRef Name="IdOrdenReparacion" />
           </Key>
-          <Property Name="IdOrdenReparacion" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="IdOrdenReparacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FechaEmision" Type="datetime" />
           <Property Name="FechaResolucion" Type="datetime" />
-          <Property Name="IdSucursal" Nullable="false" Type="int" />
-          <Property Name="IdEmpleado" Nullable="false" Type="int" />
-          <Property Name="IdCliente" Nullable="false" Type="int" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="CantidadEquipos" Type="int" />
-          <Property Name="PrecioBruto" Precision="4" Scale="2" Type="numeric" />
-          <Property Name="Descuento" Precision="4" Scale="2" Type="numeric" />
-          <Property Name="PrecioNeto" Precision="4" Scale="2" Type="numeric" />
-          <Property Name="IdEstado" Nullable="false" Type="int" />
+          <Property Name="PrecioBruto" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Descuento" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="PrecioNeto" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
           <Property Name="Facturado" Type="bit" />
         </EntityType>
         <EntityType Name="OrdenReparacionDetalle">
           <Key>
             <PropertyRef Name="IdOrdenReparacionDetalle" />
           </Key>
-          <Property Name="IdOrdenReparacionDetalle" Nullable="false" Type="int" />
-          <Property Name="IdOrdenReparacion" Nullable="false" Type="int" />
-          <Property Name="IdEquipo" Nullable="false" Type="int" />
-          <Property Name="IdEmpleado" Nullable="false" Type="int" />
-          <Property Name="IdInventario" Nullable="false" Type="int" />
+          <Property Name="IdOrdenReparacionDetalle" Type="int" Nullable="false" />
+          <Property Name="IdOrdenReparacion" Type="int" Nullable="false" />
+          <Property Name="IdEquipo" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
+          <Property Name="IdInventario" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
-          <Property Name="Precio" Precision="4" Scale="2" Type="decimal" />
-          <Property Name="SubTotal" Precision="4" Scale="2" Type="decimal" />
+          <Property Name="Precio" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="IdProveedor" />
           </Key>
-          <Property Name="IdProveedor" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Nombre" MaxLength="150" Type="varchar" />
-          <Property Name="Email" MaxLength="100" Type="varchar" />
-          <Property Name="Telefono" MaxLength="9" Type="varchar" />
-          <Property Name="NombreContacto" MaxLength="100" Type="varchar" />
-          <Property Name="IdMunicipio" Nullable="false" Type="int" />
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" />
+          <Property Name="NombreContacto" Type="varchar" MaxLength="100" />
+          <Property Name="IdMunicipio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="IdRol" />
           </Key>
-          <Property Name="IdRol" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Rol" Nullable="false" MaxLength="80" Type="varchar" />
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="80" Nullable="false" />
         </EntityType>
         <EntityType Name="Sexo">
           <Key>
             <PropertyRef Name="IdSexo" />
           </Key>
-          <Property Name="IdSexo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Sexo" Nullable="false" MaxLength="10" Type="varchar" />
+          <Property Name="IdSexo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
             <PropertyRef Name="IdSucursal" />
           </Key>
-          <Property Name="IdSucursal" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Nombre" Nullable="false" MaxLength="80" Type="varchar" />
-          <Property Name="IdMunicipio" Nullable="false" Type="int" />
+          <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="IdMunicipio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoEquipo">
           <Key>
             <PropertyRef Name="IdTipo" />
           </Key>
-          <Property Name="IdTipo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Tipo" MaxLength="50" Type="varchar" />
+          <Property Name="IdTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
           <Property Name="IdInventario" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
           </Key>
-          <Property Name="IdUsuario" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Usuario" Nullable="false" MaxLength="100" Type="varchar" />
-          <Property Name="Contrasena" Nullable="false" MaxLength="2500" Type="varchar" />
-          <Property Name="Habilitado" Nullable="false" Type="bit" />
-          <Property Name="IdRol" Nullable="false" Type="int" />
-          <Property Name="IdEmpleado" Nullable="false" Type="int" />
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="2500" Nullable="false" />
+          <Property Name="Habilitado" Type="bit" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Citas_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="IdEquipo" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_EstadoOrdenDiagnostico">
+          <End Role="EstadoOrdenDiagnostico" Type="Self.EstadoOrdenDiagnostico" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoOrdenDiagnostico">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_EstadoOrdenReparacion">
+          <End Role="EstadoOrdenReparacion" Type="Self.EstadoOrdenReparacion" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoOrdenReparacion">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cliente_Municipio">
-          <End Type="Self.Municipio" Multiplicity="1" Role="Municipio" />
-          <End Type="Self.Cliente" Multiplicity="*" Role="Cliente" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipio">
               <PropertyRef Name="IdMunicipio" />
@@ -325,8 +386,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cliente_Sexo">
-          <End Type="Self.Sexo" Multiplicity="1" Role="Sexo" />
-          <End Type="Self.Cliente" Multiplicity="*" Role="Cliente" />
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sexo">
               <PropertyRef Name="IdSexo" />
@@ -337,8 +398,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Diagnostico_Equipo">
-          <End Type="Self.Equipo" Multiplicity="1" Role="Equipo" />
-          <End Type="Self.Diagnostico" Multiplicity="*" Role="Diagnostico" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipo">
               <PropertyRef Name="IdEquipo" />
@@ -349,8 +410,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Diagnostico_OrdenDiagnostico">
-          <End Type="Self.OrdenDiagnostico" Multiplicity="1" Role="OrdenDiagnostico" />
-          <End Type="Self.Diagnostico" Multiplicity="*" Role="Diagnostico" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="1" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenDiagnostico">
               <PropertyRef Name="IdOrdenDiagnostico" />
@@ -361,8 +422,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DiagnosticoCotizacion_Diagnostico">
-          <End Type="Self.Diagnostico" Multiplicity="1" Role="Diagnostico" />
-          <End Type="Self.DiagnosticoCotizacion" Multiplicity="*" Role="DiagnosticoCotizacion" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="1" />
+          <End Role="DiagnosticoCotizacion" Type="Self.DiagnosticoCotizacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Diagnostico">
               <PropertyRef Name="IdDiagnostico" />
@@ -373,8 +434,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DiagnosticoCotizacion_Inventario">
-          <End Type="Self.Inventario" Multiplicity="1" Role="Inventario" />
-          <End Type="Self.DiagnosticoCotizacion" Multiplicity="*" Role="DiagnosticoCotizacion" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="DiagnosticoCotizacion" Type="Self.DiagnosticoCotizacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventario">
               <PropertyRef Name="IdInventario" />
@@ -385,8 +446,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Diagnosticos_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.Diagnostico" Multiplicity="0..1" Role="Diagnostico" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -397,8 +458,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Cargo">
-          <End Type="Self.Cargo" Multiplicity="1" Role="Cargo" />
-          <End Type="Self.Empleado" Multiplicity="*" Role="Empleado" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cargo">
               <PropertyRef Name="IdCargo" />
@@ -409,8 +470,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_EstadoEmpleado">
-          <End Type="Self.EstadoEmpleado" Multiplicity="1" Role="EstadoEmpleado" />
-          <End Type="Self.Empleado" Multiplicity="*" Role="Empleado" />
+          <End Role="EstadoEmpleado" Type="Self.EstadoEmpleado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoEmpleado">
               <PropertyRef Name="IdEstado" />
@@ -421,8 +482,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Municipio">
-          <End Type="Self.Municipio" Multiplicity="1" Role="Municipio" />
-          <End Type="Self.Empleado" Multiplicity="*" Role="Empleado" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipio">
               <PropertyRef Name="IdMunicipio" />
@@ -433,8 +494,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Sexo">
-          <End Type="Self.Sexo" Multiplicity="1" Role="Sexo" />
-          <End Type="Self.Empleado" Multiplicity="*" Role="Empleado" />
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sexo">
               <PropertyRef Name="IdSexo" />
@@ -445,8 +506,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Sucursal">
-          <End Type="Self.Sucursal" Multiplicity="1" Role="Sucursal" />
-          <End Type="Self.Empleado" Multiplicity="*" Role="Empleado" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="IdSucursal" />
@@ -457,8 +518,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Equipo_Cliente">
-          <End Type="Self.Cliente" Multiplicity="1" Role="Cliente" />
-          <End Type="Self.Equipo" Multiplicity="*" Role="Equipo" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="IdCliente" />
@@ -469,8 +530,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Equipo_MarcaEquipo">
-          <End Type="Self.MarcaEquipo" Multiplicity="1" Role="MarcaEquipo" />
-          <End Type="Self.Equipo" Multiplicity="*" Role="Equipo" />
+          <End Role="MarcaEquipo" Type="Self.MarcaEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MarcaEquipo">
               <PropertyRef Name="IdMarca" />
@@ -481,8 +542,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Equipo_ModeloEquipo">
-          <End Type="Self.ModeloEquipo" Multiplicity="1" Role="ModeloEquipo" />
-          <End Type="Self.Equipo" Multiplicity="*" Role="Equipo" />
+          <End Role="ModeloEquipo" Type="Self.ModeloEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ModeloEquipo">
               <PropertyRef Name="IdModelo" />
@@ -493,8 +554,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Equipo_TipoEquipo">
-          <End Type="Self.TipoEquipo" Multiplicity="1" Role="TipoEquipo" />
-          <End Type="Self.Equipo" Multiplicity="*" Role="Equipo" />
+          <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoEquipo">
               <PropertyRef Name="IdTipo" />
@@ -505,8 +566,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Factura_Cliente">
-          <End Type="Self.Cliente" Multiplicity="1" Role="Cliente" />
-          <End Type="Self.Factura" Multiplicity="0..1" Role="Factura" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="IdCliente" />
@@ -517,8 +578,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Factura_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.Factura" Multiplicity="*" Role="Factura" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -529,8 +590,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Factura_Sucursal">
-          <End Type="Self.Sucursal" Multiplicity="1" Role="Sucursal" />
-          <End Type="Self.Factura" Multiplicity="*" Role="Factura" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="IdSucursal" />
@@ -541,8 +602,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FacturaDetalle_Equipo">
-          <End Type="Self.Equipo" Multiplicity="1" Role="Equipo" />
-          <End Type="Self.FacturaDetalle" Multiplicity="*" Role="FacturaDetalle" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipo">
               <PropertyRef Name="IdEquipo" />
@@ -553,8 +614,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FacturaDetalle_Factura">
-          <End Type="Self.Factura" Multiplicity="1" Role="Factura" />
-          <End Type="Self.FacturaDetalle" Multiplicity="*" Role="FacturaDetalle" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Factura">
               <PropertyRef Name="IdFactura" />
@@ -565,8 +626,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FacturaDetalle_Inventario">
-          <End Type="Self.Inventario" Multiplicity="1" Role="Inventario" />
-          <End Type="Self.FacturaDetalle" Multiplicity="*" Role="FacturaDetalle" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventario">
               <PropertyRef Name="IdInventario" />
@@ -577,8 +638,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inventario_CategoriaInventario">
-          <End Type="Self.CategoriaInventario" Multiplicity="1" Role="CategoriaInventario" />
-          <End Type="Self.Inventario" Multiplicity="*" Role="Inventario" />
+          <End Role="CategoriaInventario" Type="Self.CategoriaInventario" Multiplicity="1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CategoriaInventario">
               <PropertyRef Name="IdCategoriaInventario" />
@@ -589,8 +650,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inventario_Proveedor">
-          <End Type="Self.Proveedor" Multiplicity="1" Role="Proveedor" />
-          <End Type="Self.Inventario" Multiplicity="*" Role="Inventario" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
               <PropertyRef Name="IdProveedor" />
@@ -601,8 +662,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ModeloEquipo_MarcaEquipo">
-          <End Type="Self.MarcaEquipo" Multiplicity="1" Role="MarcaEquipo" />
-          <End Type="Self.ModeloEquipo" Multiplicity="*" Role="ModeloEquipo" />
+          <End Role="MarcaEquipo" Type="Self.MarcaEquipo" Multiplicity="1" />
+          <End Role="ModeloEquipo" Type="Self.ModeloEquipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MarcaEquipo">
               <PropertyRef Name="IdMarca" />
@@ -613,8 +674,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Municipio_Departamento">
-          <End Type="Self.Departamento" Multiplicity="1" Role="Departamento" />
-          <End Type="Self.Municipio" Multiplicity="*" Role="Municipio" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamento">
               <PropertyRef Name="IdDepartamento" />
@@ -625,8 +686,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_Proveedor">
-          <End Type="Self.Proveedor" Multiplicity="0..1" Role="Proveedor" />
-          <End Type="Self.OrdenCompra" Multiplicity="*" Role="OrdenCompra" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
               <PropertyRef Name="IdProveedor" />
@@ -637,8 +698,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ordendiagnostico_Cliente">
-          <End Type="Self.Cliente" Multiplicity="1" Role="Cliente" />
-          <End Type="Self.OrdenDiagnostico" Multiplicity="*" Role="OrdenDiagnostico" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="IdCliente" />
@@ -649,8 +710,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ordendiagnostico_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.OrdenDiagnostico" Multiplicity="*" Role="OrdenDiagnostico" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -661,8 +722,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenDiagnostico_EstadoOrdenDiagnostico">
-          <End Type="Self.EstadoOrdenDiagnostico" Multiplicity="1" Role="EstadoOrdenDiagnostico" />
-          <End Type="Self.OrdenDiagnostico" Multiplicity="*" Role="OrdenDiagnostico" />
+          <End Role="EstadoOrdenDiagnostico" Type="Self.EstadoOrdenDiagnostico" Multiplicity="1" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoOrdenDiagnostico">
               <PropertyRef Name="IdEstado" />
@@ -673,8 +734,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ordendiagnostico_Sucursal">
-          <End Type="Self.Sucursal" Multiplicity="1" Role="Sucursal" />
-          <End Type="Self.OrdenDiagnostico" Multiplicity="*" Role="OrdenDiagnostico" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="IdSucursal" />
@@ -685,8 +746,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenDiagnosticoDetalle_Equipo">
-          <End Type="Self.Equipo" Multiplicity="1" Role="Equipo" />
-          <End Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" Role="OrdenDiagnosticoDetalle" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="OrdenDiagnosticoDetalle" Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipo">
               <PropertyRef Name="IdEquipo" />
@@ -697,8 +758,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenDiagnosticoDetalle_Inventario">
-          <End Type="Self.Inventario" Multiplicity="1" Role="Inventario" />
-          <End Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" Role="OrdenDiagnosticoDetalle" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="OrdenDiagnosticoDetalle" Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventario">
               <PropertyRef Name="IdInventario" />
@@ -709,8 +770,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenDiagnosticoDetalle_OrdenDiagnostico">
-          <End Type="Self.OrdenDiagnostico" Multiplicity="1" Role="OrdenDiagnostico" />
-          <End Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" Role="OrdenDiagnosticoDetalle" />
+          <End Role="OrdenDiagnostico" Type="Self.OrdenDiagnostico" Multiplicity="1" />
+          <End Role="OrdenDiagnosticoDetalle" Type="Self.OrdenDiagnosticoDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenDiagnostico">
               <PropertyRef Name="IdOrdenDiagnostico" />
@@ -721,8 +782,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacion_Cliente">
-          <End Type="Self.Cliente" Multiplicity="1" Role="Cliente" />
-          <End Type="Self.OrdenReparacion" Multiplicity="*" Role="OrdenReparacion" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="OrdenReparacion" Type="Self.OrdenReparacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="IdCliente" />
@@ -733,8 +794,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacion_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.OrdenReparacion" Multiplicity="*" Role="OrdenReparacion" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="OrdenReparacion" Type="Self.OrdenReparacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -745,8 +806,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacion_EstadoOrdenReparacion">
-          <End Type="Self.EstadoOrdenReparacion" Multiplicity="1" Role="EstadoOrdenReparacion" />
-          <End Type="Self.OrdenReparacion" Multiplicity="*" Role="OrdenReparacion" />
+          <End Role="EstadoOrdenReparacion" Type="Self.EstadoOrdenReparacion" Multiplicity="1" />
+          <End Role="OrdenReparacion" Type="Self.OrdenReparacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoOrdenReparacion">
               <PropertyRef Name="IdEstado" />
@@ -757,8 +818,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacion_Sucursal">
-          <End Type="Self.Sucursal" Multiplicity="1" Role="Sucursal" />
-          <End Type="Self.OrdenReparacion" Multiplicity="*" Role="OrdenReparacion" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="OrdenReparacion" Type="Self.OrdenReparacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="IdSucursal" />
@@ -769,8 +830,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacionDetalle_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.OrdenReparacionDetalle" Multiplicity="*" Role="OrdenReparacionDetalle" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="OrdenReparacionDetalle" Type="Self.OrdenReparacionDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -781,8 +842,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacionDetalle_Equipo">
-          <End Type="Self.Equipo" Multiplicity="1" Role="Equipo" />
-          <End Type="Self.OrdenReparacionDetalle" Multiplicity="*" Role="OrdenReparacionDetalle" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="OrdenReparacionDetalle" Type="Self.OrdenReparacionDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipo">
               <PropertyRef Name="IdEquipo" />
@@ -793,8 +854,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacionDetalle_Inventario">
-          <End Type="Self.Inventario" Multiplicity="1" Role="Inventario" />
-          <End Type="Self.OrdenReparacionDetalle" Multiplicity="*" Role="OrdenReparacionDetalle" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="OrdenReparacionDetalle" Type="Self.OrdenReparacionDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventario">
               <PropertyRef Name="IdInventario" />
@@ -805,8 +866,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenReparacionDetalle_OrdenReparacion">
-          <End Type="Self.OrdenReparacion" Multiplicity="1" Role="OrdenReparacion" />
-          <End Type="Self.OrdenReparacionDetalle" Multiplicity="*" Role="OrdenReparacionDetalle" />
+          <End Role="OrdenReparacion" Type="Self.OrdenReparacion" Multiplicity="1" />
+          <End Role="OrdenReparacionDetalle" Type="Self.OrdenReparacionDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenReparacion">
               <PropertyRef Name="IdOrdenReparacion" />
@@ -817,8 +878,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Municipio">
-          <End Type="Self.Municipio" Multiplicity="1" Role="Municipio" />
-          <End Type="Self.Proveedor" Multiplicity="*" Role="Proveedor" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipio">
               <PropertyRef Name="IdMunicipio" />
@@ -829,8 +890,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sucursal_Municipio">
-          <End Type="Self.Municipio" Multiplicity="1" Role="Municipio" />
-          <End Type="Self.Sucursal" Multiplicity="*" Role="Sucursal" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipio">
               <PropertyRef Name="IdMunicipio" />
@@ -841,8 +902,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TipoEquipo_Inventario">
-          <End Type="Self.Inventario" Multiplicity="0..1" Role="Inventario" />
-          <End Type="Self.TipoEquipo" Multiplicity="*" Role="TipoEquipo" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="0..1" />
+          <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventario">
               <PropertyRef Name="IdInventario" />
@@ -853,8 +914,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Empleado">
-          <End Type="Self.Empleado" Multiplicity="1" Role="Empleado" />
-          <End Type="Self.Usuario" Multiplicity="*" Role="Usuario" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -865,8 +926,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Rol">
-          <End Type="Self.Rol" Multiplicity="1" Role="Rol" />
-          <End Type="Self.Usuario" Multiplicity="*" Role="Usuario" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="IdRol" />
@@ -879,6 +940,7 @@
         <EntityContainer Name="casa_reparadoraModelStoreContainer">
           <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoriaInventario" EntityType="Self.CategoriaInventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" Schema="dbo" store:Type="Tables" />
@@ -905,193 +967,209 @@
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoEquipo" EntityType="Self.TipoEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Citas_Cliente" Association="Self.FK_Citas_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_Equipo" Association="Self.FK_Citas_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_EstadoOrdenDiagnostico" Association="Self.FK_Citas_EstadoOrdenDiagnostico">
+            <End Role="EstadoOrdenDiagnostico" EntitySet="EstadoOrdenDiagnostico" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_EstadoOrdenReparacion" Association="Self.FK_Citas_EstadoOrdenReparacion">
+            <End Role="EstadoOrdenReparacion" EntitySet="EstadoOrdenReparacion" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cliente_Municipio" Association="Self.FK_Cliente_Municipio">
-            <End EntitySet="Municipio" Role="Municipio" />
-            <End EntitySet="Cliente" Role="Cliente" />
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Sexo" Association="Self.FK_Cliente_Sexo">
-            <End EntitySet="Sexo" Role="Sexo" />
-            <End EntitySet="Cliente" Role="Cliente" />
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Diagnostico_Equipo" Association="Self.FK_Diagnostico_Equipo">
-            <End EntitySet="Equipo" Role="Equipo" />
-            <End EntitySet="Diagnostico" Role="Diagnostico" />
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_Diagnostico_OrdenDiagnostico" Association="Self.FK_Diagnostico_OrdenDiagnostico">
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
-            <End EntitySet="Diagnostico" Role="Diagnostico" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_DiagnosticoCotizacion_Diagnostico" Association="Self.FK_DiagnosticoCotizacion_Diagnostico">
-            <End EntitySet="Diagnostico" Role="Diagnostico" />
-            <End EntitySet="DiagnosticoCotizacion" Role="DiagnosticoCotizacion" />
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+            <End Role="DiagnosticoCotizacion" EntitySet="DiagnosticoCotizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_DiagnosticoCotizacion_Inventario" Association="Self.FK_DiagnosticoCotizacion_Inventario">
-            <End EntitySet="Inventario" Role="Inventario" />
-            <End EntitySet="DiagnosticoCotizacion" Role="DiagnosticoCotizacion" />
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="DiagnosticoCotizacion" EntitySet="DiagnosticoCotizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Diagnosticos_Empleado" Association="Self.FK_Diagnosticos_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="Diagnostico" Role="Diagnostico" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Cargo" Association="Self.FK_Empleado_Cargo">
-            <End EntitySet="Cargo" Role="Cargo" />
-            <End EntitySet="Empleado" Role="Empleado" />
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_EstadoEmpleado" Association="Self.FK_Empleado_EstadoEmpleado">
-            <End EntitySet="EstadoEmpleado" Role="EstadoEmpleado" />
-            <End EntitySet="Empleado" Role="Empleado" />
+            <End Role="EstadoEmpleado" EntitySet="EstadoEmpleado" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Municipio" Association="Self.FK_Empleado_Municipio">
-            <End EntitySet="Municipio" Role="Municipio" />
-            <End EntitySet="Empleado" Role="Empleado" />
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Sexo" Association="Self.FK_Empleado_Sexo">
-            <End EntitySet="Sexo" Role="Sexo" />
-            <End EntitySet="Empleado" Role="Empleado" />
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Sucursal" Association="Self.FK_Empleado_Sucursal">
-            <End EntitySet="Sucursal" Role="Sucursal" />
-            <End EntitySet="Empleado" Role="Empleado" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_Equipo_Cliente" Association="Self.FK_Equipo_Cliente">
-            <End EntitySet="Cliente" Role="Cliente" />
-            <End EntitySet="Equipo" Role="Equipo" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Equipo" EntitySet="Equipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Equipo_MarcaEquipo" Association="Self.FK_Equipo_MarcaEquipo">
-            <End EntitySet="MarcaEquipo" Role="MarcaEquipo" />
-            <End EntitySet="Equipo" Role="Equipo" />
+            <End Role="MarcaEquipo" EntitySet="MarcaEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Equipo_ModeloEquipo" Association="Self.FK_Equipo_ModeloEquipo">
-            <End EntitySet="ModeloEquipo" Role="ModeloEquipo" />
-            <End EntitySet="Equipo" Role="Equipo" />
+            <End Role="ModeloEquipo" EntitySet="ModeloEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Equipo_TipoEquipo" Association="Self.FK_Equipo_TipoEquipo">
-            <End EntitySet="TipoEquipo" Role="TipoEquipo" />
-            <End EntitySet="Equipo" Role="Equipo" />
+            <End Role="TipoEquipo" EntitySet="TipoEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Factura_Cliente" Association="Self.FK_Factura_Cliente">
-            <End EntitySet="Cliente" Role="Cliente" />
-            <End EntitySet="Factura" Role="Factura" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_Factura_Empleado" Association="Self.FK_Factura_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="Factura" Role="Factura" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_Factura_Sucursal" Association="Self.FK_Factura_Sucursal">
-            <End EntitySet="Sucursal" Role="Sucursal" />
-            <End EntitySet="Factura" Role="Factura" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_FacturaDetalle_Equipo" Association="Self.FK_FacturaDetalle_Equipo">
-            <End EntitySet="Equipo" Role="Equipo" />
-            <End EntitySet="FacturaDetalle" Role="FacturaDetalle" />
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_FacturaDetalle_Factura" Association="Self.FK_FacturaDetalle_Factura">
-            <End EntitySet="Factura" Role="Factura" />
-            <End EntitySet="FacturaDetalle" Role="FacturaDetalle" />
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_FacturaDetalle_Inventario" Association="Self.FK_FacturaDetalle_Inventario">
-            <End EntitySet="Inventario" Role="Inventario" />
-            <End EntitySet="FacturaDetalle" Role="FacturaDetalle" />
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventario_CategoriaInventario" Association="Self.FK_Inventario_CategoriaInventario">
-            <End EntitySet="CategoriaInventario" Role="CategoriaInventario" />
-            <End EntitySet="Inventario" Role="Inventario" />
+            <End Role="CategoriaInventario" EntitySet="CategoriaInventario" />
+            <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventario_Proveedor" Association="Self.FK_Inventario_Proveedor">
-            <End EntitySet="Proveedor" Role="Proveedor" />
-            <End EntitySet="Inventario" Role="Inventario" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
           <AssociationSet Name="FK_ModeloEquipo_MarcaEquipo" Association="Self.FK_ModeloEquipo_MarcaEquipo">
-            <End EntitySet="MarcaEquipo" Role="MarcaEquipo" />
-            <End EntitySet="ModeloEquipo" Role="ModeloEquipo" />
+            <End Role="MarcaEquipo" EntitySet="MarcaEquipo" />
+            <End Role="ModeloEquipo" EntitySet="ModeloEquipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Municipio_Departamento" Association="Self.FK_Municipio_Departamento">
-            <End EntitySet="Departamento" Role="Departamento" />
-            <End EntitySet="Municipio" Role="Municipio" />
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Municipio" EntitySet="Municipio" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenCompra_Proveedor" Association="Self.FK_OrdenCompra_Proveedor">
-            <End EntitySet="Proveedor" Role="Proveedor" />
-            <End EntitySet="OrdenCompra" Role="OrdenCompra" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
           </AssociationSet>
           <AssociationSet Name="FK_Ordendiagnostico_Cliente" Association="Self.FK_Ordendiagnostico_Cliente">
-            <End EntitySet="Cliente" Role="Cliente" />
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_Ordendiagnostico_Empleado" Association="Self.FK_Ordendiagnostico_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenDiagnostico_EstadoOrdenDiagnostico" Association="Self.FK_OrdenDiagnostico_EstadoOrdenDiagnostico">
-            <End EntitySet="EstadoOrdenDiagnostico" Role="EstadoOrdenDiagnostico" />
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
+            <End Role="EstadoOrdenDiagnostico" EntitySet="EstadoOrdenDiagnostico" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_Ordendiagnostico_Sucursal" Association="Self.FK_Ordendiagnostico_Sucursal">
-            <End EntitySet="Sucursal" Role="Sucursal" />
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenDiagnosticoDetalle_Equipo" Association="Self.FK_OrdenDiagnosticoDetalle_Equipo">
-            <End EntitySet="Equipo" Role="Equipo" />
-            <End EntitySet="OrdenDiagnosticoDetalle" Role="OrdenDiagnosticoDetalle" />
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="OrdenDiagnosticoDetalle" EntitySet="OrdenDiagnosticoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenDiagnosticoDetalle_Inventario" Association="Self.FK_OrdenDiagnosticoDetalle_Inventario">
-            <End EntitySet="Inventario" Role="Inventario" />
-            <End EntitySet="OrdenDiagnosticoDetalle" Role="OrdenDiagnosticoDetalle" />
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="OrdenDiagnosticoDetalle" EntitySet="OrdenDiagnosticoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenDiagnosticoDetalle_OrdenDiagnostico" Association="Self.FK_OrdenDiagnosticoDetalle_OrdenDiagnostico">
-            <End EntitySet="OrdenDiagnostico" Role="OrdenDiagnostico" />
-            <End EntitySet="OrdenDiagnosticoDetalle" Role="OrdenDiagnosticoDetalle" />
+            <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
+            <End Role="OrdenDiagnosticoDetalle" EntitySet="OrdenDiagnosticoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacion_Cliente" Association="Self.FK_OrdenReparacion_Cliente">
-            <End EntitySet="Cliente" Role="Cliente" />
-            <End EntitySet="OrdenReparacion" Role="OrdenReparacion" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="OrdenReparacion" EntitySet="OrdenReparacion" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacion_Empleado" Association="Self.FK_OrdenReparacion_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="OrdenReparacion" Role="OrdenReparacion" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="OrdenReparacion" EntitySet="OrdenReparacion" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacion_EstadoOrdenReparacion" Association="Self.FK_OrdenReparacion_EstadoOrdenReparacion">
-            <End EntitySet="EstadoOrdenReparacion" Role="EstadoOrdenReparacion" />
-            <End EntitySet="OrdenReparacion" Role="OrdenReparacion" />
+            <End Role="EstadoOrdenReparacion" EntitySet="EstadoOrdenReparacion" />
+            <End Role="OrdenReparacion" EntitySet="OrdenReparacion" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacion_Sucursal" Association="Self.FK_OrdenReparacion_Sucursal">
-            <End EntitySet="Sucursal" Role="Sucursal" />
-            <End EntitySet="OrdenReparacion" Role="OrdenReparacion" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="OrdenReparacion" EntitySet="OrdenReparacion" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacionDetalle_Empleado" Association="Self.FK_OrdenReparacionDetalle_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="OrdenReparacionDetalle" Role="OrdenReparacionDetalle" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="OrdenReparacionDetalle" EntitySet="OrdenReparacionDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacionDetalle_Equipo" Association="Self.FK_OrdenReparacionDetalle_Equipo">
-            <End EntitySet="Equipo" Role="Equipo" />
-            <End EntitySet="OrdenReparacionDetalle" Role="OrdenReparacionDetalle" />
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="OrdenReparacionDetalle" EntitySet="OrdenReparacionDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacionDetalle_Inventario" Association="Self.FK_OrdenReparacionDetalle_Inventario">
-            <End EntitySet="Inventario" Role="Inventario" />
-            <End EntitySet="OrdenReparacionDetalle" Role="OrdenReparacionDetalle" />
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="OrdenReparacionDetalle" EntitySet="OrdenReparacionDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenReparacionDetalle_OrdenReparacion" Association="Self.FK_OrdenReparacionDetalle_OrdenReparacion">
-            <End EntitySet="OrdenReparacion" Role="OrdenReparacion" />
-            <End EntitySet="OrdenReparacionDetalle" Role="OrdenReparacionDetalle" />
+            <End Role="OrdenReparacion" EntitySet="OrdenReparacion" />
+            <End Role="OrdenReparacionDetalle" EntitySet="OrdenReparacionDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Municipio" Association="Self.FK_Proveedor_Municipio">
-            <End EntitySet="Municipio" Role="Municipio" />
-            <End EntitySet="Proveedor" Role="Proveedor" />
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_Sucursal_Municipio" Association="Self.FK_Sucursal_Municipio">
-            <End EntitySet="Municipio" Role="Municipio" />
-            <End EntitySet="Sucursal" Role="Sucursal" />
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
           <AssociationSet Name="FK_TipoEquipo_Inventario" Association="Self.FK_TipoEquipo_Inventario">
-            <End EntitySet="Inventario" Role="Inventario" />
-            <End EntitySet="TipoEquipo" Role="TipoEquipo" />
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="TipoEquipo" EntitySet="TipoEquipo" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
-            <End EntitySet="Empleado" Role="Empleado" />
-            <End EntitySet="Usuario" Role="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
-            <End EntitySet="Rol" Role="Rol" />
-            <End EntitySet="Usuario" Role="Usuario" />
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1315,6 +1393,23 @@
             <End Role="OrdenDiagnostico" EntitySet="OrdenDiagnostico" />
             <End Role="OrdenDiagnosticoDetalle" EntitySet="OrdenDiagnosticoDetalle" />
           </AssociationSet>
+          <EntitySet Name="Citas" EntityType="casa_reparadoraModel.Citas" />
+          <AssociationSet Name="FK_Citas_Cliente" Association="casa_reparadoraModel.FK_Citas_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_Equipo" Association="casa_reparadoraModel.FK_Citas_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_EstadoOrdenDiagnostico" Association="casa_reparadoraModel.FK_Citas_EstadoOrdenDiagnostico">
+            <End Role="EstadoOrdenDiagnostico" EntitySet="EstadoOrdenDiagnostico" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_EstadoOrdenReparacion" Association="casa_reparadoraModel.FK_Citas_EstadoOrdenReparacion">
+            <End Role="EstadoOrdenReparacion" EntitySet="EstadoOrdenReparacion" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cargo">
           <Key>
@@ -1357,6 +1452,9 @@
           <NavigationProperty Name="Factura" Relationship="casa_reparadoraModel.FK_Factura_Cliente" FromRole="Cliente" ToRole="Factura" />
           <NavigationProperty Name="OrdenDiagnostico" Relationship="casa_reparadoraModel.FK_Ordendiagnostico_Cliente" FromRole="Cliente" ToRole="OrdenDiagnostico" />
           <NavigationProperty Name="OrdenReparacion" Relationship="casa_reparadoraModel.FK_OrdenReparacion_Cliente" FromRole="Cliente" ToRole="OrdenReparacion" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Citas" Relationship="casa_reparadoraModel.FK_Citas_Cliente" FromRole="Cliente" ToRole="Citas" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -1445,6 +1543,7 @@
           <NavigationProperty Name="FacturaDetalle" Relationship="casa_reparadoraModel.FK_FacturaDetalle_Equipo" FromRole="Equipo" ToRole="FacturaDetalle" />
           <NavigationProperty Name="OrdenReparacionDetalle" Relationship="casa_reparadoraModel.FK_OrdenReparacionDetalle_Equipo" FromRole="Equipo" ToRole="OrdenReparacionDetalle" />
           <NavigationProperty Name="OrdenDiagnosticoDetalle" Relationship="casa_reparadoraModel.FK_OrdenDiagnosticoDetalle_Equipo" FromRole="Equipo" ToRole="OrdenDiagnosticoDetalle" />
+          <NavigationProperty Name="Citas" Relationship="casa_reparadoraModel.FK_Citas_Equipo" FromRole="Equipo" ToRole="Citas" />
         </EntityType>
         <EntityType Name="EstadoEmpleado">
           <Key>
@@ -1461,6 +1560,7 @@
           <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrdenDiagnostico" Relationship="casa_reparadoraModel.FK_OrdenDiagnostico_EstadoOrdenDiagnostico" FromRole="EstadoOrdenDiagnostico" ToRole="OrdenDiagnostico" />
+          <NavigationProperty Name="Citas" Relationship="casa_reparadoraModel.FK_Citas_EstadoOrdenDiagnostico" FromRole="EstadoOrdenDiagnostico" ToRole="Citas" />
         </EntityType>
         <EntityType Name="EstadoOrdenReparacion">
           <Key>
@@ -1469,6 +1569,7 @@
           <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrdenReparacion" Relationship="casa_reparadoraModel.FK_OrdenReparacion_EstadoOrdenReparacion" FromRole="EstadoOrdenReparacion" ToRole="OrdenReparacion" />
+          <NavigationProperty Name="Citas" Relationship="casa_reparadoraModel.FK_Citas_EstadoOrdenReparacion" FromRole="EstadoOrdenReparacion" ToRole="Citas" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
@@ -2281,6 +2382,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="Id_Citas" />
+          </Key>
+          <Property Name="Id_Citas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdEquipo" Type="Int32" />
+          <Property Name="IdEstado" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCita" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="casa_reparadoraModel.FK_Citas_Cliente" FromRole="Citas" ToRole="Cliente" />
+          <NavigationProperty Name="Equipo" Relationship="casa_reparadoraModel.FK_Citas_Equipo" FromRole="Citas" ToRole="Equipo" />
+          <NavigationProperty Name="EstadoOrdenDiagnostico" Relationship="casa_reparadoraModel.FK_Citas_EstadoOrdenDiagnostico" FromRole="Citas" ToRole="EstadoOrdenDiagnostico" />
+          <NavigationProperty Name="EstadoOrdenReparacion" Relationship="casa_reparadoraModel.FK_Citas_EstadoOrdenReparacion" FromRole="Citas" ToRole="EstadoOrdenReparacion" />
+        </EntityType>
+        <Association Name="FK_Citas_Cliente">
+          <End Type="casa_reparadoraModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="casa_reparadoraModel.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_Equipo">
+          <End Type="casa_reparadoraModel.Equipo" Role="Equipo" Multiplicity="0..1" />
+          <End Type="casa_reparadoraModel.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="IdEquipo" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_EstadoOrdenDiagnostico">
+          <End Type="casa_reparadoraModel.EstadoOrdenDiagnostico" Role="EstadoOrdenDiagnostico" Multiplicity="0..1" />
+          <End Type="casa_reparadoraModel.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoOrdenDiagnostico">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_EstadoOrdenReparacion">
+          <End Type="casa_reparadoraModel.EstadoOrdenReparacion" Role="EstadoOrdenReparacion" Multiplicity="0..1" />
+          <End Type="casa_reparadoraModel.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoOrdenReparacion">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2308,6 +2472,8 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="casa_reparadoraModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
                 <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
@@ -2619,6 +2785,18 @@
                 <ScalarProperty Name="IdOrdenDiagnostico" ColumnName="IdOrdenDiagnostico" />
                 <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
                 <ScalarProperty Name="IdOrdenDiagnosticoDetalle" ColumnName="IdOrdenDiagnosticoDetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="casa_reparadoraModel.Citas">
+              <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="FechaCita" ColumnName="FechaCita" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Id_Citas" ColumnName="Id_Citas" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

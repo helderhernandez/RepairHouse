@@ -131,6 +131,7 @@
     <Compile Include="Cons.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CategoriaInventariosController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
@@ -174,6 +175,9 @@
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriaInventario.cs">
+      <DependentUpon>BDCasaModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Citas.cs">
       <DependentUpon>BDCasaModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
@@ -277,12 +281,9 @@
     <Content Include="img\cas2.jpg" />
     <Content Include="img\cas3.jpg" />
     <Content Include="img\Cas4.jpg" />
-    <Content Include="img\Diagnostico.jpg" />
-    <Content Include="img\fondo 4.jpg" />
-    <Content Include="img\Logo.png" />
-    <Content Include="img\Mantenimiento.jpg" />
-    <Content Include="img\reparacion.png" />
-    <Content Include="img\reparacion2.jpg" />
+    <Content Include="img\F1.jpg" />
+    <Content Include="img\F2.jpg" />
+    <Content Include="img\F3.jpg" />
     <Content Include="Models\BDCasaModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BDCasaModel1.Context.cs</LastGenOutput>
@@ -519,6 +520,11 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
