@@ -38,7 +38,7 @@ namespace RepairHouse.Controllers
                 .Where(x => x.Usuario1 == usuario && x.Contrasena == contrasena && x.Habilitado == true)
                 .Include(x => x.Rol).Include(x => x.Empleado).FirstOrDefault();
 
-            if(result != null)
+            if (result != null)
             {
                 UserCurrentSessionDto userCurrent = new UserCurrentSessionDto
                 {
@@ -48,7 +48,8 @@ namespace RepairHouse.Controllers
                     SucursalEmpleado = result.Empleado.Sucursal.Nombre,
                     IdUsuario = result.IdUsuario,
                     NombreUsuario = result.Usuario1,
-                    RolUsuario = result.Rol.Rol1
+                    RolUsuario = result.Rol.Rol1,
+                    MostrarBienvenida = true
                 };
 
                 Session[Cons.USER_CURRENT_SESSION] = userCurrent;

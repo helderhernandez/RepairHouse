@@ -1,75 +1,74 @@
 ﻿@{
     ViewBag.Title = "Inicio";
+    var CURRENT_USER = (RepairHouse.Dtos.UserCurrentSessionDto)Session[Cons.USER_CURRENT_SESSION];
 }
 
-<div class="alert alert-dark">
-    @*<h1>CASA REPARADORA</h1>*@
-    <h1 style="font-family: 'Copperplate Gothic'" class="text-center"> <b>  CASA REPARADORA </b>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="~/img/Logo.png" class="rounded-sm" alt="Cinque Terre" width="100" height="100" /> </h1>
-    
-    @*<p class="lead"> </p>*@
-</div>
-
-@*<head>
-    <
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-   
-    <style>
-        /* Make the image fully responsive */
-        .carousel-inner img {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>*@
-
-
-@*<body>*@
-        <div id="demo" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/img/cas1.jpg" alt="Diagnostico" width="1100" height="500">
-                <div class="carousel-caption">
+<!-- para mostrar toast de bienvenida -->
+@if (CURRENT_USER != null)
+{
+    <div aria-live="polite" aria-atomic="true" style="position: absolute; top: 60px; right: 5px; z-index:1">
+        <div>
+            <div class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+                <div class="toast-header">
+                    <strong class="mr-auto">Bienvenido a Casa Reparadora</strong>
+                    <small class="text-muted ml-3">@String.Format("{0:H:mm:ss}", @DateTime.Now)</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img src="~/img/cas2.jpg" alt="Mantenimiento" width="1100" height="500">
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="~/img/cas3.jpg" alt="Reparacion" width="1100" height="500">
-                <div class="carousel-caption">
+                <div class="toast-body">
+                    @CURRENT_USER.NombreEmpleado
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
     </div>
-@*</body>*@
+}
+<!-- para mostrar toast de bienvenida -->
+
+<div class="alert alert-dark">
+    <h1 style="font-family: 'Copperplate Gothic'" class="text-center"> <b>  CASA REPARADORA </b>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="~/img/Logo.png" class="rounded-sm" alt="Cinque Terre" width="100" height="100" /> </h1>
+</div>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/cas1.jpg" alt="Diagnostico" width="1100" height="500">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/cas2.jpg" alt="Mantenimiento" width="1100" height="500">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/cas3.jpg" alt="Reparacion" width="1100" height="500">
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
 
 <div class="row">
     <div class="col-md-6">
         <br />
         <h2>Quienes somos: </h2>
         <p>
-            Somos una empresa dedicada a la reparacion de computadoras, laptop, tablets, brindamos mantenimiento preventimos y contamos con una amplia gama 
+            Somos una empresa dedicada a la reparacion de computadoras, laptop, tablets, brindamos mantenimiento preventimos y contamos con una amplia gama
             de repuestos de calidad.
         </p>
-     </div>
+    </div>
 
 
     <div class="col-md-6">
@@ -77,6 +76,20 @@
         <a href="https://www.instagram.com/casareparadorasv/?hl=es-la" class="fa fa-instagram"></a> <br />
         <a href="https://www.facebook.com/Casa-Reparadora-SV-107129997684077/?view_public_for=107129997684077" class="fa fa-facebook"></a><br />
         <a href="https://twitter.com/ReparadoraSv" class="fa fa-twitter"></a> <br />
-        <a class="fa fa-whatsapp"></a> 70828205 o a traves de nuestro Whatsapp o correo electronico: <a href="casareaparadorassv@gmail.com"></a>casareaparadorassv@gmail.com <br />       
-    </div>    
+        <a class="fa fa-whatsapp"></a> 70828205 o a traves de nuestro Whatsapp o correo electronico: <a href="casareaparadorassv@gmail.com"></a>casareaparadorassv@gmail.com <br />
+    </div>
 </div>
+
+@section scripts{
+    <!-- para mostrar toast de bienvenida -->
+    @if (CURRENT_USER != null && CURRENT_USER.MostrarBienvenida)
+    {
+        <script>
+            $(".toast").toast('dispose');
+            $(".toast").toast('show');
+        </script>
+
+        CURRENT_USER.MostrarBienvenida = false;
+    }
+    <!-- para mostrar toast de bienvenida -->
+}

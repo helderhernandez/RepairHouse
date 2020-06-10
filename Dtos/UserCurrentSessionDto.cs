@@ -18,6 +18,8 @@ namespace RepairHouse.Dtos
         public int IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
 
-        public string RolUsuario { get; set; }        
+        public string RolUsuario { get; set; }
+
+        public bool MostrarBienvenida { get; set; }
     }
 }
