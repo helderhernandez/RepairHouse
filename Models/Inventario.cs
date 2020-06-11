@@ -11,7 +11,8 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Inventario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,6 +31,9 @@ namespace RepairHouse.Models
         public Nullable<decimal> PrecioNeto { get; set; }
         public Nullable<decimal> Iva { get; set; }
         public Nullable<decimal> TotalUnitario { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Fecha { get; set; }
         public int IdProveedor { get; set; }
         public int IdCategoria { get; set; }

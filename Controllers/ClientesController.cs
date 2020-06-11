@@ -7,8 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
-using RepairHouse.Dtos;
 using RepairHouse.Models;
 
 namespace RepairHouse.Controllers
@@ -39,6 +37,35 @@ namespace RepairHouse.Controllers
             return View(cliente);
         }
 
+        // GET: Clientes/Registrarse
+        public ActionResult Registrarse()
+        {
+            ViewBag.IdMunicipio = new SelectList(db.Municipio, "IdMunicipio", "Municipio1");
+            ViewBag.IdSexo = new SelectList(db.Sexo, "IdSexo", "Sexo1");
+            ViewBag.IdCliente = new SelectList(db.Factura, "IdFactura", "IdFactura");
+            return View();
+        }
+
+        // POST: Clientes/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registrarse([Bind(Include = "IdCliente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,DeCasada,IdSexo,Email,DUI,NIT,Telefono,IdMunicipio,Domicilio,Usuario,Password")] Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Cliente.Add(cliente);
+                db.SaveChanges();
+                return RedirectToAction("Cliente", "Login");
+            }
+
+            ViewBag.IdMunicipio = new SelectList(db.Municipio, "IdMunicipio", "Municipio1", cliente.IdMunicipio);
+            ViewBag.IdSexo = new SelectList(db.Sexo, "IdSexo", "Sexo1", cliente.IdSexo);
+            ViewBag.IdCliente = new SelectList(db.Factura, "IdFactura", "IdFactura", cliente.IdCliente);
+            return View(cliente);
+        }
+
         // GET: Clientes/Create
         public ActionResult Create()
         {
@@ -53,7 +80,7 @@ namespace RepairHouse.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdCliente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,DeCasada,IdSexo,Email,DUI,NIT,Telefono,IdMunicipio,Domicilio")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "IdCliente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,DeCasada,IdSexo,Email,DUI,NIT,Telefono,IdMunicipio,Domicilio,Usuario,Password")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +118,7 @@ namespace RepairHouse.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdCliente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,DeCasada,IdSexo,Email,DUI,NIT,Telefono,IdMunicipio,Domicilio")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "IdCliente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,DeCasada,IdSexo,Email,DUI,NIT,Telefono,IdMunicipio,Domicilio,Usuario,Password")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {

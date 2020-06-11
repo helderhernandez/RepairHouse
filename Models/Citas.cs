@@ -25,6 +25,8 @@ namespace RepairHouse.Models
         public Nullable<int> IdEstado { get; set; }
         public string Observaciones { get; set; }
         [Display(Name = "Fecha de Cita")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FechaCita { get; set; }
     
         public virtual Cliente Cliente { get; set; }

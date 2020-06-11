@@ -63,7 +63,6 @@ namespace RepairHouse.Controllers
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenReparacion, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
 
@@ -82,7 +81,6 @@ namespace RepairHouse.Controllers
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenReparacion, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
 
@@ -102,7 +100,6 @@ namespace RepairHouse.Controllers
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
             ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenReparacion, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
 

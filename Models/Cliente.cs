@@ -11,7 +11,8 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,8 +25,11 @@ namespace RepairHouse.Models
         }
     
         public int IdCliente { get; set; }
+
+        [Required()]
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
+        [Required()]
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public string DeCasada { get; set; }
@@ -36,7 +40,9 @@ namespace RepairHouse.Models
         public string Telefono { get; set; }
         public int IdMunicipio { get; set; }
         public string Domicilio { get; set; }
+        [Required()]
         public string Usuario { get; set; }
+        [Required()]
         public string Password { get; set; }
     
         public virtual Municipio Municipio { get; set; }

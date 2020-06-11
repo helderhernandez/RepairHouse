@@ -22,6 +22,12 @@ namespace RepairHouse.Controllers
             return View();
         }
 
+        // GET: /login
+        public ActionResult Cliente()
+        {
+            return View();
+        }
+
         // GET: /Login/Entrar
         [HttpPost]
         public ActionResult Entrar(string usuario, string contrasena)
@@ -49,6 +55,40 @@ namespace RepairHouse.Controllers
                     IdUsuario = result.IdUsuario,
                     NombreUsuario = result.Usuario1,
                     RolUsuario = result.Rol.Rol1,
+                    MostrarBienvenida = true
+                };
+
+                Session[Cons.USER_CURRENT_SESSION] = userCurrent;
+                return Content("true");
+            }
+            else
+            {
+                return Content("false");
+            }
+        }
+
+        // GET: /Login/EntrarCliente
+        [HttpPost]
+        public ActionResult EntrarCliente(string usuario, string contrasena)
+        {
+            bool resultVal = usuario == null || contrasena == null || usuario.Trim() == "" || contrasena.Trim() == "";
+
+            if (resultVal)
+            {
+                // lanzamos error si las validaciones no se cumplen
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Usuario y Constraseña requeridos");
+            }
+
+            Cliente result = db.Cliente
+                .Where(x => x.Usuario == usuario && x.Password == contrasena).FirstOrDefault();
+
+            if (result != null)
+            {
+                ClienteCurrentSessionDto userCurrent = new ClienteCurrentSessionDto
+                {
+                    IdCliente = result.IdCliente,
+                    NombreCliente = result.PrimerNombre + " " + result.PrimerApellido,
+                    NombreUsuario = result.Usuario,
                     MostrarBienvenida = true
                 };
 

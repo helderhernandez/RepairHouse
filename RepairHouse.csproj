@@ -131,6 +131,7 @@
     <Compile Include="Cons.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CategoriaInventariosController.cs" />
+    <Compile Include="Controllers\CitasClienteController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Controllers\TipoEquiposController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
+    <Compile Include="Dtos\ClienteCurrentSessionDto.cs" />
     <Compile Include="Dtos\UserCurrentSessionDto.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
@@ -440,11 +442,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Reporte\ReporteDiagnostico.cshtml" />
-    <Content Include="Views\Clientes\Create.cshtml" />
-    <Content Include="Views\Clientes\Delete.cshtml" />
-    <Content Include="Views\Clientes\Details.cshtml" />
-    <Content Include="Views\Clientes\Edit.cshtml" />
-    <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Views\Proveedores\Create.cshtml" />
     <Content Include="Views\Proveedores\Delete.cshtml" />
     <Content Include="Views\Proveedores\Details.cshtml" />
@@ -520,6 +517,20 @@
     <Content Include="Views\Citas\Details.cshtml" />
     <Content Include="Views\Citas\Edit.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Clientes\Create.cshtml" />
+    <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Clientes\Details.cshtml" />
+    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Shared\_ClienteLayout.cshtml" />
+    <Content Include="Views\Clientes\Registrarse.cshtml" />
+    <Content Include="Views\Login\Cliente.cshtml" />
+    <Content Include="Views\Home\IndexCliente.cshtml" />
+    <Content Include="Views\CitasCliente\Create.cshtml" />
+    <Content Include="Views\CitasCliente\Delete.cshtml" />
+    <Content Include="Views\CitasCliente\Details.cshtml" />
+    <Content Include="Views\CitasCliente\Edit.cshtml" />
+    <Content Include="Views\CitasCliente\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

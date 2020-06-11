@@ -11,7 +11,8 @@ namespace RepairHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrdenCompra
     {
         public int IdOrdenCompra { get; set; }
@@ -19,6 +20,9 @@ namespace RepairHouse.Models
         public string Descripcion { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<int> IdProveedor { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FechaIngreso { get; set; }
         public Nullable<decimal> PrecioBruto { get; set; }
         public Nullable<decimal> SubTotal { get; set; }

@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Inicio";
-    var CURRENT_USER = (RepairHouse.Dtos.UserCurrentSessionDto)Session[Cons.USER_CURRENT_SESSION];
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+    var CURRENT_USER = (RepairHouse.Dtos.ClienteCurrentSessionDto)Session[Cons.USER_CURRENT_SESSION];
 }
 
 <!-- para mostrar toast de bienvenida -->
@@ -17,7 +18,7 @@
                     </button>
                 </div>
                 <div class="toast-body">
-                    @CURRENT_USER.NombreEmpleado
+                    @CURRENT_USER.NombreCliente
                 </div>
             </div>
         </div>
