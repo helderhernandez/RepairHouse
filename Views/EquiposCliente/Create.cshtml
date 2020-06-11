@@ -1,0 +1,203 @@
+﻿@model RepairHouse.Models.Equipo
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_ClienteLayout.cshtml";
+}
+
+<h2>Nuevo Equipo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="app">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdCliente, "Id cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group mb-3">
+                    @*<div class="input-group-prepend" data-toggle="modal" data-target="#ClientesModal" v-on:click="searchCliente()">
+                        <button class="input-group-text" type="button"><i class="fa fa-search"></i></button>
+                    </div>*@
+                    @Html.EditorFor(model => model.IdCliente, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.IdCliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cliente.PrimerNombre, "Nombre cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cliente.PrimerNombre, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Cliente.PrimerNombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdMarca, "Marca", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdMarca", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdMarca, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdModelo, "Modelo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdModelo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdModelo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumeroSerie, "Número de serire", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumeroSerie, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroSerie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdTipoEquipo, "Tipo Equipo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdTipoEquipo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdTipoEquipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" id="ClientesModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Clientes</h5>
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <input v-model="NombreCliente" type="search" class="form-control">
+                                    <div class="input-group-append" v-on:click="searchCliente()">
+                                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <a href="@Url.Action("Create", "Clientes")" target="_blank" class="btn btn-primary ml-4">Registrar nuevo cliente</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body" style="overflow-y: scroll; height:300px;">
+                            <table class="table table-bordered table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cliente</th>
+                                        <th>DUI</th>
+                                        <th>Municipio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="Cliente in Clientes">
+                                        <td>{{Cliente.IdCliente}}</td>
+                                        <td>{{Cliente.NombreCliente}}</td>
+                                        <td>{{Cliente.DUI}}</td>
+                                        <td>{{Cliente.Municipio}}</td>
+                                        <td><button v-on:click="setClienteEnEncabezado(Cliente)" data-dismiss="modal" class="btn btn-success"><i class="fa fa-check"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#IdMarca").change(function () {
+                var url = '@Url.Content("~/ModeloEquipos/Search?idMarca=")' + $(this).val();
+
+                axios.get(url).then((result) => {
+                    var { data } = result;
+
+                    $("#IdModelo option").remove();
+
+                    data.forEach((e) => {
+                        $("#IdModelo").append($("<option />").val(e.IdModelo).text(e.Modelo));
+                    })
+                }).catch((error) => {
+                    alert("Ha ocurrido un error");
+                });
+            });
+        });
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                Clientes: [],
+                NombreCliente: ""
+            },
+            watch: {
+                'NombreCliente': function (newVal, oldVal) {
+                    // para buscar clientes mientras escribe
+                    this.searchCliente();
+                }
+            },
+            methods: {
+                searchCliente() {
+                    // buscamos el cliente
+                    var nombreCliente = this.NombreCliente;
+
+                    var url = '@Url.Content("~/Clientes/Search?nombreCliente=")' + nombreCliente;
+
+                    axios.get(url).then((result) => {
+                        var { data } = result;
+
+                        this.Clientes = [];
+                        data.forEach((e) => {
+                            var item = new Object();
+                            item.IdCliente = e.IdCliente;
+                            item.NombreCliente = e.NombreCliente;
+                            item.DUI = e.DUI;
+                            item.Municipio = e.Municipio.Municipio;
+
+                            this.Clientes.push(item);
+                        })
+                    }).catch((error) => {
+                        alert("Ha ocurrido un error");
+                    });
+                },
+                setClienteEnEncabezado(cliente) {
+                    // set cliente en el form encabezado
+                    $("#IdCliente").val(cliente.IdCliente);
+                    $("#Cliente_PrimerNombre").val(cliente.NombreCliente);
+                }
+            }
+        })
+    </script>
+}

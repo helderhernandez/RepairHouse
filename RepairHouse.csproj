@@ -136,6 +136,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DiagnosticosController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\EquiposClienteController.cs" />
     <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventariosController.cs" />
@@ -531,6 +532,7 @@
     <Content Include="Views\CitasCliente\Details.cshtml" />
     <Content Include="Views\CitasCliente\Edit.cshtml" />
     <Content Include="Views\CitasCliente\Index.cshtml" />
+    <Content Include="Views\EquiposCliente\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
