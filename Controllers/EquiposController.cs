@@ -58,21 +58,25 @@ namespace RepairHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Equipo equipo)
         {
-            if (ModelState.IsValid)
-            {
-                equipo.Cliente = null; // para que no intente persistir el cliente
-                db.Equipo.Add(equipo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            equipo.Cliente = null; // para que no intente persistir el cliente
+            db.Equipo.Add(equipo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            //if (ModelState.IsValid)
+            //{
+            //    equipo.Cliente = null; // para que no intente persistir el cliente
+            //    db.Equipo.Add(equipo);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
-            ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
+            //ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
 
-            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
-            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
+            //List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
+            //ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
 
-            ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
-            return View(equipo);
+            //ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
+            //return View(equipo);
         }
 
         // GET: Equipoes/Edit/5
@@ -104,21 +108,25 @@ namespace RepairHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Equipo equipo)
         {
-            if (ModelState.IsValid)
-            {
-                equipo.Cliente = null; // para que no intente persistir el cliente
-                db.Entry(equipo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            equipo.Cliente = null; // para que no intente persistir el cliente
+            db.Entry(equipo).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            //if (ModelState.IsValid)
+            //{
+            //    equipo.Cliente = null; // para que no intente persistir el cliente
+            //    db.Entry(equipo).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
-            ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
+            //ViewBag.IdMarca = new SelectList(db.MarcaEquipo, "IdMarca", "Marca", equipo.IdMarca);
 
-            List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
-            ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
+            //List<ModeloEquipo> modelos = db.ModeloEquipo.Where(x => x.IdMarca == equipo.IdMarca).ToList();
+            //ViewBag.IdModelo = new SelectList(modelos, "IdModelo", "Modelo", equipo.IdModelo);
 
-            ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
-            return View(equipo);
+            //ViewBag.IdTipoEquipo = new SelectList(db.TipoEquipo, "IdTipo", "Tipo", equipo.IdTipoEquipo);
+            //return View(equipo);
         }
 
         // GET: Equipoes/Delete/5

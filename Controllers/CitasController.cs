@@ -40,9 +40,12 @@ namespace RepairHouse.Controllers
         public ActionResult Create()
         {
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre");
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie");
+
+            int idCliente = db.Cliente.First().IdCliente;
+            ViewBag.IdEquipo = new SelectList(db.Equipo.Where(x => x.IdCliente == idCliente).Select(x => new { x.IdEquipo, Descripcion = x.MarcaEquipo.Marca + " " + x.ModeloEquipo.Modelo }), "IdEquipo", "Descripcion");
+
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado");
-            ViewBag.IdEstado = new SelectList(db.EstadoOrdenReparacion, "IdEstado", "Estado");
+
             return View();
         }
 
@@ -61,7 +64,10 @@ namespace RepairHouse.Controllers
             }
 
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
+
+            int idCliente = db.Cliente.First().IdCliente;
+            ViewBag.IdEquipo = new SelectList(db.Equipo.Where(x => x.IdCliente == idCliente).Select(x => new { x.IdEquipo, Descripcion = x.MarcaEquipo.Marca + " " + x.ModeloEquipo.Modelo }), "IdEquipo", "Descripcion", citas.IdEquipo);
+
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
@@ -79,7 +85,9 @@ namespace RepairHouse.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
+
+            ViewBag.IdEquipo = new SelectList(db.Equipo.Where(x => x.IdCliente == citas.IdCliente).Select(x => new { x.IdEquipo, Descripcion = x.MarcaEquipo.Marca + " " + x.ModeloEquipo.Modelo }), "IdEquipo", "Descripcion", citas.IdEquipo);
+
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
@@ -98,7 +106,9 @@ namespace RepairHouse.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdCliente = new SelectList(db.Cliente, "IdCliente", "PrimerNombre", citas.IdCliente);
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "NumeroSerie", citas.IdEquipo);
+
+            ViewBag.IdEquipo = new SelectList(db.Equipo.Where(x => x.IdCliente == citas.IdCliente).Select(x => new { x.IdEquipo, Descripcion = x.MarcaEquipo.Marca + " " + x.ModeloEquipo.Modelo }), "IdEquipo", "Descripcion", citas.IdEquipo);
+
             ViewBag.IdEstado = new SelectList(db.EstadoOrdenDiagnostico, "IdEstado", "Estado", citas.IdEstado);
             return View(citas);
         }
